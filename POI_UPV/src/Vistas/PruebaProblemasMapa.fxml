@@ -55,19 +55,19 @@
       <SplitPane dividerPositions="0.4431438127090301, 0.5" VBox.vgrow="ALWAYS">
          <items>
             <ListView fx:id="map_listview" onMouseClicked="#listClicked" prefHeight="399.0" prefWidth="87.0" />
-            <VBox prefHeight="200.0" prefWidth="100.0">
+            <VBox SplitPane.resizableWithParent="false">
                <children>
-                  <Button mnemonicParsing="false" onAction="#Condicion1" text="Button">
+                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#Condicion1" prefHeight="30.0" prefWidth="30.0" text="Button">
                      <VBox.margin>
                         <Insets left="3.0" right="3.0" top="5.0" />
                      </VBox.margin>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#Condicion2" text="Button">
+                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#Condicion2" prefHeight="30.0" prefWidth="30.0" text="Button">
                      <VBox.margin>
                         <Insets left="3.0" right="3.0" top="5.0" />
                      </VBox.margin>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#Condicion3">
+                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#Condicion3" prefHeight="30.0" prefWidth="30.0">
                      <VBox.margin>
                         <Insets left="3.0" right="3.0" top="5.0" />
                      </VBox.margin>
@@ -79,12 +79,12 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#Condicion4" text="Button">
+                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#Condicion4" prefHeight="30.0" prefWidth="30.0" text="Button">
                      <VBox.margin>
                         <Insets left="3.0" right="3.0" top="5.0" />
                      </VBox.margin>
                   </Button>
-                  <Button mnemonicParsing="false" text="Button">
+                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="Button">
                      <VBox.margin>
                         <Insets left="3.0" right="3.0" top="5.0" />
                      </VBox.margin>
