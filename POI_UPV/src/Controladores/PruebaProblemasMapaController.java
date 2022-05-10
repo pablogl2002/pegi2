@@ -5,24 +5,16 @@
  */
 package Controladores;
 
-import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -33,12 +25,10 @@ import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -69,12 +59,12 @@ public class PruebaProblemasMapaController implements Initializable {
     @FXML
     private Label posicion;
     private Line linePainting;
-    double baseX;
-    double baseY;
-    double inicioYTrans;
-    double inicioXTrans;
+    private double baseX;
+    private double baseY;
+    private double inicioYTrans;
+    private double inicioXTrans;
     private int intAyuda;
-    double inicioXArc;
+    private double inicioXArc;
     
     
     Circle circlePainting;
@@ -163,9 +153,6 @@ public class PruebaProblemasMapaController implements Initializable {
         contentGroup.getChildren().add(zoomGroup);
         zoomGroup.getChildren().add(map_scrollpane.getContent());
         map_scrollpane.setContent(contentGroup);
-        map_scrollpane.setPannable(false);
-
-        
     }
 
     @FXML
@@ -189,6 +176,8 @@ public class PruebaProblemasMapaController implements Initializable {
     
     @FXML
      private void RatonPulsado(MouseEvent event) {
+        map_scrollpane.setPannable(false);
+        
         if (intAyuda == 2) {
             linePainting = new Line(event.getX(), event.getY(), event.getX(), event.getY());
             zoomGroup.getChildren().add(linePainting);}
@@ -199,7 +188,8 @@ public class PruebaProblemasMapaController implements Initializable {
             inicioYTrans = event.getSceneY();
             baseX = transportador.getTranslateX();
             baseY = transportador.getTranslateY();
-            event.consume();}
+            event.consume();
+        }
         
         if (intAyuda == 3) {
             circlePainting = new Circle(1);
@@ -229,12 +219,13 @@ public class PruebaProblemasMapaController implements Initializable {
             });
         }
      }
+     
      private void RatonArrastrado(MouseEvent event) {
             
-            double despX = event.getSceneX() - inicioXTrans;
-            double despY = event.getSceneY() - inicioYTrans;
+        double despX = event.getSceneX() - inicioXTrans;
+        double despY = event.getSceneY() - inicioYTrans;
             
-     if (intAyuda == 1){
+        if (intAyuda == 1){
      
             despX = event.getSceneX() - inicioXTrans;
             despY = event.getSceneY() - inicioYTrans;
@@ -249,16 +240,15 @@ public class PruebaProblemasMapaController implements Initializable {
             event.consume();
         }
      
-     }
+    }
     @FXML
       private void RatonSoltado(MouseEvent event) {
         if (intAyuda == 2){
-        linePainting.setEndX(event.getX());
-        linePainting.setEndY(event.getY());
-        event.consume();
+            linePainting.setEndX(event.getX());
+            linePainting.setEndY(event.getY());
+            event.consume();
         }
-        
-}
+    }
 
     @FXML
     private void Condicion1(ActionEvent event) {
@@ -282,5 +272,11 @@ public class PruebaProblemasMapaController implements Initializable {
 
     @FXML
     private void Borrar(ActionEvent event) {
+        
+    }
+
+    @FXML
+    private void moverFondo(ActionEvent event) {
+        
     }
 }

@@ -57,37 +57,65 @@
             <ListView fx:id="map_listview" onMouseClicked="#listClicked" prefHeight="399.0" prefWidth="87.0" />
             <VBox SplitPane.resizableWithParent="false">
                <children>
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#Condicion1" prefHeight="30.0" prefWidth="30.0" text="Button">
+                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#moverFondo" prefHeight="30.0" prefWidth="30.0">
                      <VBox.margin>
                         <Insets left="3.0" right="3.0" top="5.0" />
                      </VBox.margin>
+                     <graphic>
+                        <ImageView fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/iconos/icons8-mover-30.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </Button>
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#Condicion2" prefHeight="30.0" prefWidth="30.0" text="Button">
+                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#Condicion2" prefHeight="30.0" prefWidth="30.0">
                      <VBox.margin>
                         <Insets left="3.0" right="3.0" top="5.0" />
                      </VBox.margin>
+                     <graphic>
+                        <ImageView fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/iconos/icons8-línea-48.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </Button>
                   <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#Condicion3" prefHeight="30.0" prefWidth="30.0">
                      <VBox.margin>
                         <Insets left="3.0" right="3.0" top="5.0" />
                      </VBox.margin>
                      <graphic>
-                        <ImageView pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../resources/circulobueno.png" />
+                              <Image url="@../resources/iconos/icons8-esfera-32.png" />
                            </image>
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#Condicion4" prefHeight="30.0" prefWidth="30.0" text="Button">
+                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#Condicion4" prefHeight="30.0" prefWidth="30.0">
                      <VBox.margin>
                         <Insets left="3.0" right="3.0" top="5.0" />
                      </VBox.margin>
+                     <graphic>
+                        <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/iconos/icons8-añadir-texto-32.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </Button>
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="Button">
+                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#Condicion1" prefHeight="30.0" prefWidth="30.0">
                      <VBox.margin>
                         <Insets left="3.0" right="3.0" top="5.0" />
                      </VBox.margin>
+                     <graphic>
+                        <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/iconos/icons8-grados-50.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </Button>
                </children>
             </VBox>
