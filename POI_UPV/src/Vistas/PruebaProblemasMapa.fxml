@@ -123,7 +123,7 @@
                <content>
                   <Pane>
                      <children>
-                        <ImageView onMousePressed="#RatonPulsado" onMouseReleased="#RatonSoltado" pickOnBounds="true">
+                        <ImageView onMouseDragged="#RatonArrastrado" onMousePressed="#RatonPulsado" onMouseReleased="#RatonSoltado" pickOnBounds="true">
                            <image>
                               <Image url="@../resources/carta_nautica.jpg" />
                            </image>

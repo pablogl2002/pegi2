@@ -23,6 +23,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
@@ -220,6 +221,7 @@ public class PruebaProblemasMapaController implements Initializable {
         }
      }
      
+    @FXML
      private void RatonArrastrado(MouseEvent event) {
             
         double despX = event.getSceneX() - inicioXTrans;
