@@ -163,6 +163,8 @@ public class PruebaProblemasMapaController implements Initializable {
         contentGroup.getChildren().add(zoomGroup);
         zoomGroup.getChildren().add(map_scrollpane.getContent());
         map_scrollpane.setContent(contentGroup);
+        map_scrollpane.setPannable(false);
+
         
     }
 
@@ -276,5 +278,9 @@ public class PruebaProblemasMapaController implements Initializable {
     @FXML
     private void Condicion4(ActionEvent event) {
         intAyuda = 4;
+    }
+
+    @FXML
+    private void Borrar(ActionEvent event) {
     }
 }
