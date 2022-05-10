@@ -31,6 +31,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
@@ -75,12 +76,15 @@ public class PruebaProblemasMapaController implements Initializable {
     double inicioXTrans;
     private int intAyuda;
     double inicioXArc;
+    private Image img1;
     
     
     Circle circlePainting;
     TextField texto = new TextField();
     @FXML
     private ImageView transportador;
+    @FXML
+    private ImageView mapa;
     
     @FXML
     void zoomIn(ActionEvent event) {
@@ -222,13 +226,14 @@ public class PruebaProblemasMapaController implements Initializable {
                 Text textoT= new Text(texto.getText());
                 textoT.setX(texto.getLayoutX());
                 textoT.setY(texto.getLayoutY());
-                textoT.setStyle("-fx-font-family: Gafata; -fx-font-size: 40;");
+                textoT.setStyle("-fx-fonmi-family: Gafata; -fx-font-size: 40;");
                 zoomGroup.getChildren().add(textoT);
                 zoomGroup.getChildren().remove(texto);
                 e.consume();
             });
         }
      }
+    @FXML
      private void RatonArrastrado(MouseEvent event) {
             
             double despX = event.getSceneX() - inicioXTrans;
@@ -282,5 +287,9 @@ public class PruebaProblemasMapaController implements Initializable {
 
     @FXML
     private void Borrar(ActionEvent event) {
+        
+        img1 = new Image("@../resources/carta_nautica.jpg");
+        
+        mapa.setImage(img1);
     }
 }
