@@ -29,7 +29,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
@@ -231,6 +230,7 @@ public class LogInSignUpController implements Initializable {
             FileInputStream in = new FileInputStream(selectFile);
             Image img = new Image(in);
             id_avatar.setImage(img);
+           
         }   
     }
     

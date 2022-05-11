@@ -32,7 +32,7 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Editar">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Borrar" />
+                    <MenuItem mnemonicParsing="false" onAction="#Borrar" text="Borrar" />
                         <MenuItem mnemonicParsing="false" onAction="#Condicion1" text="MoverTransportador" />
                         <MenuItem mnemonicParsing="false" onAction="#Condicion2" text="PintarLinea" />
                         <MenuItem mnemonicParsing="false" onAction="#Condicion3" text="PintarCirculo" />
@@ -55,39 +55,67 @@
       <SplitPane dividerPositions="0.4431438127090301, 0.5" VBox.vgrow="ALWAYS">
          <items>
             <ListView fx:id="map_listview" onMouseClicked="#listClicked" prefHeight="399.0" prefWidth="87.0" />
-            <VBox prefHeight="200.0" prefWidth="100.0">
+            <VBox SplitPane.resizableWithParent="false">
                <children>
-                  <Button mnemonicParsing="false" text="Button">
-                     <VBox.margin>
-                        <Insets left="3.0" right="3.0" top="5.0" />
-                     </VBox.margin>
-                  </Button>
-                  <Button mnemonicParsing="false" text="Button">
-                     <VBox.margin>
-                        <Insets left="3.0" right="3.0" top="5.0" />
-                     </VBox.margin>
-                  </Button>
-                  <Button mnemonicParsing="false">
+                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#moverFondo" prefHeight="30.0" prefWidth="30.0">
                      <VBox.margin>
                         <Insets left="3.0" right="3.0" top="5.0" />
                      </VBox.margin>
                      <graphic>
-                        <ImageView pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../resources/circulobueno.png" />
+                              <Image url="@../resources/iconos/icons8-mover-30.png" />
                            </image>
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button mnemonicParsing="false" text="Button">
+                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#Condicion2" prefHeight="30.0" prefWidth="30.0">
                      <VBox.margin>
                         <Insets left="3.0" right="3.0" top="5.0" />
                      </VBox.margin>
+                     <graphic>
+                        <ImageView fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/iconos/icons8-línea-48.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </Button>
-                  <Button mnemonicParsing="false" text="Button">
+                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#Condicion3" prefHeight="30.0" prefWidth="30.0">
                      <VBox.margin>
                         <Insets left="3.0" right="3.0" top="5.0" />
                      </VBox.margin>
+                     <graphic>
+                        <ImageView fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/iconos/icons8-esfera-32.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#Condicion4" prefHeight="30.0" prefWidth="30.0">
+                     <VBox.margin>
+                        <Insets left="3.0" right="3.0" top="5.0" />
+                     </VBox.margin>
+                     <graphic>
+                        <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/iconos/icons8-añadir-texto-32.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#Condicion1" prefHeight="30.0" prefWidth="30.0">
+                     <VBox.margin>
+                        <Insets left="3.0" right="3.0" top="5.0" />
+                     </VBox.margin>
+                     <graphic>
+                        <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/iconos/icons8-grados-50.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </Button>
                </children>
             </VBox>
@@ -95,7 +123,7 @@
                <content>
                   <Pane>
                      <children>
-                        <ImageView onMousePressed="#RatonPulsado" onMouseReleased="#RatonSoltado" pickOnBounds="true">
+                        <ImageView onMouseDragged="#RatonArrastrado" onMousePressed="#RatonPulsado" onMouseReleased="#RatonSoltado" pickOnBounds="true">
                            <image>
                               <Image url="@../resources/carta_nautica.jpg" />
                            </image>
