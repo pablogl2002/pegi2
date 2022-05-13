@@ -19,6 +19,7 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import model.User;
 
 /**
  * FXML Controller class
@@ -37,6 +38,7 @@ public class ChooseProblemTypeController implements Initializable {
     private int auxNum = -1;
     @FXML
     private Menu id_menuPerfil;
+    private User usuario;
 
     /**
      * Initializes the controller class.
@@ -46,8 +48,9 @@ public class ChooseProblemTypeController implements Initializable {
         id_menuPerfil.setText("Perfil");
     }    
 
-    public void initStage(Stage stage) {
+    public void initStage(Stage stage, User user) {
          primaryStage = stage;
+         usuario = user;
     }
     
     @FXML

@@ -79,7 +79,7 @@ public class LogInSignUpController implements Initializable {
     private Label label_anotherError;
     @FXML
     private ImageView id_avatar;
-      
+    private Image avatar;
     
     public void initStage(Stage stage) {
          primaryStage = stage;
@@ -160,12 +160,16 @@ public class LogInSignUpController implements Initializable {
                 label_anotherError.setText("Passwords don't match");
                 label_anotherError.visibleProperty().set(true);
             }
-
-            if (User.checkNickName(nickName) && !baseDatos.exitsNickName(nickName) && User.checkEmail(email) && User.checkPassword(password) && password.equals(rePassword)) {
-                User user = baseDatos.registerUser(nickName, email, password, birthdate);               
-                goToMap();
+            
+            if (avatar == null) {
+                avatar = new Image("/resources/avatars/default.png");
             }
             
+            if (User.checkNickName(nickName) && !baseDatos.exitsNickName(nickName) && User.checkEmail(email) && User.checkPassword(password) && password.equals(rePassword)) {
+                User usuario = baseDatos.registerUser(nickName, email, password, birthdate);               
+                goToProblems(usuario);
+            }
+
         } catch (NavegacionDAOException ex) {
             Logger.getLogger(LogInSignUpController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -182,9 +186,8 @@ public class LogInSignUpController implements Initializable {
             User usuario = baseDatos.loginUser(nick, pass);
             if (usuario == null) {
                 label_wPass.visibleProperty().set(true);
-            } else { goToMap(); }
+            } else { goToProblems(usuario); }
         }
- 
     }
 
     @FXML
@@ -202,18 +205,18 @@ public class LogInSignUpController implements Initializable {
         initSignUp();
     } 
     
-    private void goToMap() {
+    private void goToProblems(User usuario) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/FXMLDocument.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/ChooseProblemType.fxml"));
             Parent root = loader.load();
 
             Scene scene = new Scene(root);
-            primaryStage.setTitle("Mapa");
+            primaryStage.setTitle("Problemas");
             primaryStage.setScene(scene);
             primaryStage.setResizable(true);
 
-            LogInSignUpController logIn = loader.getController();
-            logIn.initStage(primaryStage);        
+            ChooseProblemTypeController ctr = loader.getController();
+            ctr.initStage(primaryStage, usuario);        
             primaryStage.show();
         } catch (IOException ex) {
             Logger.getLogger(LogInSignUpController.class.getName()).log(Level.SEVERE, null, ex);
@@ -228,8 +231,8 @@ public class LogInSignUpController implements Initializable {
         File selectFile = fc.showOpenDialog(primaryStage);
         if (selectFile != null) {
             FileInputStream in = new FileInputStream(selectFile);
-            Image img = new Image(in);
-            id_avatar.setImage(img);
+            avatar = new Image(in);
+            id_avatar.setImage(avatar);
            
         }   
     }

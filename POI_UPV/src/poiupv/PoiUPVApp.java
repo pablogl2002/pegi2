@@ -5,6 +5,7 @@
  */
 package poiupv;
 
+import Controladores.LogInSignUpController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,11 +20,16 @@ public class PoiUPVApp extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/Vistas/PruebaProblemasMapa.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/LogInSignUp.fxml"));
+        Parent root = loader.load();
         
         Scene scene = new Scene(root);
         stage.setTitle("Log In");
         stage.setScene(scene);
+       
+        LogInSignUpController ctr = loader.getController();
+        ctr.initStage(stage);
+        
         stage.show();
     }
 
