@@ -49,8 +49,10 @@ public class ChooseProblemTypeController implements Initializable {
     }    
 
     public void initStage(Stage stage, User user) {
-         primaryStage = stage;
-         usuario = user;
+        primaryStage = stage;
+        usuario = user;
+        id_avatar.setImage(usuario.getAvatar());
+        id_menuPerfil.setText(usuario.getNickName());
     }
     
     @FXML

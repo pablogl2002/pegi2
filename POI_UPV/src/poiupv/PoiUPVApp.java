@@ -24,7 +24,7 @@ public class PoiUPVApp extends Application {
         Parent root = loader.load();
         
         Scene scene = new Scene(root);
-        stage.setTitle("Log In");
+        stage.setTitle("Iniciar Sesión o Registrar Cuenta");
         stage.setScene(scene);
        
         LogInSignUpController ctr = loader.getController();
