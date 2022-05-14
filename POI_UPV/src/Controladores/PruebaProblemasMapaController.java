@@ -66,6 +66,7 @@ public class PruebaProblemasMapaController implements Initializable {
     private double inicioXTrans;
     private int intAyuda;
     private double inicioXArc;
+    private Stage primaryStage;
     
     
     Circle circlePainting;
@@ -287,5 +288,9 @@ public class PruebaProblemasMapaController implements Initializable {
     @FXML
     private void moverFondo(ActionEvent event) {
         
+    }
+
+    public void initStage(Stage stage) {
+        primaryStage = stage;
     }
 }

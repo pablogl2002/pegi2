@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.String?>
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -19,7 +20,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox stylesheets="@../resources/estilos.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.PruebaProblemasMapaController">
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.PruebaProblemasMapaController">
    <children>
       <HBox alignment="CENTER_RIGHT" fillHeight="false" spacing="5.0" VBox.vgrow="NEVER">
          <children>
@@ -55,9 +56,9 @@
       <SplitPane dividerPositions="0.4431438127090301, 0.5" VBox.vgrow="ALWAYS">
          <items>
             <ListView fx:id="map_listview" onMouseClicked="#listClicked" prefHeight="399.0" prefWidth="87.0" />
-            <VBox SplitPane.resizableWithParent="false">
+            <VBox minHeight="-Infinity" minWidth="-Infinity" SplitPane.resizableWithParent="false">
                <children>
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#moverFondo" prefHeight="30.0" prefWidth="30.0">
+                  <Button id="edit_button" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#moverFondo" prefHeight="30.0" prefWidth="30.0">
                      <VBox.margin>
                         <Insets left="3.0" right="3.0" top="5.0" />
                      </VBox.margin>
@@ -69,7 +70,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#Condicion2" prefHeight="30.0" prefWidth="30.0">
+                  <Button id="edit_button" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#Condicion2" prefHeight="30.0" prefWidth="30.0">
                      <VBox.margin>
                         <Insets left="3.0" right="3.0" top="5.0" />
                      </VBox.margin>
@@ -81,7 +82,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#Condicion3" prefHeight="30.0" prefWidth="30.0">
+                  <Button id="edit_button" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#Condicion3" prefHeight="30.0" prefWidth="30.0">
                      <VBox.margin>
                         <Insets left="3.0" right="3.0" top="5.0" />
                      </VBox.margin>
@@ -93,7 +94,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#Condicion4" prefHeight="30.0" prefWidth="30.0">
+                  <Button id="edit_button" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#Condicion4" prefHeight="30.0" prefWidth="30.0">
                      <VBox.margin>
                         <Insets left="3.0" right="3.0" top="5.0" />
                      </VBox.margin>
@@ -105,7 +106,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#Condicion1" prefHeight="30.0" prefWidth="30.0">
+                  <Button id="edit_button" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#Condicion1" prefHeight="30.0" prefWidth="30.0">
                      <VBox.margin>
                         <Insets left="3.0" right="3.0" top="5.0" />
                      </VBox.margin>
@@ -170,4 +171,8 @@
          </VBox.margin>
       </HBox>
    </children>
+   <stylesheets>
+      <URL value="@../Estilos/estilos.css" />
+      <URL value="@../Estilos/botones.css" />
+   </stylesheets>
 </VBox>
