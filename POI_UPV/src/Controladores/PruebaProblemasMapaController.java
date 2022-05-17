@@ -155,6 +155,7 @@ public class PruebaProblemasMapaController implements Initializable {
         contentGroup.getChildren().add(zoomGroup);
         zoomGroup.getChildren().add(map_scrollpane.getContent());
         map_scrollpane.setContent(contentGroup);
+        map_scrollpane.setPannable(false);
     }
 
     @FXML
@@ -178,7 +179,7 @@ public class PruebaProblemasMapaController implements Initializable {
     
     @FXML
      private void RatonPulsado(MouseEvent event) {
-        map_scrollpane.setPannable(false);
+        
         
         if (intAyuda == 2) {
             linePainting = new Line(event.getX(), event.getY(), event.getX(), event.getY());
@@ -287,7 +288,8 @@ public class PruebaProblemasMapaController implements Initializable {
 
     @FXML
     private void moverFondo(ActionEvent event) {
-        
+        map_scrollpane.setPannable(true);
+        intAyuda = 115;
     }
 
     public void initStage(Stage stage) {
