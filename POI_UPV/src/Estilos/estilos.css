@@ -2,6 +2,7 @@
 /* Imagen cambiar avatar en Registro */
 #big_avatarEdit:hover {
     -fx-opacity: 0.8;
+    
 }
 #big_avatarEdit{
     -fx-opacity: 0;
@@ -9,5 +10,8 @@
 
 /* Estilo avatar */
 #small_avatar {
+    
+}
+#big_avatar {
     
 }

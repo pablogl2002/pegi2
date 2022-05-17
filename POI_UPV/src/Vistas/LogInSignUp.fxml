@@ -19,7 +19,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<HBox fillHeight="false" prefHeight="432.0" prefWidth="606.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.LogInSignUpController">
+<HBox fillHeight="false" prefHeight="432.0" prefWidth="606.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.LogInSignUpController">
    <children>
       <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="470.0" prefWidth="250.0" style="-fx-background-color: white;">
          <top>
@@ -282,15 +282,15 @@
                                  <children>
                                     <ImageView id="big_avatar" fx:id="id_avatar" cache="true" fitHeight="120.0" fitWidth="120.0" layoutY="10.0" onMouseClicked="#changeAvatar" onMouseDragOver="#mouseOverAvatar" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../resources/avatars/avatar2.png" />
+                                          <Image url="@../resources/avatars/default2.png" />
                                        </image>
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
                                     </ImageView>
-                                    <ImageView id="big_avatarEdit" fx:id="id_avatarEdit" cache="true" fitHeight="65.0" fitWidth="65.0" layoutX="20.0" layoutY="30.0" onMouseClicked="#changeAvatar" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView id="big_avatarEdit" fx:id="id_avatarEdit" cache="true" fitHeight="120.0" fitWidth="120.0" layoutY="10.0" onMouseClicked="#changeAvatar" opacity="0.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../resources/avatars/1159633.png" />
+                                          <Image url="@../resources/editarAvatar.png" />
                                        </image>
                                        <cursor>
                                           <Cursor fx:constant="HAND" />

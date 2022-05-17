@@ -225,9 +225,12 @@ public class LogInSignUpController implements Initializable {
 
     @FXML
     private void changeAvatar(MouseEvent event) throws FileNotFoundException {
-        FileChooser fc = new FileChooser(); 
+        FileChooser fc = new FileChooser();
+        
+        //fc.setInitialDirectory(new File("\\resources\\avatars\\"));
         fc.setTitle("Select an avatar");
         fc.getExtensionFilters().addAll(new ExtensionFilter("Image", "*.png", "*.jpg", "*.jpeg"));
+        
         File selectFile = fc.showOpenDialog(primaryStage);
         if (selectFile != null) {
             FileInputStream in = new FileInputStream(selectFile);

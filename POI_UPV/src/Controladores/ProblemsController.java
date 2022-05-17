@@ -13,7 +13,9 @@ import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Accordion;
+import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Navegacion;
@@ -46,11 +48,11 @@ public class ProblemsController implements Initializable {
             
             for (int i = 1; i <= tPane.length; i++) {
                 tPane[i] = new TitledPane();
-                tPane[i].setText(new String("Problema " + i));
-                
-                Text pregunta = new Text(problemas.get(i).getText());
-                pregunta.wrappingWidthProperty().set(350);
-                tPane[i].setContent(pregunta);
+                tPane[i].setText("Problema " + i);
+                                
+                String pregunta = problemas.get(i).getText();
+                //pregunta.wrappingWidthProperty().set(350);
+                tPane[i].setText(pregunta);
             }
             
             acordeonProblemas.getPanes().addAll(tPane);
