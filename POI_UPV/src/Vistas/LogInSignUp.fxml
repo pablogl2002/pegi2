@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<HBox fillHeight="false" prefHeight="432.0" prefWidth="606.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.LogInSignUpController">
+   <children>
+      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="470.0" prefWidth="250.0" style="-fx-background-color: white;">
+         <top>
+            <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="300.0" BorderPane.alignment="CENTER_LEFT">
+               <children>
+                  <Text fill="#a19f9f" strokeType="OUTSIDE" strokeWidth="0.0" text="Inicio Sesión">
+                     <font>
+                        <Font name="Dubai Bold" size="40.0" />
+                     </font>
+                  </Text>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <BorderPane.margin>
+                  <Insets />
+               </BorderPane.margin>
+               <padding>
+                  <Insets left="20.0" right="20.0" />
+               </padding>
+            </HBox>
+         </top>
+         <center>
+            <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" BorderPane.alignment="TOP_CENTER">
+               <children>
+                  <HBox prefHeight="72.0" prefWidth="240.0">
+                     <children>
+                        <VBox prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <HBox prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Label text="Usuario:" textFill="#025477" />
+                                    <Label fx:id="label_wUser" text="x" textFill="#ca0505" visible="false">
+                                       <HBox.margin>
+                                          <Insets left="20.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <TextField fx:id="nickField" minHeight="26.0" minWidth="200.0" prefHeight="26.0" prefWidth="350.0" promptText="yourUsername" />
+                           </children>
+                        </VBox>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <VBox prefHeight="50.0" prefWidth="210.0">
+                           <children>
+                              <HBox maxWidth="-Infinity" prefHeight="100.0" prefWidth="250.0">
+                                 <children>
+                                    <Label text="Contraseña:" textFill="#025477" />
+                                    <Label fx:id="label_wPass" text="x" textFill="#ca0505" visible="false">
+                                       <HBox.margin>
+                                          <Insets left="20.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <PasswordField fx:id="passFieldLog" maxWidth="-Infinity" promptText="LettersNumbersSymbols" />
+                           </children>
+                        </VBox>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                     </padding>
+                  </HBox>
+               </children>
+               <BorderPane.margin>
+                  <Insets />
+               </BorderPane.margin>
+            </VBox>
+         </center>
+         <bottom>
+            <HBox alignment="CENTER_RIGHT" prefHeight="75.0" spacing="25.0" BorderPane.alignment="CENTER_RIGHT">
+               <children>
+                  <Button alignment="CENTER" minWidth="80.0" mnemonicParsing="false" onAction="#handleLogInOnAction" prefWidth="100.0" style="-fx-background-color: #0685bc;" text="Iniciar" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children>
+               <BorderPane.margin>
+                  <Insets left="20.0" right="20.0" top="20.0" />
+               </BorderPane.margin>
+            </HBox>
+         </bottom>
+      </BorderPane>
+      <Separator orientation="VERTICAL" prefHeight="200.0" />
+      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="470.0" prefWidth="350.0" style="-fx-background-color: white;">
+         <top>
+            <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="300.0" BorderPane.alignment="CENTER_LEFT">
+               <children>
+                  <Text fill="#a19f9f" strokeType="OUTSIDE" strokeWidth="0.0" text="Registro">
+                     <font>
+                        <Font name="Dubai Bold" size="40.0" />
+                     </font>
+                  </Text>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <BorderPane.margin>
+                  <Insets />
+               </BorderPane.margin>
+               <padding>
+                  <Insets left="20.0" right="20.0" />
+               </padding>
+            </HBox>
+         </top>
+         <center>
+            <VBox BorderPane.alignment="CENTER">
+               <children>
+                  <HBox>
+                     <children>
+                        <VBox>
+                           <children>
+                              <HBox>
+                                 <children>
+                                    <Label text="Email:" textFill="#025477">
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin></Label>
+                                    <Label fx:id="label_wEmail" prefWidth="104.0" text="x" textFill="#ca0505" visible="false">
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin></Label>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="5.0" />
+                                 </padding>
+                              </HBox>
+                              <TextField fx:id="emailField" minHeight="26.0" minWidth="320.0" prefHeight="26.0" prefWidth="350.0" promptText="yourEmail@domain.com" />
+                           </children>
+                        </VBox>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <VBox>
+                           <children>
+                              <HBox>
+                                 <children>
+                                    <Label text="Usuario:" textFill="#025477">
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" />
+                                       </HBox.margin></Label>
+                                    <Label fx:id="label_wUserSign" text="x" textFill="#ca0505" visible="false">
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <TextField fx:id="userFieldSign" prefWidth="220.0" promptText="YourUsername" />
+                           </children>
+                        </VBox>
+                        <VBox>
+                           <children>
+                              <HBox>
+                                 <children>
+                                    <Label text="Cumpleaños:" textFill="#025477">
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" />
+                                       </HBox.margin></Label>
+                                    <Label fx:id="label_wBirthday" text="x" textFill="#ca0505" visible="false">
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <DatePicker fx:id="picker_birthday" promptText="YourBirth" />
+                           </children>
+                           <HBox.margin>
+                              <Insets left="20.0" />
+                           </HBox.margin>
+                        </VBox>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                     </padding>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <VBox prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <HBox>
+                                 <children>
+                                    <VBox prefHeight="43.0" prefWidth="250.0">
+                                       <children>
+                                          <HBox prefHeight="100.0" prefWidth="200.0">
+                                             <children>
+                                                <Label text="Contraseña:" textFill="#025477">
+                                                   <HBox.margin>
+                                                      <Insets bottom="5.0" />
+                                                   </HBox.margin></Label>
+                                                <Label fx:id="label_wPassSign" text="x" textFill="#ca0505" visible="false">
+                                                   <HBox.margin>
+                                                      <Insets left="10.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                          <PasswordField fx:id="passFieldSign" maxWidth="-Infinity" minHeight="26.0" minWidth="150.0" prefHeight="26.0" prefWidth="100.0" promptText="LettersNumbersSymbols" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                                 </padding>
+                              </HBox>
+                              <HBox prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <VBox>
+                                       <children>
+                                          <HBox prefHeight="26.0">
+                                             <children>
+                                                <Label text="Repetir Contraseña:" textFill="#025477">
+                                                   <HBox.margin>
+                                                      <Insets bottom="5.0" />
+                                                   </HBox.margin></Label>
+                                                <Label fx:id="label_wRePassSign" text="x" textFill="#ca0505" visible="false">
+                                                   <HBox.margin>
+                                                      <Insets left="10.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                          <PasswordField fx:id="rePassFieldSign" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="26.0" minWidth="150.0" prefHeight="26.0" prefWidth="150.0" promptText="LettersNumbersSymbols" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                                 </padding>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="200.0" prefWidth="100.0">
+                           <HBox.margin>
+                              <Insets left="25.0" />
+                           </HBox.margin>
+                           <children>
+                              <Pane>
+                                 <children>
+                                    <ImageView id="big_avatar" fx:id="id_avatar" cache="true" fitHeight="120.0" fitWidth="120.0" layoutY="10.0" onMouseClicked="#changeAvatar" onMouseDragOver="#mouseOverAvatar" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../resources/avatars/avatar2.png" />
+                                       </image>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </ImageView>
+                                    <ImageView id="big_avatarEdit" fx:id="id_avatarEdit" cache="true" fitHeight="65.0" fitWidth="65.0" layoutX="20.0" layoutY="30.0" onMouseClicked="#changeAvatar" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../resources/avatars/1159633.png" />
+                                       </image>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <viewport>
+                                          <Rectangle2D />
+                                       </viewport>
+                                    </ImageView>
+                                 </children>
+                              </Pane>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <Label fx:id="label_anotherError" prefHeight="35.0" prefWidth="320.0" textFill="#ca0505" visible="false" wrapText="true">
+                     <VBox.margin>
+                        <Insets left="20.0" right="20.0" />
+                     </VBox.margin>
+                  </Label>
+               </children>
+               <BorderPane.margin>
+                  <Insets />
+               </BorderPane.margin>
+            </VBox>
+         </center>
+         <bottom>
+            <HBox alignment="CENTER_RIGHT" prefHeight="75.0" prefWidth="200.0" spacing="25.0" BorderPane.alignment="CENTER_RIGHT">
+               <children>
+                  <Button alignment="CENTER" minWidth="80.0" mnemonicParsing="false" onAction="#handleRegisterOnAction" prefWidth="100.0" style="-fx-background-color: #0685bc;" text="Registrar" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="bCancel" alignment="CENTER" minWidth="80.0" mnemonicParsing="false" onAction="#handleBCancelOnAction" prefWidth="100.0" style="-fx-background-color: #0685bc;" text="Cancelar" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children>
+               <BorderPane.margin>
+                  <Insets left="20.0" right="20.0" />
+               </BorderPane.margin>
+            </HBox>
+         </bottom>
+      </BorderPane>
+   </children>
+   <stylesheets>
+      <URL value="@../Estilos/estilos.css" />
+      <URL value="@../Estilos/botones.css" />
+   </stylesheets>
+</HBox>
