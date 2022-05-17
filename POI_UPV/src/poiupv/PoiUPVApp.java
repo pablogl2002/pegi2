@@ -21,7 +21,7 @@ public class PoiUPVApp extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/PruebaProblemasMapa.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/LogInSignUp.fxml"));
         Parent root = loader.load();
         
         Scene scene = new Scene(root);
@@ -29,8 +29,8 @@ public class PoiUPVApp extends Application {
         stage.setScene(scene);
         stage.setResizable(true);
        
-        //LogInSignUpController ctr = loader.getController();
-        PruebaProblemasMapaController ctr = loader.getController();
+        LogInSignUpController ctr = loader.getController();
+        //PruebaProblemasMapaController ctr = loader.getController();
         ctr.initStage(stage);
         
         stage.show();

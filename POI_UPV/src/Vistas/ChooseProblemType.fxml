@@ -14,19 +14,19 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="270.0" prefWidth="520.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.ChooseProblemTypeController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="270.0" prefWidth="520.0" stylesheets="@../Estilos/estilos.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.ChooseProblemTypeController">
    <children>
       <BorderPane>
          <top>
             <MenuBar nodeOrientation="RIGHT_TO_LEFT" BorderPane.alignment="CENTER">
               <menus>
-                  <Menu fx:id="id_menuPerfil" mnemonicParsing="false" text="Mi Perfil">
+                  <Menu id="perfil_menu" fx:id="id_menuPerfil" mnemonicParsing="false" text="Mi Perfil">
                     <items>
                       <MenuItem mnemonicParsing="false" onAction="#editProfile" text="Editar Perfil" />
                         <MenuItem mnemonicParsing="false" onAction="#logOut" text="Cerrar Sesión" />
                     </items>
                      <graphic>
-                        <ImageView fx:id="id_avatar" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView id="small_avatar" fx:id="id_avatar" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../resources/avatars/avatar4.png" />
                            </image>
