@@ -85,8 +85,9 @@ public class ChooseProblemTypeController implements Initializable {
                 ProblemsController pro = loader.getController();
                 pro.initStage(primaryStage);
             }
+            
             if (auxNum == 1) {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/RandomProblems.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/PruebaProblemasMapa.fxml"));
                 Parent root = loader.load();
 
                 Scene scene = new Scene(root);
@@ -94,10 +95,10 @@ public class ChooseProblemTypeController implements Initializable {
                 primaryStage.setScene(scene);
                 primaryStage.setResizable(false);
 
-                RandomProblemsController rPro = loader.getController();
+                PruebaProblemasMapaController rPro = loader.getController();
                 rPro.initStage(primaryStage);
             }
-             primaryStage.show();
+            primaryStage.show();
         } catch (IOException ex) {
                 Logger.getLogger(ChooseProblemTypeController.class.getName()).log(Level.SEVERE, null, ex);
         }
