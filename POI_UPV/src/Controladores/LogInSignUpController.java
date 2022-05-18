@@ -82,6 +82,8 @@ public class LogInSignUpController implements Initializable {
     private Stage primaryStage;
     private Navegacion baseDatos;
     private Image avatar;
+    @FXML
+    private ImageView id_avatarEdit;
     
     public void initStage(Stage stage) {
          primaryStage = stage;
@@ -126,10 +128,32 @@ public class LogInSignUpController implements Initializable {
         
         label_anotherError.setText("");
     }
-    
-    
+
+    @FXML
+    private void handleBCancelOnAction(ActionEvent event) {
+        bCancel.getScene().getWindow().hide();
+    }
+
+    /* metodo que comprueba que los parametros de Inicio son correctos, en caso incorrecta muestra un label de error */
+    @FXML
+    private void handleLogInOnAction(ActionEvent event) {
+        iniErrorsLabels();
+        
+        String nick = nickField.textProperty().getValueSafe();
+        String pass = passFieldLog.textProperty().getValueSafe();
+        if (!baseDatos.exitsNickName(nick)) {
+            label_wUser.visibleProperty().set(true);
+        } else {
+            User usuario = baseDatos.loginUser(nick, pass);
+            if (usuario == null) {
+                label_wPass.visibleProperty().set(true);
+            } else { goToProblems(usuario); }
+        }
+    }
+
     /* metodo que comprueba que los parametros de registro son correctos, en caso incorrecta muestra un label de error */
-    private void initSignUp() {
+    @FXML
+    private void handleRegisterOnAction(ActionEvent event) {
         try {
             iniErrorsLabels();
             
@@ -179,37 +203,6 @@ public class LogInSignUpController implements Initializable {
         } catch (NavegacionDAOException ex) {
             Logger.getLogger(LogInSignUpController.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-
-    /* metodo que comprueba que los parametros de Inicio son correctos, en caso incorrecta muestra un label de error */
-    private void initLogIn() {  
-        iniErrorsLabels();
-        
-        String nick = nickField.textProperty().getValueSafe();
-        String pass = passFieldLog.textProperty().getValueSafe();
-        if (!baseDatos.exitsNickName(nick)) {
-            label_wUser.visibleProperty().set(true);
-        } else {
-            User usuario = baseDatos.loginUser(nick, pass);
-            if (usuario == null) {
-                label_wPass.visibleProperty().set(true);
-            } else { goToProblems(usuario); }
-        }
-    }
-
-    @FXML
-    private void handleBCancelOnAction(ActionEvent event) {
-        bCancel.getScene().getWindow().hide();
-    }
-
-    @FXML
-    private void handleLogInOnAction(ActionEvent event) {
-        initLogIn();
-    }
-
-    @FXML
-    private void handleRegisterOnAction(ActionEvent event) {
-        initSignUp();
     } 
     
     private void goToProblems(User usuario) {
@@ -247,8 +240,4 @@ public class LogInSignUpController implements Initializable {
         }   
     }
     
-    @FXML
-    private void mouseOverAvatar(MouseDragEvent event) {
-        
-    }
 }

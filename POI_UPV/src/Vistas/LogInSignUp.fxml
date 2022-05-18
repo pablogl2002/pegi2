@@ -19,7 +19,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<HBox fillHeight="false" prefHeight="432.0" prefWidth="606.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.LogInSignUpController">
+<HBox fillHeight="false" prefHeight="432.0" prefWidth="606.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.LogInSignUpController">
    <children>
       <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="470.0" prefWidth="250.0" style="-fx-background-color: white;">
          <top>
@@ -101,7 +101,7 @@
          <bottom>
             <HBox alignment="CENTER_RIGHT" prefHeight="75.0" spacing="25.0" BorderPane.alignment="CENTER_RIGHT">
                <children>
-                  <Button alignment="CENTER" minWidth="80.0" mnemonicParsing="false" onAction="#handleLogInOnAction" prefWidth="100.0" style="-fx-background-color: #0685bc;" text="Iniciar" textFill="WHITE">
+                  <Button id="accept_button" alignment="CENTER" minWidth="80.0" mnemonicParsing="false" onAction="#handleLogInOnAction" prefWidth="100.0" text="Iniciar" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -280,7 +280,7 @@
                            <children>
                               <Pane>
                                  <children>
-                                    <ImageView id="big_avatar" fx:id="id_avatar" cache="true" fitHeight="120.0" fitWidth="120.0" layoutY="10.0" onMouseClicked="#changeAvatar" onMouseDragOver="#mouseOverAvatar" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView id="big_avatar" fx:id="id_avatar" cache="true" fitHeight="120.0" fitWidth="120.0" layoutY="10.0" onMouseClicked="#changeAvatar" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../resources/avatars/default2.png" />
                                        </image>
@@ -319,7 +319,7 @@
          <bottom>
             <HBox alignment="CENTER_RIGHT" prefHeight="75.0" prefWidth="200.0" spacing="25.0" BorderPane.alignment="CENTER_RIGHT">
                <children>
-                  <Button alignment="CENTER" minWidth="80.0" mnemonicParsing="false" onAction="#handleRegisterOnAction" prefWidth="100.0" style="-fx-background-color: #0685bc;" text="Registrar" textFill="WHITE">
+                  <Button id="accept_button" alignment="CENTER" minWidth="80.0" mnemonicParsing="false" onAction="#handleRegisterOnAction" prefWidth="100.0" text="Registrar" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -327,7 +327,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="bCancel" alignment="CENTER" minWidth="80.0" mnemonicParsing="false" onAction="#handleBCancelOnAction" prefWidth="100.0" style="-fx-background-color: #0685bc;" text="Cancelar" textFill="WHITE">
+                  <Button id="accept_button" fx:id="bCancel" alignment="CENTER" minWidth="80.0" mnemonicParsing="false" onAction="#handleBCancelOnAction" prefWidth="100.0" text="Cancelar" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>

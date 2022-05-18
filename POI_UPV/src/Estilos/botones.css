@@ -1,3 +1,12 @@
+/* Iniciar - Registrar - Aceptar - ... */
+#accept_button {
+    -fx-background-color: #0685bc;
+    -fx-font-family: "Tahoma";
+    -fx-font-size: 14px;
+    -fx-text-fill: white;
+    -fx-font-style: bold;
+}
+
 /* edicion del mapa */
 #edit_button {
     -fx-box-shadow:inset 0px 1px 0px 0px #ffffff;

@@ -4,13 +4,38 @@
 <?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="700.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.ProblemsController">
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="650.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.ProblemsController">
    <children>
-      <Label text="PROBLEMAS" />
-      <Accordion fx:id="acordeonProblemas" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="650.0">
+      <MenuBar nodeOrientation="RIGHT_TO_LEFT">
+         <menus>
+            <Menu id="perfil_menu" fx:id="id_menuPerfil" mnemonicParsing="false" text="Mi Perfil">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#editProfile" text="Editar Perfil" />
+                  <MenuItem mnemonicParsing="false" onAction="#logOut" text="Cerrar Sesión" />
+               </items>
+               <graphic>
+                  <ImageView id="small_avatar" fx:id="id_avatar" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/avatars/avatar4.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Menu>
+         </menus>
+      </MenuBar>
+      <Label text="PROBLEMAS">
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin></Label>
+      <Accordion fx:id="acordeonProblemas" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="600.0">
          <VBox.margin>
             <Insets top="10.0" />
          </VBox.margin>
@@ -28,7 +53,4 @@
          </padding>
       </HBox>
    </children>
-   <padding>
-      <Insets top="10.0" />
-   </padding>
 </VBox>
