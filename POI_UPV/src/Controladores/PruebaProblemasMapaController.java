@@ -15,7 +15,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuButton;
@@ -180,6 +182,7 @@ public class PruebaProblemasMapaController implements Initializable {
     @FXML
      private void RatonPulsado(MouseEvent event) {
         
+        if (event.isSecondaryButtonDown()){intAyuda = 935;}//Estoy hay que cambiarlo porque al usar el click derecho se quita la funcion de dibujar y demás
         
         if (intAyuda == 2) {
             linePainting = new Line(event.getX(), event.getY(), event.getX(), event.getY());
@@ -222,6 +225,44 @@ public class PruebaProblemasMapaController implements Initializable {
                 e.consume();
             });
         }
+        
+        linePainting.setOnContextMenuRequested(e -> {
+            ContextMenu menuContext = new ContextMenu();
+            MenuItem borrarItem = new MenuItem("eliminar");
+            menuContext.getItems().add(borrarItem);
+            borrarItem.setOnAction(ev -> {
+                zoomGroup.getChildren().remove((Node)e.getSource());
+                ev.consume();
+            });
+            menuContext.show(linePainting, e.getSceneX(), e.getSceneY());
+            e.consume();
+        });
+        
+        /*circlePainting.setOnContextMenuRequested(e -> {
+            ContextMenu menuContextCirculo = new ContextMenu();
+            MenuItem borrarCirculo = new MenuItem("Borrar Circulo");
+            menuContextCirculo.getItems().add(borrarCirculo);
+            borrarCirculo.setOnAction(ev -> {
+                zoomGroup.getChildren().remove((Node)e.getSource());
+                ev.consume();
+            });
+            menuContextCirculo.show(circlePainting, e.getSceneX(), e.getSceneY());
+            e.consume();
+        });*/
+        
+        linePainting.setOnContextMenuRequested(e -> {
+            ContextMenu menuColor = new ContextMenu();
+            MenuItem borrarTodo = new MenuItem("Borrar Todo");
+            menuColor.getItems().add(borrarTodo);
+            borrarTodo.setOnAction(ev -> {
+                zoomGroup.getChildren().remove(1,zoomGroup.getChildren().size());
+                ev.consume();
+            });
+            menuColor.show(linePainting, e.getSceneX(), e.getSceneY());
+            e.consume();
+        });
+        
+        
      }
      
     @FXML
