@@ -41,8 +41,8 @@ import model.User;
  * @author pablo
  */
 public class LogInSignUpController implements Initializable {  
-    private Stage primaryStage;
     
+    // Variables FXML
     @FXML
     private TextField nickField;
     @FXML
@@ -56,9 +56,7 @@ public class LogInSignUpController implements Initializable {
     @FXML
     private PasswordField passFieldSign;
     @FXML
-    private PasswordField rePassFieldSign;
-    
-    private Navegacion baseDatos;
+    private PasswordField rePassFieldSign;    
     @FXML
     private Label label_wUser;
     @FXML
@@ -79,6 +77,10 @@ public class LogInSignUpController implements Initializable {
     private Label label_anotherError;
     @FXML
     private ImageView id_avatar;
+    
+    // Variables del codigo
+    private Stage primaryStage;
+    private Navegacion baseDatos;
     private Image avatar;
     
     public void initStage(Stage stage) {
@@ -97,8 +99,9 @@ public class LogInSignUpController implements Initializable {
             String nickName = "a";
             String email = "email@domain.es";
             String password = "a";
+            Image av = new Image("/resources/avatars/ctangana.png");
             LocalDate birthdate = LocalDate.now().minusYears(18);
-            User result = baseDatos.registerUser(nickName, email, password, birthdate);
+            User result = baseDatos.registerUser(nickName, email, password, av, birthdate);
             */
             
         } catch (NavegacionDAOException ex) {
@@ -106,6 +109,7 @@ public class LogInSignUpController implements Initializable {
         }
     }    
     
+    /* metodo que inicializa las etiquetas de error en invisibles */
     private void iniErrorsLabels() {
         //labels Log In 
         label_wUser.visibleProperty().set(false);
@@ -123,6 +127,8 @@ public class LogInSignUpController implements Initializable {
         label_anotherError.setText("");
     }
     
+    
+    /* metodo que comprueba que los parametros de registro son correctos, en caso incorrecta muestra un label de error */
     private void initSignUp() {
         try {
             iniErrorsLabels();
@@ -175,6 +181,7 @@ public class LogInSignUpController implements Initializable {
         }
     }
 
+    /* metodo que comprueba que los parametros de Inicio son correctos, en caso incorrecta muestra un label de error */
     private void initLogIn() {  
         iniErrorsLabels();
         

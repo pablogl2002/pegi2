@@ -83,7 +83,7 @@ public class ChooseProblemTypeController implements Initializable {
                 primaryStage.setResizable(false);
 
                 ProblemsController pro = loader.getController();
-                pro.initStage(primaryStage);
+                pro.initStage(primaryStage, usuario);
             }
             
             if (auxNum == 1) {
@@ -96,7 +96,7 @@ public class ChooseProblemTypeController implements Initializable {
                 primaryStage.setResizable(false);
 
                 PruebaProblemasMapaController rPro = loader.getController();
-                rPro.initStage(primaryStage);
+            rPro.initStage(primaryStage, usuario);
             }
             primaryStage.show();
         } catch (IOException ex) {

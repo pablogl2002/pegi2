@@ -7,22 +7,17 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="400.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.ProblemsController">
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="700.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.ProblemsController">
    <children>
       <Label text="PROBLEMAS" />
-      <Accordion fx:id="acordeonProblemas" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="350.0">
+      <Accordion fx:id="acordeonProblemas" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="650.0">
          <VBox.margin>
             <Insets top="10.0" />
          </VBox.margin>
       </Accordion>
       <HBox alignment="CENTER_RIGHT">
          <children>
-            <Button mnemonicParsing="false" text="Realizar">
-               <HBox.margin>
-                  <Insets right="10.0" />
-               </HBox.margin>
-            </Button>
-            <Button mnemonicParsing="false" text="Cancelar">
+            <Button mnemonicParsing="false" text="Aleatorio">
                <HBox.margin>
                   <Insets right="15.0" />
                </HBox.margin>

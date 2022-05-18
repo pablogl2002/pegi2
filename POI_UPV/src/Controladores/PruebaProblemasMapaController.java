@@ -32,6 +32,7 @@ import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import model.User;
 
 /**
  *
@@ -290,7 +291,8 @@ public class PruebaProblemasMapaController implements Initializable {
         
     }
 
-    public void initStage(Stage stage) {
+    public void initStage(Stage stage, User user) {
         primaryStage = stage;
+        
     }
 }
