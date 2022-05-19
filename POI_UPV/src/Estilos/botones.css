@@ -1,5 +1,5 @@
 /* Iniciar - Registrar - Aceptar - ... */
-#accept_button {
+#accept_button, #acordeon .button {
     -fx-background-color: #0685bc;
     -fx-font-family: "Tahoma";
     -fx-font-size: 14px;

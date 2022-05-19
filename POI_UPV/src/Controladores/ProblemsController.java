@@ -77,7 +77,7 @@ public class ProblemsController implements Initializable {
                 qCont.getChildren().add(pregunta);
                 qCont.getChildren().add(bCont);
                 
-                pregunta.wrappingWidthProperty().set(580);
+                pregunta.wrappingWidthProperty().set(560);
                 
                 qCont.alignmentProperty().set(Pos.CENTER);
                 tPane[i].setContent(qCont);
