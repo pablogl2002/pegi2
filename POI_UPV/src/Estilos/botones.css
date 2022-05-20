@@ -1,0 +1,24 @@
+/* Iniciar - Registrar - Aceptar - ... */
+#accept_button, #acordeon .button {
+    -fx-background-color: #0685bc;
+    -fx-font-family: "Tahoma";
+    -fx-font-size: 14px;
+    -fx-text-fill: white;
+    -fx-font-style: bold;
+}
+
+/* edicion del mapa */
+#edit_button {
+    -fx-box-shadow:inset 0px 1px 0px 0px #ffffff;
+    -fx-background-color:rgba(0, 0, 0, 0);
+    -fx-border-radius:5px;
+    -fx-border-width:0.3px;
+    -fx-border-color: rgba(0, 0, 0, 0.2);
+    
+    -fx-text-decoration:none;
+    -fx-text-shadow:0px 1px 0px #ffffff;
+}
+#edit_button:hover {
+    -fx-background-color:rgba(0, 0, 0, 0.1);
+    -fx-border-color: rgba(200, 200, 200, 1);
+}

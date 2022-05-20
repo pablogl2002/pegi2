@@ -19,6 +19,7 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import model.User;
 
 /**
  * FXML Controller class
@@ -37,6 +38,7 @@ public class ChooseProblemTypeController implements Initializable {
     private int auxNum = -1;
     @FXML
     private Menu id_menuPerfil;
+    private User usuario;
 
     /**
      * Initializes the controller class.
@@ -46,8 +48,11 @@ public class ChooseProblemTypeController implements Initializable {
         id_menuPerfil.setText("Perfil");
     }    
 
-    public void initStage(Stage stage) {
-         primaryStage = stage;
+    public void initStage(Stage stage, User user) {
+        primaryStage = stage;
+        usuario = user;
+        id_avatar.setImage(usuario.getAvatar());
+        id_menuPerfil.setText(usuario.getNickName());
     }
     
     @FXML
@@ -78,21 +83,22 @@ public class ChooseProblemTypeController implements Initializable {
                 primaryStage.setResizable(false);
 
                 ProblemsController pro = loader.getController();
-                pro.initStage(primaryStage);
+                pro.initStage(primaryStage, usuario);
             }
+            
             if (auxNum == 1) {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/RandomProblems.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/PruebaProblemasMapa.fxml"));
                 Parent root = loader.load();
 
                 Scene scene = new Scene(root);
                 primaryStage.setTitle("Problemas Aleatorios");
                 primaryStage.setScene(scene);
-                primaryStage.setResizable(false);
+                primaryStage.setResizable(true);
 
-                RandomProblemsController rPro = loader.getController();
-                rPro.initStage(primaryStage);
+                PruebaProblemasMapaController rPro = loader.getController();
+            rPro.initStage(primaryStage, usuario, 0);
             }
-             primaryStage.show();
+            primaryStage.show();
         } catch (IOException ex) {
                 Logger.getLogger(ChooseProblemTypeController.class.getName()).log(Level.SEVERE, null, ex);
         }

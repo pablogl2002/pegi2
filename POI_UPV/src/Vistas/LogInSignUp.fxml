@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
@@ -11,17 +14,18 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<HBox fillHeight="false" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.LogInSignUpController">
+<HBox fillHeight="false" prefHeight="432.0" prefWidth="606.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.LogInSignUpController">
    <children>
       <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="470.0" prefWidth="250.0" style="-fx-background-color: white;">
          <top>
             <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="300.0" BorderPane.alignment="CENTER_LEFT">
                <children>
-                  <Text fill="#a19f9f" strokeType="OUTSIDE" strokeWidth="0.0" text="Log In">
+                  <Text fill="#a19f9f" strokeType="OUTSIDE" strokeWidth="0.0" text="Inicio Sesión">
                      <font>
                         <Font name="Dubai Bold" size="40.0" />
                      </font>
@@ -55,7 +59,7 @@
                                     </Label>
                                  </children>
                               </HBox>
-                              <TextField fx:id="nickField" minHeight="26.0" minWidth="200.0" prefHeight="26.0" prefWidth="350.0" promptText="yourUsername" />
+                              <TextField id="textfield" fx:id="nickField" minHeight="26.0" minWidth="200.0" prefHeight="26.0" prefWidth="350.0" promptText="yourUsername" />
                            </children>
                         </VBox>
                      </children>
@@ -80,7 +84,7 @@
                                     </Label>
                                  </children>
                               </HBox>
-                              <PasswordField fx:id="passFieldLog" maxWidth="-Infinity" promptText="LettersNumbersSymbols" />
+                              <PasswordField id="textfield" fx:id="passFieldLog" maxWidth="-Infinity" promptText="LettersNumbersSymbols" />
                            </children>
                         </VBox>
                      </children>
@@ -97,10 +101,13 @@
          <bottom>
             <HBox alignment="CENTER_RIGHT" prefHeight="75.0" spacing="25.0" BorderPane.alignment="CENTER_RIGHT">
                <children>
-                  <Button alignment="CENTER" minWidth="80.0" mnemonicParsing="false" onAction="#handleLogInOnAction" prefWidth="100.0" style="-fx-background-color: #0685bc;" text="Log In" textFill="WHITE">
+                  <Button id="accept_button" alignment="CENTER" minWidth="80.0" mnemonicParsing="false" onAction="#handleLogInOnAction" prefWidth="100.0" text="Iniciar" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
                </children>
                <BorderPane.margin>
@@ -114,7 +121,7 @@
          <top>
             <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="300.0" BorderPane.alignment="CENTER_LEFT">
                <children>
-                  <Text fill="#a19f9f" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign Up">
+                  <Text fill="#a19f9f" strokeType="OUTSIDE" strokeWidth="0.0" text="Registro">
                      <font>
                         <Font name="Dubai Bold" size="40.0" />
                      </font>
@@ -153,7 +160,7 @@
                                     <Insets bottom="5.0" />
                                  </padding>
                               </HBox>
-                              <TextField fx:id="emailField" minHeight="26.0" minWidth="320.0" prefHeight="26.0" prefWidth="350.0" promptText="yourEmail@domain.com" />
+                              <TextField id="textfield" fx:id="emailField" minHeight="26.0" minWidth="320.0" prefHeight="26.0" prefWidth="350.0" promptText="yourEmail@domain.com" />
                            </children>
                         </VBox>
                      </children>
@@ -181,7 +188,7 @@
                                     </Label>
                                  </children>
                               </HBox>
-                              <TextField fx:id="userFieldSign" prefWidth="220.0" promptText="YourUsername" />
+                              <TextField id="textfield" fx:id="userFieldSign" prefWidth="220.0" promptText="YourUsername" />
                            </children>
                         </VBox>
                         <VBox>
@@ -199,7 +206,7 @@
                                     </Label>
                                  </children>
                               </HBox>
-                              <DatePicker fx:id="picker_birthday" promptText="YourBirth" />
+                              <DatePicker id="datepicker" fx:id="picker_birthday" promptText="YourBirth" />
                            </children>
                            <HBox.margin>
                               <Insets left="20.0" />
@@ -231,7 +238,7 @@
                                                 </Label>
                                              </children>
                                           </HBox>
-                                          <PasswordField fx:id="passFieldSign" maxWidth="-Infinity" minHeight="26.0" minWidth="150.0" prefHeight="26.0" prefWidth="100.0" promptText="LettersNumbersSymbols" />
+                                          <PasswordField id="textfield" fx:id="passFieldSign" maxWidth="-Infinity" minHeight="26.0" minWidth="150.0" prefHeight="26.0" prefWidth="100.0" promptText="LettersNumbersSymbols" />
                                        </children>
                                     </VBox>
                                  </children>
@@ -256,7 +263,7 @@
                                                 </Label>
                                              </children>
                                           </HBox>
-                                          <PasswordField fx:id="rePassFieldSign" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="26.0" minWidth="150.0" prefHeight="26.0" prefWidth="150.0" promptText="LettersNumbersSymbols" />
+                                          <PasswordField id="textfield" fx:id="rePassFieldSign" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="26.0" minWidth="150.0" prefHeight="26.0" prefWidth="150.0" promptText="LettersNumbersSymbols" />
                                        </children>
                                     </VBox>
                                  </children>
@@ -267,16 +274,34 @@
                            </children>
                         </VBox>
                         <VBox prefHeight="200.0" prefWidth="100.0">
-                           <children>
-                              <ImageView fx:id="id_avatar" fitHeight="120.0" fitWidth="120.0" onMouseClicked="#changeAvatar" onMouseDragOver="#mouseOverAvatar" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../resources/avatars/avatar4.png" />
-                                 </image>
-                              </ImageView>
-                           </children>
                            <HBox.margin>
                               <Insets left="25.0" />
                            </HBox.margin>
+                           <children>
+                              <Pane>
+                                 <children>
+                                    <ImageView id="big_avatar" fx:id="id_avatar" cache="true" fitHeight="120.0" fitWidth="120.0" layoutY="10.0" onMouseClicked="#changeAvatar" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../resources/avatars/default2.png" />
+                                       </image>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </ImageView>
+                                    <ImageView id="big_avatarEdit" fx:id="id_avatarEdit" cache="true" fitHeight="120.0" fitWidth="120.0" layoutY="10.0" onMouseClicked="#changeAvatar" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../resources/editarAvatar.png" />
+                                       </image>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <viewport>
+                                          <Rectangle2D />
+                                       </viewport>
+                                    </ImageView>
+                                 </children>
+                              </Pane>
+                           </children>
                         </VBox>
                      </children>
                   </HBox>
@@ -294,15 +319,21 @@
          <bottom>
             <HBox alignment="CENTER_RIGHT" prefHeight="75.0" prefWidth="200.0" spacing="25.0" BorderPane.alignment="CENTER_RIGHT">
                <children>
-                  <Button alignment="CENTER" minWidth="80.0" mnemonicParsing="false" onAction="#handleRegisterOnAction" prefWidth="100.0" style="-fx-background-color: #0685bc;" text="Register" textFill="WHITE">
+                  <Button id="accept_button" alignment="CENTER" minWidth="80.0" mnemonicParsing="false" onAction="#handleRegisterOnAction" prefWidth="100.0" text="Registrar" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
-                  <Button fx:id="bCancel" alignment="CENTER" minWidth="80.0" mnemonicParsing="false" onAction="#handleBCancelOnAction" prefWidth="100.0" style="-fx-background-color: #0685bc;" text="Cancel" textFill="WHITE">
+                  <Button id="accept_button" fx:id="bCancel" alignment="CENTER" minWidth="80.0" mnemonicParsing="false" onAction="#handleBCancelOnAction" prefWidth="100.0" text="Cancelar" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
                </children>
                <BorderPane.margin>
@@ -312,4 +343,8 @@
          </bottom>
       </BorderPane>
    </children>
+   <stylesheets>
+      <URL value="@../Estilos/estilos.css" />
+      <URL value="@../Estilos/botones.css" />
+   </stylesheets>
 </HBox>

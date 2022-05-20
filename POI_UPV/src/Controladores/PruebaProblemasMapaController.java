@@ -15,7 +15,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuButton;
@@ -66,7 +68,9 @@ public class PruebaProblemasMapaController implements Initializable {
     private double inicioXTrans;
     private int intAyuda;
     private double inicioXArc;
-    
+    private Stage primaryStage;
+    private int tipo;
+    private User usuario;
     
     Circle circlePainting;
     TextField texto = new TextField();
@@ -154,6 +158,7 @@ public class PruebaProblemasMapaController implements Initializable {
         contentGroup.getChildren().add(zoomGroup);
         zoomGroup.getChildren().add(map_scrollpane.getContent());
         map_scrollpane.setContent(contentGroup);
+        map_scrollpane.setPannable(false);
     }
 
     @FXML
@@ -177,14 +182,18 @@ public class PruebaProblemasMapaController implements Initializable {
     
     @FXML
      private void RatonPulsado(MouseEvent event) {
-        map_scrollpane.setPannable(false);
+      
+        if (event.isSecondaryButtonDown()){intAyuda = 935;}//Estoy hay que cambiarlo porque al usar el click derecho se quita la funcion de dibujar y demás
         
         if (intAyuda == 2) {
             linePainting = new Line(event.getX(), event.getY(), event.getX(), event.getY());
-            zoomGroup.getChildren().add(linePainting);}
+            zoomGroup.getChildren().add(linePainting);
+        }
         
         if (intAyuda == 1) {
             transportador.setOpacity(0.5);
+            transportador.fitHeightProperty().set(240.0);
+            transportador.fitWidthProperty().set(240.0);
             inicioXTrans = event.getSceneX();
             inicioYTrans = event.getSceneY();
             baseX = transportador.getTranslateX();
@@ -195,7 +204,7 @@ public class PruebaProblemasMapaController implements Initializable {
         if (intAyuda == 3) {
             circlePainting = new Circle(1);
             circlePainting.setStroke(Color.RED);
-            circlePainting.setFill(Color.TRANSPARENT);
+            circlePainting.setFill(null);
             
             zoomGroup.getChildren().add(circlePainting);
             
@@ -219,6 +228,44 @@ public class PruebaProblemasMapaController implements Initializable {
                 e.consume();
             });
         }
+        
+        linePainting.setOnContextMenuRequested(e -> {
+            ContextMenu menuContext = new ContextMenu();
+            MenuItem borrarItem = new MenuItem("eliminar");
+            menuContext.getItems().add(borrarItem);
+            borrarItem.setOnAction(ev -> {
+                zoomGroup.getChildren().remove((Node)e.getSource());
+                ev.consume();
+            });
+            MenuItem borrarTodo = new MenuItem("Borrar Todo");
+            menuContext.getItems().add(borrarTodo);
+            borrarTodo.setOnAction(ev -> {
+                zoomGroup.getChildren().remove(1,zoomGroup.getChildren().size());
+                ev.consume();
+            });
+            menuContext.show(linePainting, e.getSceneX(), e.getSceneY());
+            e.consume();
+        });
+        
+        circlePainting.setOnContextMenuRequested(e -> {
+            ContextMenu menuContext = new ContextMenu();
+            MenuItem borrarItem = new MenuItem("eliminar");
+            menuContext.getItems().add(borrarItem);
+            borrarItem.setOnAction(ev -> {
+                zoomGroup.getChildren().remove((Node)e.getSource());
+                ev.consume();
+            });
+            MenuItem borrarTodo = new MenuItem("Borrar Todo");
+            menuContext.getItems().add(borrarTodo);
+            borrarTodo.setOnAction(ev -> {
+                zoomGroup.getChildren().remove(1,zoomGroup.getChildren().size());
+                ev.consume();
+            });
+            menuContext.show(circlePainting, e.getSceneX(), e.getSceneY());
+            e.consume();
+        });
+        
+        
      }
      
     @FXML
@@ -240,8 +287,14 @@ public class PruebaProblemasMapaController implements Initializable {
             double radio = Math.abs(event.getX()- inicioXArc);
             circlePainting.setRadius(radio);
             event.consume();
+            
         }
-     
+        
+        if (intAyuda == 2){
+            linePainting.setEndX(event.getX());
+            linePainting.setEndY(event.getY());
+            event.consume();
+        }
     }
     @FXML
       private void RatonSoltado(MouseEvent event) {
@@ -279,6 +332,13 @@ public class PruebaProblemasMapaController implements Initializable {
 
     @FXML
     private void moverFondo(ActionEvent event) {
-        
+        map_scrollpane.setPannable(true);
+        intAyuda = 115;
+    }
+
+    public void initStage(Stage stage) {
+        primaryStage = stage;
+        usuario = user;
+        tipo = type; //tipo = 0 -> problemas aleatorios  tipo = 1 -> problemas ordenados
     }
 }

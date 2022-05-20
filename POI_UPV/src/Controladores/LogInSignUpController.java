@@ -41,8 +41,8 @@ import model.User;
  * @author pablo
  */
 public class LogInSignUpController implements Initializable {  
-    private Stage primaryStage;
     
+    // Variables FXML
     @FXML
     private TextField nickField;
     @FXML
@@ -56,9 +56,7 @@ public class LogInSignUpController implements Initializable {
     @FXML
     private PasswordField passFieldSign;
     @FXML
-    private PasswordField rePassFieldSign;
-    
-    private Navegacion baseDatos;
+    private PasswordField rePassFieldSign;    
     @FXML
     private Label label_wUser;
     @FXML
@@ -79,7 +77,13 @@ public class LogInSignUpController implements Initializable {
     private Label label_anotherError;
     @FXML
     private ImageView id_avatar;
-      
+    
+    // Variables del codigo
+    private Stage primaryStage;
+    private Navegacion baseDatos;
+    private Image avatar;
+    @FXML
+    private ImageView id_avatarEdit;
     
     public void initStage(Stage stage) {
          primaryStage = stage;
@@ -97,8 +101,9 @@ public class LogInSignUpController implements Initializable {
             String nickName = "a";
             String email = "email@domain.es";
             String password = "a";
+            Image av = new Image("/resources/avatars/ctangana.png");
             LocalDate birthdate = LocalDate.now().minusYears(18);
-            User result = baseDatos.registerUser(nickName, email, password, birthdate);
+            User result = baseDatos.registerUser(nickName, email, password, av, birthdate);
             */
             
         } catch (NavegacionDAOException ex) {
@@ -106,6 +111,7 @@ public class LogInSignUpController implements Initializable {
         }
     }    
     
+    /* metodo que inicializa las etiquetas de error en invisibles */
     private void iniErrorsLabels() {
         //labels Log In 
         label_wUser.visibleProperty().set(false);
@@ -122,8 +128,32 @@ public class LogInSignUpController implements Initializable {
         
         label_anotherError.setText("");
     }
-    
-    private void initSignUp() {
+
+    @FXML
+    private void handleBCancelOnAction(ActionEvent event) {
+        bCancel.getScene().getWindow().hide();
+    }
+
+    /* metodo que comprueba que los parametros de Inicio son correctos, en caso incorrecta muestra un label de error */
+    @FXML
+    private void handleLogInOnAction(ActionEvent event) {
+        iniErrorsLabels();
+        
+        String nick = nickField.textProperty().getValueSafe();
+        String pass = passFieldLog.textProperty().getValueSafe();
+        if (!baseDatos.exitsNickName(nick)) {
+            label_wUser.visibleProperty().set(true);
+        } else {
+            User usuario = baseDatos.loginUser(nick, pass);
+            if (usuario == null) {
+                label_wPass.visibleProperty().set(true);
+            } else { goToProblems(usuario); }
+        }
+    }
+
+    /* metodo que comprueba que los parametros de registro son correctos, en caso incorrecta muestra un label de error */
+    @FXML
+    private void handleRegisterOnAction(ActionEvent event) {
         try {
             iniErrorsLabels();
             
@@ -160,60 +190,33 @@ public class LogInSignUpController implements Initializable {
                 label_anotherError.setText("Passwords don't match");
                 label_anotherError.visibleProperty().set(true);
             }
-
-            if (User.checkNickName(nickName) && !baseDatos.exitsNickName(nickName) && User.checkEmail(email) && User.checkPassword(password) && password.equals(rePassword)) {
-                User user = baseDatos.registerUser(nickName, email, password, birthdate);               
-                goToMap();
+            
+            if (avatar == null) {
+                avatar = new Image("/resources/avatars/default.png");
             }
             
+            if (User.checkNickName(nickName) && !baseDatos.exitsNickName(nickName) && User.checkEmail(email) && User.checkPassword(password) && password.equals(rePassword)) {
+                User usuario = baseDatos.registerUser(nickName, email, password, birthdate);               
+                goToProblems(usuario);
+            }
+
         } catch (NavegacionDAOException ex) {
             Logger.getLogger(LogInSignUpController.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-
-    private void initLogIn() {  
-        iniErrorsLabels();
-        
-        String nick = nickField.textProperty().getValueSafe();
-        String pass = passFieldLog.textProperty().getValueSafe();
-        if (!baseDatos.exitsNickName(nick)) {
-            label_wUser.visibleProperty().set(true);
-        } else {
-            User usuario = baseDatos.loginUser(nick, pass);
-            if (usuario == null) {
-                label_wPass.visibleProperty().set(true);
-            } else { goToMap(); }
-        }
- 
-    }
-
-    @FXML
-    private void handleBCancelOnAction(ActionEvent event) {
-        bCancel.getScene().getWindow().hide();
-    }
-
-    @FXML
-    private void handleLogInOnAction(ActionEvent event) {
-        initLogIn();
-    }
-
-    @FXML
-    private void handleRegisterOnAction(ActionEvent event) {
-        initSignUp();
     } 
     
-    private void goToMap() {
+    private void goToProblems(User usuario) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/FXMLDocument.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/ChooseProblemType.fxml"));
             Parent root = loader.load();
 
             Scene scene = new Scene(root);
-            primaryStage.setTitle("Mapa");
+            primaryStage.setTitle("Problemas");
             primaryStage.setScene(scene);
             primaryStage.setResizable(true);
 
-            LogInSignUpController logIn = loader.getController();
-            logIn.initStage(primaryStage);        
+            ChooseProblemTypeController ctr = loader.getController();
+            ctr.initStage(primaryStage, usuario);        
             primaryStage.show();
         } catch (IOException ex) {
             Logger.getLogger(LogInSignUpController.class.getName()).log(Level.SEVERE, null, ex);
@@ -222,20 +225,19 @@ public class LogInSignUpController implements Initializable {
 
     @FXML
     private void changeAvatar(MouseEvent event) throws FileNotFoundException {
-        FileChooser fc = new FileChooser(); 
+        FileChooser fc = new FileChooser();
+        
+        //fc.setInitialDirectory(new File("\\resources\\avatars\\"));
         fc.setTitle("Select an avatar");
         fc.getExtensionFilters().addAll(new ExtensionFilter("Image", "*.png", "*.jpg", "*.jpeg"));
+        
         File selectFile = fc.showOpenDialog(primaryStage);
         if (selectFile != null) {
             FileInputStream in = new FileInputStream(selectFile);
-            Image img = new Image(in);
-            id_avatar.setImage(img);
+            avatar = new Image(in);
+            id_avatar.setImage(avatar);
            
         }   
     }
     
-    @FXML
-    private void mouseOverAvatar(MouseDragEvent event) {
-        
-    }
 }

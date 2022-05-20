@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.String?>
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
@@ -19,7 +21,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox stylesheets="@../resources/estilos.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.PruebaProblemasMapaController">
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.PruebaProblemasMapaController">
    <children>
       <HBox alignment="CENTER_RIGHT" fillHeight="false" spacing="5.0" VBox.vgrow="NEVER">
          <children>
@@ -55,9 +57,9 @@
       <SplitPane dividerPositions="0.4431438127090301, 0.5" VBox.vgrow="ALWAYS">
          <items>
             <ListView fx:id="map_listview" onMouseClicked="#listClicked" prefHeight="399.0" prefWidth="87.0" />
-            <VBox SplitPane.resizableWithParent="false">
+            <VBox minHeight="-Infinity" minWidth="-Infinity" SplitPane.resizableWithParent="false">
                <children>
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#moverFondo" prefHeight="30.0" prefWidth="30.0">
+                  <Button id="edit_button" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#moverFondo" prefHeight="30.0" prefWidth="30.0">
                      <VBox.margin>
                         <Insets left="3.0" right="3.0" top="5.0" />
                      </VBox.margin>
@@ -68,8 +70,11 @@
                            </image>
                         </ImageView>
                      </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#Condicion2" prefHeight="30.0" prefWidth="30.0">
+                  <Button id="edit_button" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#Condicion2" prefHeight="30.0" prefWidth="30.0">
                      <VBox.margin>
                         <Insets left="3.0" right="3.0" top="5.0" />
                      </VBox.margin>
@@ -80,8 +85,11 @@
                            </image>
                         </ImageView>
                      </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#Condicion3" prefHeight="30.0" prefWidth="30.0">
+                  <Button id="edit_button" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#Condicion3" prefHeight="30.0" prefWidth="30.0">
                      <VBox.margin>
                         <Insets left="3.0" right="3.0" top="5.0" />
                      </VBox.margin>
@@ -92,8 +100,11 @@
                            </image>
                         </ImageView>
                      </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#Condicion4" prefHeight="30.0" prefWidth="30.0">
+                  <Button id="edit_button" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#Condicion4" prefHeight="30.0" prefWidth="30.0">
                      <VBox.margin>
                         <Insets left="3.0" right="3.0" top="5.0" />
                      </VBox.margin>
@@ -104,8 +115,11 @@
                            </image>
                         </ImageView>
                      </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#Condicion1" prefHeight="30.0" prefWidth="30.0">
+                  <Button id="edit_button" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#Condicion1" prefHeight="30.0" prefWidth="30.0">
                      <VBox.margin>
                         <Insets left="3.0" right="3.0" top="5.0" />
                      </VBox.margin>
@@ -116,19 +130,23 @@
                            </image>
                         </ImageView>
                      </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
+                  <Button mnemonicParsing="false" text="Button" />
                </children>
             </VBox>
             <ScrollPane fx:id="map_scrollpane" hbarPolicy="ALWAYS" onMouseMoved="#muestraPosicion" pannable="true" prefHeight="398.0" prefWidth="317.0" vbarPolicy="ALWAYS">
                <content>
                   <Pane>
                      <children>
-                        <ImageView onMouseDragged="#RatonArrastrado" onMousePressed="#RatonPulsado" onMouseReleased="#RatonSoltado" pickOnBounds="true">
+                        <ImageView fitHeight="5746.0" fitWidth="8974.0" onMouseDragged="#RatonArrastrado" onMousePressed="#RatonPulsado" onMouseReleased="#RatonSoltado" pickOnBounds="true">
                            <image>
                               <Image url="@../resources/carta_nautica.jpg" />
                            </image>
                         </ImageView>
-                        <ImageView fx:id="transportador" fitHeight="150.0" fitWidth="200.0" layoutX="48.0" layoutY="92.0" onMousePressed="#RatonPulsado" onMouseReleased="#RatonSoltado" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="transportador" fitHeight="26.0" fitWidth="92.0" onMouseDragged="#RatonArrastrado" onMousePressed="#RatonPulsado" onMouseReleased="#RatonSoltado" opacity="0.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../resources/transportador.png" />
                            </image></ImageView>
@@ -170,4 +188,8 @@
          </VBox.margin>
       </HBox>
    </children>
+   <stylesheets>
+      <URL value="@../Estilos/botones.css" />
+      <URL value="@../Estilos/estilos_base.css" />
+   </stylesheets>
 </VBox>
