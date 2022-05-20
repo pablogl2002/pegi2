@@ -93,10 +93,10 @@ public class ChooseProblemTypeController implements Initializable {
                 Scene scene = new Scene(root);
                 primaryStage.setTitle("Problemas Aleatorios");
                 primaryStage.setScene(scene);
-                primaryStage.setResizable(false);
+                primaryStage.setResizable(true);
 
                 PruebaProblemasMapaController rPro = loader.getController();
-            rPro.initStage(primaryStage, usuario);
+            rPro.initStage(primaryStage, usuario, 0);
             }
             primaryStage.show();
         } catch (IOException ex) {

@@ -57,7 +57,7 @@
       <SplitPane dividerPositions="0.4431438127090301, 0.5" VBox.vgrow="ALWAYS">
          <items>
             <ListView fx:id="map_listview" onMouseClicked="#listClicked" prefHeight="399.0" prefWidth="87.0" />
-            <VBox minHeight="-Infinity" minWidth="-Infinity" SplitPane.resizableWithParent="false">
+            <VBox alignment="TOP_CENTER" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="35.0" SplitPane.resizableWithParent="false">
                <children>
                   <Button id="edit_button" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#moverFondo" prefHeight="30.0" prefWidth="30.0">
                      <VBox.margin>

@@ -68,7 +68,8 @@ public class PruebaProblemasMapaController implements Initializable {
     private int intAyuda;
     private double inicioXArc;
     private Stage primaryStage;
-    
+    private int tipo;
+    private User usuario;
     
     Circle circlePainting;
     TextField texto = new TextField();
@@ -291,8 +292,9 @@ public class PruebaProblemasMapaController implements Initializable {
         
     }
 
-    public void initStage(Stage stage, User user) {
+    public void initStage(Stage stage, User user, int type) {
         primaryStage = stage;
-        
+        usuario = user;
+        tipo = type; //tipo = 0 -> problemas aleatorios  tipo = 1 -> problemas ordenados
     }
 }
