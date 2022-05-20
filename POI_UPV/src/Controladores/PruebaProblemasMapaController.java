@@ -34,6 +34,8 @@ import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import model.User;
+
 
 /**
  *
@@ -336,9 +338,11 @@ public class PruebaProblemasMapaController implements Initializable {
         intAyuda = 115;
     }
 
-    public void initStage(Stage stage) {
+    public void initStage(Stage stage, User user, int type) {
         primaryStage = stage;
         usuario = user;
+        //id_avatar.setImage(usuario.getAvatar());
+        //id_menuPerfil.setText(usuario.getNickName());
         tipo = type; //tipo = 0 -> problemas aleatorios  tipo = 1 -> problemas ordenados
     }
 }
