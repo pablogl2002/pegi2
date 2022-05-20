@@ -96,7 +96,7 @@ public class ChooseProblemTypeController implements Initializable {
                 primaryStage.setResizable(true);
 
                 PruebaProblemasMapaController rPro = loader.getController();
-            rPro.initStage(primaryStage, usuario, 0);
+                rPro.initStage(primaryStage, usuario, 1);
             }
             primaryStage.show();
         } catch (IOException ex) {

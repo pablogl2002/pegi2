@@ -343,6 +343,6 @@ public class PruebaProblemasMapaController implements Initializable {
         usuario = user;
         //id_avatar.setImage(usuario.getAvatar());
         //id_menuPerfil.setText(usuario.getNickName());
-        tipo = type; //tipo = 0 -> problemas aleatorios  tipo = 1 -> problemas ordenados
+        tipo = type; //tipo = 1 -> problemas aleatorios  tipo = 0 -> problemas ordenados
     }
 }

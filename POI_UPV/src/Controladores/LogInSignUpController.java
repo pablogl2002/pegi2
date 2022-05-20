@@ -213,7 +213,7 @@ public class LogInSignUpController implements Initializable {
             Scene scene = new Scene(root);
             primaryStage.setTitle("Problemas");
             primaryStage.setScene(scene);
-            primaryStage.setResizable(true);
+            primaryStage.setResizable(false);
 
             ChooseProblemTypeController ctr = loader.getController();
             ctr.initStage(primaryStage, usuario);        
