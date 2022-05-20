@@ -70,6 +70,8 @@ public class ChooseProblemTypeController implements Initializable {
             actualStage.setResizable(false);
             actualStage.initModality(Modality.APPLICATION_MODAL);
             
+            EditProfileController ctr = loader.getController();
+            ctr.initStage(actualStage);
             actualStage.show();
             
         } catch (IOException ex) {
@@ -79,12 +81,42 @@ public class ChooseProblemTypeController implements Initializable {
 
     @FXML
     private void logOut(ActionEvent event) {
-        
+        LogInSignUpController.setUser(null);
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/ChooseProblemType.fxml"));
+            Parent root = loader.load();
+            
+            Scene scene = new Scene(root);
+            primaryStage.setTitle("Problemas");
+            primaryStage.setScene(scene);
+            primaryStage.setResizable(false);
+            
+            ChooseProblemTypeController ctr = loader.getController();
+            ctr.initStage(primaryStage, usuario);
+            primaryStage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(ProblemsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML
     private void pressSalir(ActionEvent event) {
-        
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/LogInSignUp.fxml"));
+            Parent root = loader.load();
+
+            Scene scene = new Scene(root);
+            primaryStage.setTitle("Iniciar Sesión o Registrar Cuenta");
+            primaryStage.setScene(scene);
+            primaryStage.setResizable(false);
+            
+            LogInSignUpController ctr = loader.getController();
+            ctr.initStage(primaryStage);
+
+            primaryStage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(ChooseProblemTypeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     @FXML

@@ -82,7 +82,7 @@ public class LogInSignUpController implements Initializable {
     private Stage primaryStage;
     private Navegacion baseDatos;
     private Image avatar;
-    private User usuario;
+    private static User usuario;
     
     @FXML
     private ImageView id_avatarEdit;
@@ -92,8 +92,12 @@ public class LogInSignUpController implements Initializable {
          primaryStage = stage;
     }
     
-    public User getUser() { return usuario; }
-    public void setUser(User user) { usuario = user; }
+    /**
+     *
+     * @return
+     */
+    public static User getUser() { return usuario; }
+    public static void setUser(User user) { usuario = user; }
     
     /**
      * Initializes the controller class.

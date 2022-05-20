@@ -20,14 +20,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.TitledPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Navegacion;
 import model.Problem;
@@ -103,20 +102,30 @@ public class ProblemsController implements Initializable {
 
     @FXML
     private void editProfile(ActionEvent event) {
-        
+        try {
+            Stage actualStage = new Stage();
+            
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/EditProfile.fxml"));
+            Parent root = loader.load();
+            
+            Scene scene = new Scene(root);
+            actualStage.setTitle("Editar Perfil");
+            actualStage.setScene(scene);
+            actualStage.setResizable(false);
+            actualStage.initModality(Modality.APPLICATION_MODAL);
+            
+            EditProfileController ctr = loader.getController();
+            ctr.initStage(actualStage);
+            actualStage.show();
+            
+        } catch (IOException ex) {
+            Logger.getLogger(ChooseProblemTypeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML
     private void logOut(ActionEvent event) {
-        
-    }
-
-    private void goToProblem(int i) {
-        System.out.println(i);
-    }
-    
-    @FXML
-    private void goToBack(ActionEvent event) {
+        LogInSignUpController.setUser(null);
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/ChooseProblemType.fxml"));
             Parent root = loader.load();
@@ -132,6 +141,15 @@ public class ProblemsController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(ProblemsController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    private void goToProblem(int i) {
+        System.out.println(i);
+    }
+    
+    @FXML
+    private void goToBack(ActionEvent event) {
+        
     }
 
     @FXML
