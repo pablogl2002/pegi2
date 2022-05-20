@@ -181,7 +181,7 @@ public class PruebaProblemasMapaController implements Initializable {
     
     @FXML
      private void RatonPulsado(MouseEvent event) {
-        
+      
         if (event.isSecondaryButtonDown()){intAyuda = 935;}//Estoy hay que cambiarlo porque al usar el click derecho se quita la funcion de dibujar y demás
         
         if (intAyuda == 2) {
@@ -191,6 +191,8 @@ public class PruebaProblemasMapaController implements Initializable {
         
         if (intAyuda == 1) {
             transportador.setOpacity(0.5);
+            transportador.fitHeightProperty().set(240.0);
+            transportador.fitWidthProperty().set(240.0);
             inicioXTrans = event.getSceneX();
             inicioYTrans = event.getSceneY();
             baseX = transportador.getTranslateX();
@@ -201,7 +203,7 @@ public class PruebaProblemasMapaController implements Initializable {
         if (intAyuda == 3) {
             circlePainting = new Circle(1);
             circlePainting.setStroke(Color.RED);
-            circlePainting.setFill(Color.TRANSPARENT);
+            circlePainting.setFill(null);
             
             zoomGroup.getChildren().add(circlePainting);
             
@@ -234,31 +236,31 @@ public class PruebaProblemasMapaController implements Initializable {
                 zoomGroup.getChildren().remove((Node)e.getSource());
                 ev.consume();
             });
-            menuContext.show(linePainting, e.getSceneX(), e.getSceneY());
-            e.consume();
-        });
-        
-        /*circlePainting.setOnContextMenuRequested(e -> {
-            ContextMenu menuContextCirculo = new ContextMenu();
-            MenuItem borrarCirculo = new MenuItem("Borrar Circulo");
-            menuContextCirculo.getItems().add(borrarCirculo);
-            borrarCirculo.setOnAction(ev -> {
-                zoomGroup.getChildren().remove((Node)e.getSource());
-                ev.consume();
-            });
-            menuContextCirculo.show(circlePainting, e.getSceneX(), e.getSceneY());
-            e.consume();
-        });*/
-        
-        linePainting.setOnContextMenuRequested(e -> {
-            ContextMenu menuColor = new ContextMenu();
             MenuItem borrarTodo = new MenuItem("Borrar Todo");
-            menuColor.getItems().add(borrarTodo);
+            menuContext.getItems().add(borrarTodo);
             borrarTodo.setOnAction(ev -> {
                 zoomGroup.getChildren().remove(1,zoomGroup.getChildren().size());
                 ev.consume();
             });
-            menuColor.show(linePainting, e.getSceneX(), e.getSceneY());
+            menuContext.show(linePainting, e.getSceneX(), e.getSceneY());
+            e.consume();
+        });
+        
+        circlePainting.setOnContextMenuRequested(e -> {
+            ContextMenu menuContext = new ContextMenu();
+            MenuItem borrarItem = new MenuItem("eliminar");
+            menuContext.getItems().add(borrarItem);
+            borrarItem.setOnAction(ev -> {
+                zoomGroup.getChildren().remove((Node)e.getSource());
+                ev.consume();
+            });
+            MenuItem borrarTodo = new MenuItem("Borrar Todo");
+            menuContext.getItems().add(borrarTodo);
+            borrarTodo.setOnAction(ev -> {
+                zoomGroup.getChildren().remove(1,zoomGroup.getChildren().size());
+                ev.consume();
+            });
+            menuContext.show(circlePainting, e.getSceneX(), e.getSceneY());
             e.consume();
         });
         

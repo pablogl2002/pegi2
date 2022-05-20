@@ -134,18 +134,19 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
+                  <Button mnemonicParsing="false" text="Button" />
                </children>
             </VBox>
             <ScrollPane fx:id="map_scrollpane" hbarPolicy="ALWAYS" onMouseMoved="#muestraPosicion" pannable="true" prefHeight="398.0" prefWidth="317.0" vbarPolicy="ALWAYS">
                <content>
                   <Pane>
                      <children>
-                        <ImageView onMouseDragged="#RatonArrastrado" onMousePressed="#RatonPulsado" onMouseReleased="#RatonSoltado" pickOnBounds="true">
+                        <ImageView fitHeight="5746.0" fitWidth="8974.0" onMouseDragged="#RatonArrastrado" onMousePressed="#RatonPulsado" onMouseReleased="#RatonSoltado" pickOnBounds="true">
                            <image>
                               <Image url="@../resources/carta_nautica.jpg" />
                            </image>
                         </ImageView>
-                        <ImageView fx:id="transportador" fitHeight="150.0" fitWidth="200.0" layoutX="48.0" layoutY="98.0" onMouseDragged="#RatonArrastrado" onMousePressed="#RatonPulsado" onMouseReleased="#RatonSoltado" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="transportador" fitHeight="26.0" fitWidth="92.0" onMouseDragged="#RatonArrastrado" onMousePressed="#RatonPulsado" onMouseReleased="#RatonSoltado" opacity="0.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../resources/transportador.png" />
                            </image></ImageView>
