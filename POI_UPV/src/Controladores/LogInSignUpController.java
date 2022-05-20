@@ -82,13 +82,19 @@ public class LogInSignUpController implements Initializable {
     private Stage primaryStage;
     private Navegacion baseDatos;
     private Image avatar;
+    private User usuario;
+    
     @FXML
     private ImageView id_avatarEdit;
+    
     
     public void initStage(Stage stage) {
          primaryStage = stage;
     }
-     
+    
+    public User getUser() { return usuario; }
+    public void setUser(User user) { usuario = user; }
+    
     /**
      * Initializes the controller class.
      */
@@ -144,7 +150,8 @@ public class LogInSignUpController implements Initializable {
         if (!baseDatos.exitsNickName(nick)) {
             label_wUser.visibleProperty().set(true);
         } else {
-            User usuario = baseDatos.loginUser(nick, pass);
+            User user = baseDatos.loginUser(nick, pass);
+            setUser(user);
             if (usuario == null) {
                 label_wPass.visibleProperty().set(true);
             } else { goToProblems(usuario); }
@@ -196,7 +203,8 @@ public class LogInSignUpController implements Initializable {
             }
             
             if (User.checkNickName(nickName) && !baseDatos.exitsNickName(nickName) && User.checkEmail(email) && User.checkPassword(password) && password.equals(rePassword)) {
-                User usuario = baseDatos.registerUser(nickName, email, password, birthdate);               
+                User user = baseDatos.registerUser(nickName, email, password, birthdate);        
+                setUser(user);
                 goToProblems(usuario);
             }
 

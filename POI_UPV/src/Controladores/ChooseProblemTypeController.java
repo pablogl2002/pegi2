@@ -18,6 +18,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.User;
 
@@ -57,7 +58,23 @@ public class ChooseProblemTypeController implements Initializable {
     
     @FXML
     private void editProfile(ActionEvent event) {
-        
+        try {
+            Stage actualStage = new Stage();
+            
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/EditProfile.fxml"));
+            Parent root = loader.load();
+            
+            Scene scene = new Scene(root);
+            actualStage.setTitle("Editar Perfil");
+            actualStage.setScene(scene);
+            actualStage.setResizable(false);
+            actualStage.initModality(Modality.APPLICATION_MODAL);
+            
+            actualStage.show();
+            
+        } catch (IOException ex) {
+            Logger.getLogger(ChooseProblemTypeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML
