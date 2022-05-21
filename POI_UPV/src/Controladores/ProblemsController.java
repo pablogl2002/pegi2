@@ -38,40 +38,51 @@ import model.User;
  * @author pablo
  */
 public class ProblemsController implements Initializable {
-    
-    private Stage primaryStage;
-    private User usuario;
-    @FXML
-    private Accordion acordeonProblemas;
-    private TitledPane[] tPane;
-    private Navegacion datos;
-    private List<Problem> problemas;
+
     @FXML
     private Menu id_menuPerfil;
     @FXML
     private ImageView id_avatar;
+    @FXML
+    private Accordion acordeonProblemas;
+    
+    private Stage primaryStage;
+    private User usuario;
+    private TitledPane[] tPane;
+    private Navegacion datos;
+    private List<Problem> problemas;
+    int i;
+
+    public void initStage(Stage stage, User user) {
+        primaryStage = stage;
+        usuario = user;
+        id_avatar.setImage(usuario.getAvatar());
+        id_menuPerfil.setText(usuario.getNickName());
+    }
     
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
         try {
-            // TODO
             datos = Navegacion.getSingletonNavegacion();
             problemas = datos.getProblems();
             tPane = new TitledPane[problemas.size()];
             
-            for (int i = 0; i < problemas.size(); i++) {
+            for (i = 0; i < problemas.size(); i++) {
                 tPane[i] = new TitledPane();
                 tPane[i].setText("Problema " + (i + 1));
-                                
                 VBox qCont = new VBox();
                 HBox bCont = new HBox();
-                Button bRealizar = new Button("Realizar Ejercicio");                
+                Button bRealizar = new Button("Realizar Ejercicio");
                 
-                Text pregunta = new Text(problemas.get(i).getText());
+                Problem aux = problemas.get(i);
+                Text pregunta = new Text(aux.getText());
+                
+                bRealizar.setOnAction(a -> {
+                    goToMap(aux, "Problemas Ordenados");
+                });
                 
                 bCont.getChildren().add(bRealizar);
                 
@@ -91,14 +102,7 @@ public class ProblemsController implements Initializable {
         } catch (NavegacionDAOException ex) {
             Logger.getLogger(ProblemsController.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }    
-    
-    public void initStage(Stage stage, User user) {
-        primaryStage = stage;
-        usuario = user;
-        id_avatar.setImage(usuario.getAvatar());
-        id_menuPerfil.setText(usuario.getNickName());
-    }
+    }   
 
     @FXML
     private void editProfile(ActionEvent event) {
@@ -114,8 +118,6 @@ public class ProblemsController implements Initializable {
             actualStage.setResizable(false);
             actualStage.initModality(Modality.APPLICATION_MODAL);
             
-            //EditProfileController ctr = loader.getController();
-            //ctr.initStage(actualStage);
             actualStage.show();
             
         } catch (IOException ex) {
@@ -143,19 +145,10 @@ public class ProblemsController implements Initializable {
         }
     }
 
-    private void goToProblem(int i) {
-        System.out.println(i);
-    }
-    
     @FXML
     private void goToBack(ActionEvent event) {
-        
-    }
-
-    @FXML
-    private void goToRandom(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/PruebaProblemasMapa.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/ChooseProblemType.fxml"));
             Parent root = loader.load();
             
             Scene scene = new Scene(root);
@@ -163,10 +156,33 @@ public class ProblemsController implements Initializable {
             primaryStage.setScene(scene);
             primaryStage.setResizable(true);
             
-            PruebaProblemasMapaController rPro = loader.getController();
-            rPro.initStage(primaryStage, usuario, 1);
+            ChooseProblemTypeController rPro = loader.getController();
+            rPro.initStage(primaryStage, usuario);
         } catch (IOException ex) {
             Logger.getLogger(ProblemsController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    @FXML
+    private void goToRandom(ActionEvent event) {
+        //goToMap(-1, "Problemas Aleatorios");
+    }
+    
+    private void goToMap(Problem p, String title) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/PruebaProblemasMapa.fxml"));
+            Parent root = loader.load();
+            
+            Scene scene = new Scene(root);
+            primaryStage.setTitle(title);
+            primaryStage.setScene(scene);
+            primaryStage.setResizable(true);
+            
+            PruebaProblemasMapaController rPro = loader.getController();
+            rPro.initStage(primaryStage, usuario, p);
+        } catch (IOException ex) {
+            Logger.getLogger(ProblemsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
 }

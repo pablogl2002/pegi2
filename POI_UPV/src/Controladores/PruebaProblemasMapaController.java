@@ -5,9 +5,13 @@
  */
 package Controladores;
 
+import DBAccess.NavegacionDAOException;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -17,15 +21,18 @@ import javafx.fxml.Initializable;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Menu;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
@@ -34,6 +41,8 @@ import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import model.Navegacion;
+import model.Problem;
 import model.User;
 
 
@@ -73,11 +82,38 @@ public class PruebaProblemasMapaController implements Initializable {
     private Stage primaryStage;
     private int tipo;
     private User usuario;
+    private Navegacion datos;
+    private List<Problem> problemas;
     
     Circle circlePainting;
     TextField texto = new TextField();
     @FXML
     private ImageView transportador;
+    @FXML
+    private Menu id_menuPerfil;
+    @FXML
+    private ImageView id_avatar;
+    @FXML
+    private Label question_label;
+    @FXML
+    private Text questionText;
+    @FXML
+    private RadioButton answer1;
+    @FXML
+    private ToggleGroup answer;
+    @FXML
+    private RadioButton answer2;
+    @FXML
+    private RadioButton answer3;
+    @FXML
+    private RadioButton answer4;
+    @FXML
+    private Button prevQ_button;
+    @FXML
+    private Button verificar_button;
+    @FXML
+    private Button nextQ_button;
+    private int numProb;
     
     @FXML
     void zoomIn(ActionEvent event) {
@@ -161,6 +197,25 @@ public class PruebaProblemasMapaController implements Initializable {
         zoomGroup.getChildren().add(map_scrollpane.getContent());
         map_scrollpane.setContent(contentGroup);
         map_scrollpane.setPannable(false);
+        
+        
+        //=========================================================================
+        // inicialización problemas
+        try {
+            datos = Navegacion.getSingletonNavegacion();
+            problemas = datos.getProblems();
+            if (tipo >= 0) {
+                questionText.setText(problemas.get(tipo).getText());
+                question_label.setText("Problema " + (tipo + 1));
+            } else {
+                
+            }
+            
+        } catch (NavegacionDAOException ex) {
+            Logger.getLogger(PruebaProblemasMapaController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
     }
 
     @FXML
@@ -343,6 +398,20 @@ public class PruebaProblemasMapaController implements Initializable {
         usuario = user;
         //id_avatar.setImage(usuario.getAvatar());
         //id_menuPerfil.setText(usuario.getNickName());
-        tipo = type; //tipo = 1 -> problemas aleatorios  tipo = 0 -> problemas ordenados
+        tipo = type; //tipo = -1 -> problemas aleatorios  tipo = num -> problemas ordenados (numero del problema - 1)
+    }
+    
+    public void initStage(Stage stage, User user, Problem problema) {
+        primaryStage = stage;
+        usuario = user;
+        tipo = problemas.indexOf(problema);
+    }
+
+    @FXML
+    private void editProfile(ActionEvent event) {
+    }
+
+    @FXML
+    private void logOut(ActionEvent event) {
     }
 }
