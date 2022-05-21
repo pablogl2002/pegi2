@@ -70,8 +70,8 @@ public class ChooseProblemTypeController implements Initializable {
             actualStage.setResizable(false);
             actualStage.initModality(Modality.APPLICATION_MODAL);
             
-            EditProfileController ctr = loader.getController();
-            ctr.initStage(actualStage);
+            //EditProfileController ctr = loader.getController();
+            //ctr.initStage(actualStage);
             actualStage.show();
             
         } catch (IOException ex) {

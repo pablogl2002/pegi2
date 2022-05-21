@@ -14,6 +14,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -44,8 +45,6 @@ public class EditProfileController implements Initializable {
     @FXML
     private Label label_wRePassSign1;
     @FXML
-    private TextField newNickField;
-    @FXML
     private PasswordField oldPassField;
     @FXML
     private PasswordField reNewPassField;   
@@ -53,8 +52,6 @@ public class EditProfileController implements Initializable {
     private ImageView id_avatar;
     @FXML
     private ImageView id_avatarEdit;
-    @FXML
-    private TextField oldNickField;
     
     private Image avatar;
     private Stage stage;
@@ -62,6 +59,18 @@ public class EditProfileController implements Initializable {
     @FXML
     private PasswordField newPassField;
     private Boolean passProp = false;
+    @FXML
+    private TextField oldMailField;
+    @FXML
+    private TextField newMailField;
+    @FXML
+    private Label label_wBirthday;
+    @FXML
+    private DatePicker oldBirth_picker;
+    @FXML
+    private Label label_wBirthday1;
+    @FXML
+    private DatePicker newBirth_picker;
     
     
     /**
@@ -70,8 +79,11 @@ public class EditProfileController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         usuario = LogInSignUpController.getUser();
-        id_avatar.setImage(usuario.getAvatar());
-        oldNickField.setText(usuario.getNickName());
+        avatar = usuario.getAvatar();
+        id_avatar.setImage(avatar);
+        oldMailField.setText(usuario.getEmail());
+        
+        
         
         oldPassField.textProperty().addListener((ob, oldV, newV) -> {
             //if ( oldV != null && oldV.equals(newV)) { passProp = true; System.out.println("ta chida"); }
@@ -82,18 +94,20 @@ public class EditProfileController implements Initializable {
 
     @FXML
     private void applyButton(ActionEvent event) throws NavegacionDAOException {
-        if (!newNickField.equals(usuario.getNickName()) && oldNickField.equals(usuario.getNickName())) {
-            usuario.setEmail(newNickField.getText());            
+        if (!newMailField.getText().equals(usuario.getEmail()) && oldMailField.getText().equals(usuario.getEmail()) && newMailField.getText() != null) {
+            usuario.setEmail(newMailField.getText());      
+            System.out.println("Cambiado mail");
         }
         
-        if (!newPassField.equals(usuario.getPassword()) && oldPassField.equals(usuario.getPassword()) && newPassField.equals(reNewPassField)) {
-            
+        if (oldPassField.getText().equals(usuario.getPassword()) && !newPassField.getText().equals(usuario.getPassword()) && newPassField.getText().equals(reNewPassField)) {
+            usuario.setPassword(newPassField.getText());
+            System.out.println("Cambiada contraseña");
         }
         
         if (!avatar.equals(usuario.getAvatar())) {
-            
+            usuario.setAvatar(avatar);
+            System.out.println("Cambiado avatar");
         }
-        
     }
 
     @FXML
@@ -115,11 +129,12 @@ public class EditProfileController implements Initializable {
         if (selectFile != null) {
             avatar = new Image(in);
             id_avatar.setImage(avatar);
-        
         }    
     }
 
+    /*
     public void initStage(Stage stage) {
         this.stage = stage;
     }
+    */
 }

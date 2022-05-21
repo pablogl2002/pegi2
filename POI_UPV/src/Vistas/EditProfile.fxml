@@ -6,6 +6,7 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
@@ -20,7 +21,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="410.0" prefWidth="440.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.EditProfileController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="450.0" prefWidth="440.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.EditProfileController">
    <top>
       <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="300.0" BorderPane.alignment="CENTER_LEFT">
          <children>
@@ -42,7 +43,7 @@
       </HBox>
    </top>
    <bottom>
-      <HBox alignment="CENTER_RIGHT" prefHeight="75.0" prefWidth="200.0" spacing="25.0" BorderPane.alignment="CENTER_RIGHT">
+      <HBox alignment="CENTER_RIGHT" prefHeight="60.0" prefWidth="200.0" spacing="25.0" BorderPane.alignment="CENTER_RIGHT">
          <children>
             <Button id="accept_button" alignment="CENTER" minWidth="80.0" mnemonicParsing="false" onAction="#applyButton" prefWidth="100.0" text="Aplicar" textFill="WHITE">
                <font>
@@ -62,26 +63,26 @@
             </Button>
          </children>
          <BorderPane.margin>
-            <Insets left="20.0" right="20.0" />
+            <Insets left="20.0" right="15.0" />
          </BorderPane.margin>
       </HBox>
    </bottom>
    <center>
-      <VBox prefWidth="100.0" BorderPane.alignment="CENTER">
+      <VBox prefWidth="100.0" BorderPane.alignment="TOP_CENTER">
          <children>
             <Accordion maxWidth="-Infinity" minWidth="-Infinity" prefWidth="280.0">
                <panes>
-                  <TitledPane animated="false" text="Cambiar nombre de usuario">
+                  <TitledPane animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="280.0" text="Cambiar email">
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefWidth="200.0">
                            <children>
-                              <VBox alignment="CENTER" prefWidth="280.0">
+                              <VBox prefWidth="280.0">
                                  <children>
-                                    <VBox maxWidth="-Infinity" minWidth="-Infinity" prefWidth="260.0">
+                                    <VBox maxWidth="-Infinity" minWidth="-Infinity" prefWidth="250.0">
                                        <children>
                                           <HBox>
                                              <children>
-                                                <Label text="Antiguo Usuario:" textFill="#025477">
+                                                <Label text="Actual Email:" textFill="#025477">
                                                    <HBox.margin>
                                                       <Insets bottom="5.0" />
                                                    </HBox.margin>
@@ -96,14 +97,17 @@
                                                 <Insets top="10.0" />
                                              </VBox.margin>
                                           </HBox>
-                                          <TextField id="textfield" fx:id="oldNickField" prefWidth="220.0" promptText="YourUsername" />
+                                          <TextField id="textfield" fx:id="oldMailField" prefWidth="220.0" promptText="ActualEmail" />
                                        </children>
+                                       <VBox.margin>
+                                          <Insets left="15.0" right="15.0" />
+                                       </VBox.margin>
                                     </VBox>
-                                    <VBox maxWidth="-Infinity" minWidth="-Infinity" prefWidth="260.0">
+                                    <VBox maxWidth="-Infinity" minWidth="-Infinity" prefWidth="250.0">
                                        <children>
                                           <HBox>
                                              <children>
-                                                <Label text="Nuevo Usuario:" textFill="#025477">
+                                                <Label text="Nuevo Email:" textFill="#025477">
                                                    <HBox.margin>
                                                       <Insets bottom="5.0" />
                                                    </HBox.margin>
@@ -115,10 +119,10 @@
                                                 </Label>
                                              </children>
                                           </HBox>
-                                          <TextField id="textfield" fx:id="newNickField" prefWidth="220.0" promptText="YourUsername" />
+                                          <TextField id="textfield" fx:id="newMailField" prefWidth="220.0" promptText="NewEmail" />
                                        </children>
                                        <VBox.margin>
-                                          <Insets top="10.0" />
+                                          <Insets left="15.0" right="15.0" top="10.0" />
                                        </VBox.margin>
                                     </VBox>
                                  </children>
@@ -127,13 +131,13 @@
                         </AnchorPane>
                      </content>
                   </TitledPane>
-                  <TitledPane animated="false" prefWidth="280.0" text="Cambiar contraseña">
+                  <TitledPane animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="280.0" text="Cambiar contraseña">
                      <content>
                         <AnchorPane minWidth="-Infinity" prefWidth="280.0">
                            <children>
-                              <VBox alignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="280.0">
+                              <VBox maxWidth="-Infinity" minWidth="-Infinity" prefWidth="280.0">
                                  <children>
-                                    <VBox prefWidth="260.0">
+                                    <VBox prefWidth="250.0">
                                        <children>
                                           <HBox>
                                              <children>
@@ -141,7 +145,7 @@
                                                    <children>
                                                       <HBox prefHeight="100.0" prefWidth="200.0">
                                                          <children>
-                                                            <Label text="Antigua Contraseña:" textFill="#025477">
+                                                            <Label text="Actual Contraseña:" textFill="#025477">
                                                                <HBox.margin>
                                                                   <Insets bottom="5.0" />
                                                                </HBox.margin>
@@ -153,13 +157,13 @@
                                                             </Label>
                                                          </children>
                                                       </HBox>
-                                                      <PasswordField id="textfield" fx:id="oldPassField" maxWidth="-Infinity" minHeight="26.0" minWidth="150.0" prefHeight="26.0" prefWidth="100.0" promptText="LettersNumbersSymbols" />
+                                                      <PasswordField id="textfield" fx:id="oldPassField" maxWidth="-Infinity" minHeight="26.0" minWidth="-Infinity" prefHeight="26.0" prefWidth="250.0" promptText="LettersNumbersSymbols" />
                                                    </children>
                                                 </VBox>
                                              </children>
-                                             <padding>
-                                                <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
-                                             </padding>
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
                                           </HBox>
                                           <HBox>
                                              <children>
@@ -179,13 +183,13 @@
                                                             </Label>
                                                          </children>
                                                       </HBox>
-                                                      <PasswordField id="textfield" fx:id="newPassField" maxWidth="-Infinity" minHeight="26.0" minWidth="150.0" prefHeight="26.0" prefWidth="100.0" promptText="LettersNumbersSymbols" />
+                                                      <PasswordField id="textfield" fx:id="newPassField" maxWidth="-Infinity" minHeight="26.0" minWidth="-Infinity" prefHeight="26.0" prefWidth="250.0" promptText="LettersNumbersSymbols" />
                                                    </children>
                                                 </VBox>
                                              </children>
-                                             <padding>
-                                                <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
-                                             </padding>
+                                             <VBox.margin>
+                                                <Insets top="10.0" />
+                                             </VBox.margin>
                                           </HBox>
                                           <HBox prefWidth="200.0">
                                              <children>
@@ -205,17 +209,73 @@
                                                             </Label>
                                                          </children>
                                                       </HBox>
-                                                      <PasswordField id="textfield" fx:id="reNewPassField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="26.0" minWidth="150.0" prefHeight="26.0" prefWidth="150.0" promptText="LettersNumbersSymbols" />
+                                                      <PasswordField id="textfield" fx:id="reNewPassField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="26.0" minWidth="-Infinity" prefHeight="26.0" prefWidth="250.0" promptText="LettersNumbersSymbols" />
                                                    </children>
                                                 </VBox>
                                              </children>
-                                             <padding>
-                                                <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
-                                             </padding>
+                                             <VBox.margin>
+                                                <Insets top="10.0" />
+                                             </VBox.margin>
                                           </HBox>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets left="15.0" right="15.0" top="10.0" />
+                                       </VBox.margin>
+                                    </VBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </TitledPane>
+                  <TitledPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="200.0" text="Cambiar fecha de nacimiento">
+                     <content>
+                        <AnchorPane>
+                           <children>
+                              <VBox spacing="10.0">
+                                 <children>
+                                    <VBox>
+                                       <children>
+                                          <HBox>
+                                             <children>
+                                                <Label text="Actual Cumpleaños:" textFill="#025477">
+                                                   <HBox.margin>
+                                                      <Insets bottom="5.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                                <Label fx:id="label_wBirthday" text="x" textFill="#ca0505" visible="false">
+                                                   <HBox.margin>
+                                                      <Insets left="10.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                          <DatePicker id="datepicker" fx:id="oldBirth_picker" promptText="YourBirth" />
+                                       </children>
+                                    </VBox>
+                                    <VBox>
+                                       <children>
+                                          <HBox>
+                                             <children>
+                                                <Label text="Nuevo Cumpleaños:" textFill="#025477">
+                                                   <HBox.margin>
+                                                      <Insets bottom="5.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                                <Label fx:id="label_wBirthday1" text="x" textFill="#ca0505" visible="false">
+                                                   <HBox.margin>
+                                                      <Insets left="10.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                          <DatePicker id="datepicker" fx:id="newBirth_picker" promptText="YourBirth" />
                                        </children>
                                     </VBox>
                                  </children>
+                                 <padding>
+                                    <Insets left="15.0" top="10.0" />
+                                 </padding>
                               </VBox>
                            </children>
                         </AnchorPane>
@@ -230,7 +290,7 @@
       </VBox>
    </center>
    <right>
-      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+      <VBox BorderPane.alignment="CENTER">
          <children>
             <Pane>
                <children>
@@ -257,7 +317,7 @@
             </Pane>
          </children>
          <BorderPane.margin>
-            <Insets right="35.0" />
+            <Insets right="15.0" />
          </BorderPane.margin>
       </VBox>
    </right>

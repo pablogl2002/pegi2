@@ -20,8 +20,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
 
-<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.PruebaProblemasMapaController">
+<VBox prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.PruebaProblemasMapaController">
    <children>
       <HBox alignment="CENTER_RIGHT" fillHeight="false" spacing="5.0" VBox.vgrow="NEVER">
          <children>
@@ -49,120 +50,172 @@
               </menus>
             </MenuBar>
             <Region HBox.hgrow="ALWAYS" />
+            <MenuBar nodeOrientation="RIGHT_TO_LEFT">
+               <menus>
+                  <Menu id="perfil_menu" fx:id="id_menuPerfil" mnemonicParsing="false" text="Mi Perfil">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#editProfile" text="Editar Perfil" />
+                        <MenuItem mnemonicParsing="false" onAction="#logOut" text="Cerrar Sesión" />
+                     </items>
+                     <graphic>
+                        <ImageView id="small_avatar" fx:id="id_avatar" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/avatars/avatar4.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Menu>
+               </menus>
+            </MenuBar>
          </children>
          <VBox.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </VBox.margin>
       </HBox>
-      <SplitPane dividerPositions="0.4431438127090301, 0.5" VBox.vgrow="ALWAYS">
+      <SplitPane dividerPositions="0.4" VBox.vgrow="ALWAYS">
          <items>
-            <ListView fx:id="map_listview" onMouseClicked="#listClicked" prefHeight="399.0" prefWidth="87.0" />
-            <VBox minHeight="-Infinity" minWidth="-Infinity" SplitPane.resizableWithParent="false">
+            <VBox maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="380.0">
                <children>
-                  <Button id="edit_button" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#moverFondo" prefHeight="30.0" prefWidth="30.0">
-                     <VBox.margin>
-                        <Insets left="3.0" right="3.0" top="5.0" />
-                     </VBox.margin>
-                     <graphic>
-                        <ImageView fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../resources/iconos/icons8-mover-30.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-                  <Button id="edit_button" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#Condicion2" prefHeight="30.0" prefWidth="30.0">
-                     <VBox.margin>
-                        <Insets left="3.0" right="3.0" top="5.0" />
-                     </VBox.margin>
-                     <graphic>
-                        <ImageView fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../resources/iconos/icons8-línea-48.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-                  <Button id="edit_button" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#Condicion3" prefHeight="30.0" prefWidth="30.0">
-                     <VBox.margin>
-                        <Insets left="3.0" right="3.0" top="5.0" />
-                     </VBox.margin>
-                     <graphic>
-                        <ImageView fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../resources/iconos/icons8-esfera-32.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-                  <Button id="edit_button" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#Condicion4" prefHeight="30.0" prefWidth="30.0">
-                     <VBox.margin>
-                        <Insets left="3.0" right="3.0" top="5.0" />
-                     </VBox.margin>
-                     <graphic>
-                        <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../resources/iconos/icons8-añadir-texto-32.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-                  <Button id="edit_button" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#Condicion1" prefHeight="30.0" prefWidth="30.0">
-                     <VBox.margin>
-                        <Insets left="3.0" right="3.0" top="5.0" />
-                     </VBox.margin>
-                     <graphic>
-                        <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../resources/iconos/icons8-grados-50.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-                  <Button mnemonicParsing="false" text="Button" />
+                  <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="380.0">
+                     <children>
+                        <Label text="Nº Problema">
+                           <VBox.margin>
+                              <Insets left="25.0" right="25.0" top="10.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum." textAlignment="JUSTIFY" wrappingWidth="330.0">
+                           <VBox.margin>
+                              <Insets left="25.0" right="25.0" top="10.0" />
+                           </VBox.margin>
+                        </Text>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Button mnemonicParsing="false" text="Button" />
+                              <Button mnemonicParsing="false" text="Button" />
+                              <Button mnemonicParsing="false" text="Button" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <ListView fx:id="map_listview" onMouseClicked="#listClicked" prefHeight="399.0" prefWidth="87.0" />
                </children>
             </VBox>
-            <ScrollPane fx:id="map_scrollpane" hbarPolicy="ALWAYS" onMouseMoved="#muestraPosicion" pannable="true" prefHeight="398.0" prefWidth="317.0" vbarPolicy="ALWAYS">
-               <content>
-                  <Pane>
+            <HBox>
+               <children>
+                  <VBox minHeight="-Infinity" minWidth="-Infinity">
                      <children>
-                        <ImageView fitHeight="5746.0" fitWidth="8974.0" onMouseDragged="#RatonArrastrado" onMousePressed="#RatonPulsado" onMouseReleased="#RatonSoltado" pickOnBounds="true">
-                           <image>
-                              <Image url="@../resources/carta_nautica.jpg" />
-                           </image>
-                        </ImageView>
-                        <ImageView fx:id="transportador" fitHeight="26.0" fitWidth="92.0" onMouseDragged="#RatonArrastrado" onMousePressed="#RatonPulsado" onMouseReleased="#RatonSoltado" opacity="0.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../resources/transportador.png" />
-                           </image></ImageView>
-                        <MenuButton fx:id="map_pin" mnemonicParsing="false" prefHeight="60.0" prefWidth="48.0" visible="false">
-                           <items>
-                              <MenuItem fx:id="pin_info" mnemonicParsing="false" text="Action 1" />
-                           </items>
-                           <styleClass>
-                              <String fx:value="menu-button" />
-                              <String fx:value="map-pin" />
-                           </styleClass>
-                        </MenuButton>
+                        <Button id="edit_button" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#moverFondo" prefHeight="30.0" prefWidth="30.0">
+                           <VBox.margin>
+                              <Insets left="3.0" right="3.0" top="5.0" />
+                           </VBox.margin>
+                           <graphic>
+                              <ImageView fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../resources/iconos/icons8-mover-30.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button id="edit_button" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#Condicion2" prefHeight="30.0" prefWidth="30.0">
+                           <VBox.margin>
+                              <Insets left="3.0" right="3.0" top="5.0" />
+                           </VBox.margin>
+                           <graphic>
+                              <ImageView fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../resources/iconos/icons8-línea-48.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button id="edit_button" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#Condicion3" prefHeight="30.0" prefWidth="30.0">
+                           <VBox.margin>
+                              <Insets left="3.0" right="3.0" top="5.0" />
+                           </VBox.margin>
+                           <graphic>
+                              <ImageView fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../resources/iconos/icons8-esfera-32.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button id="edit_button" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#Condicion4" prefHeight="30.0" prefWidth="30.0">
+                           <VBox.margin>
+                              <Insets left="3.0" right="3.0" top="5.0" />
+                           </VBox.margin>
+                           <graphic>
+                              <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../resources/iconos/icons8-añadir-texto-32.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button id="edit_button" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#Condicion1" prefHeight="30.0" prefWidth="30.0">
+                           <VBox.margin>
+                              <Insets left="3.0" right="3.0" top="5.0" />
+                           </VBox.margin>
+                           <graphic>
+                              <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../resources/iconos/icons8-grados-50.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Region VBox.vgrow="ALWAYS" />
+                        <Button id="edit_button" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0">
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="3.0" right="3.0" top="5.0" />
+                           </VBox.margin>
+                        </Button>
                      </children>
-                  </Pane>
-               </content>
-            </ScrollPane>
+                  </VBox>
+                  <ScrollPane fx:id="map_scrollpane" hbarPolicy="ALWAYS" onMouseMoved="#muestraPosicion" pannable="true" vbarPolicy="ALWAYS">
+                     <content>
+                        <Pane>
+                           <children>
+                              <ImageView fitHeight="5746.0" fitWidth="8974.0" onMouseDragged="#RatonArrastrado" onMousePressed="#RatonPulsado" onMouseReleased="#RatonSoltado" pickOnBounds="true">
+                                 <image>
+                                    <Image url="@../resources/carta_nautica.jpg" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="transportador" fitHeight="26.0" fitWidth="92.0" onMouseDragged="#RatonArrastrado" onMousePressed="#RatonPulsado" onMouseReleased="#RatonSoltado" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../resources/transportador.png" />
+                                 </image>
+                              </ImageView>
+                              <MenuButton fx:id="map_pin" mnemonicParsing="false" prefHeight="60.0" prefWidth="48.0" visible="false">
+                                 <items>
+                                    <MenuItem fx:id="pin_info" mnemonicParsing="false" text="Action 1" />
+                                 </items>
+                                 <styleClass>
+                                    <String fx:value="menu-button" />
+                                    <String fx:value="map-pin" />
+                                 </styleClass>
+                              </MenuButton>
+                           </children>
+                        </Pane>
+                     </content>
+                  </ScrollPane>
+               </children>
+            </HBox>
          </items>
       </SplitPane>
       <HBox alignment="CENTER_RIGHT">
