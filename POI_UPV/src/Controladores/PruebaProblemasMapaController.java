@@ -5,17 +5,23 @@
  */
 package Controladores;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
@@ -29,9 +35,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import static javafx.scene.paint.Color.*;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -61,15 +70,16 @@ public class PruebaProblemasMapaController implements Initializable {
     private MenuItem pin_info;
     @FXML
     private Label posicion;
-    private Line linePainting;
+    public Line linePainting;
     private double baseX;
     private double baseY;
     private double inicioYTrans;
     private double inicioXTrans;
-    private int intAyuda;
+    public int intAyuda;
     private double inicioXArc;
     private Stage primaryStage;
-    
+    public double grosorLinea;
+    public Paint colorLinea;
     
     Circle circlePainting;
     TextField texto = new TextField();
@@ -186,6 +196,9 @@ public class PruebaProblemasMapaController implements Initializable {
         
         if (intAyuda == 2) {
             linePainting = new Line(event.getX(), event.getY(), event.getX(), event.getY());
+            colorLinea = BLACK;
+            linePainting.setStroke(colorLinea);
+            linePainting.setStrokeWidth(grosorLinea);
             zoomGroup.getChildren().add(linePainting);
         }
         
@@ -312,6 +325,28 @@ public class PruebaProblemasMapaController implements Initializable {
     @FXML
     private void Condicion2(ActionEvent event) {
         intAyuda = 2;
+        try {
+            Stage actualStage = new Stage();
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/Linea.fxml"));
+            Parent root = loader.load();
+
+            Scene scene = new Scene(root);
+            actualStage.setTitle("Propiedades de la Linea");
+            actualStage.setScene(scene);
+            actualStage.setResizable(false);
+            actualStage.initModality(Modality.APPLICATION_MODAL);
+
+            //EditProfileController ctr = loader.getController();
+            //ctr.initStage(actualStage);
+            actualStage.show();
+            
+            
+            
+            
+        } catch (IOException ex) {
+            Logger.getLogger(PruebaProblemasMapaController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML

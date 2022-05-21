@@ -21,9 +21,9 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.PruebaProblemasMapaController">
+<VBox focusTraversable="true" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.PruebaProblemasMapaController">
    <children>
-      <HBox alignment="CENTER_RIGHT" fillHeight="false" spacing="5.0" VBox.vgrow="NEVER">
+      <HBox alignment="CENTER_RIGHT" fillHeight="false" focusTraversable="true" spacing="5.0" VBox.vgrow="NEVER">
          <children>
             <MenuBar>
               <menus>
@@ -57,7 +57,7 @@
       <SplitPane dividerPositions="0.4431438127090301, 0.5" VBox.vgrow="ALWAYS">
          <items>
             <ListView fx:id="map_listview" onMouseClicked="#listClicked" prefHeight="399.0" prefWidth="87.0" />
-            <VBox minHeight="-Infinity" minWidth="-Infinity" SplitPane.resizableWithParent="false">
+            <VBox focusTraversable="true" minHeight="-Infinity" minWidth="-Infinity" SplitPane.resizableWithParent="false">
                <children>
                   <Button id="edit_button" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#moverFondo" prefHeight="30.0" prefWidth="30.0">
                      <VBox.margin>
@@ -165,7 +165,7 @@
             </ScrollPane>
          </items>
       </SplitPane>
-      <HBox alignment="CENTER_RIGHT">
+      <HBox alignment="CENTER_RIGHT" focusTraversable="true">
          <children>
             <Label text="Zoom">
                <HBox.margin>
