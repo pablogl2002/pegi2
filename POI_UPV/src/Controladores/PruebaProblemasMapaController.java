@@ -34,15 +34,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
-import static javafx.scene.paint.Color.*;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
-import javafx.scene.text.Text;
+import javafx.scene.text.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import javafx.scene.paint.Color;
 
 /**
  *
@@ -79,7 +78,11 @@ public class PruebaProblemasMapaController implements Initializable {
     private double inicioXArc;
     private Stage primaryStage;
     public double grosorLinea;
-    public Paint colorLinea;
+    public Color colorLinea;
+    public Color colorCirculo;
+    public double grosorCirculo;
+    public Color colorTexto;
+    public int grosorTexto;
     
     Circle circlePainting;
     TextField texto = new TextField();
@@ -192,14 +195,51 @@ public class PruebaProblemasMapaController implements Initializable {
     @FXML
      private void RatonPulsado(MouseEvent event) {
       
-        if (event.isSecondaryButtonDown()){intAyuda = 935;}//Estoy hay que cambiarlo porque al usar el click derecho se quita la funcion de dibujar y demás
+        if (event.isSecondaryButtonDown()){
+            intAyuda = 24;
+            
+        }//Estoy hay que cambiarlo porque al usar el click derecho se quita la funcion de dibujar y demás
         
         if (intAyuda == 2) {
             linePainting = new Line(event.getX(), event.getY(), event.getX(), event.getY());
-            colorLinea = BLACK;
+            //colorLinea = BLACK;
+            
             linePainting.setStroke(colorLinea);
             linePainting.setStrokeWidth(grosorLinea);
             zoomGroup.getChildren().add(linePainting);
+            linePainting.setOnContextMenuRequested(e -> {
+                ContextMenu menuContext = new ContextMenu();
+                MenuItem borrarItem = new MenuItem("eliminar");
+                menuContext.getItems().add(borrarItem);
+                borrarItem.setOnAction(ev -> {
+                    zoomGroup.getChildren().remove((Node)e.getSource());
+                    ev.consume();
+                });
+                MenuItem editarItem = new MenuItem("editar");
+                menuContext.getItems().add(editarItem);
+                editarItem.setOnAction(ev -> {
+                    try {
+                        FXMLLoader loaderLinea = new FXMLLoader(getClass().getResource("/Vistas/Linea.fxml"));
+                        Parent root = loaderLinea.load();
+                        LineaController controlador = loaderLinea.getController();
+
+                        Scene scene = new Scene(root);
+                        Stage stage = new Stage();
+                        stage.setTitle("Opciones Linea");
+                        stage.initModality(Modality.APPLICATION_MODAL);
+                        stage.setScene(scene);
+                        stage.showAndWait();
+
+                        colorLinea = controlador.getColor();
+                    } catch (IOException ex) {
+                        Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    Line lineaNueva = (Line) e.getSource();
+                    lineaNueva.setStroke(colorLinea);
+                });
+                 menuContext.show(zoom_slider.getScene().getWindow(), e.getSceneX(), e.getSceneY());
+                e.consume();
+            });
         }
         
         if (intAyuda == 1) {
@@ -215,7 +255,8 @@ public class PruebaProblemasMapaController implements Initializable {
         
         if (intAyuda == 3) {
             circlePainting = new Circle(1);
-            circlePainting.setStroke(Color.RED);
+            circlePainting.setStroke(colorCirculo);
+            circlePainting.setStrokeWidth(grosorCirculo);
             circlePainting.setFill(null);
             
             zoomGroup.getChildren().add(circlePainting);
@@ -223,6 +264,41 @@ public class PruebaProblemasMapaController implements Initializable {
             circlePainting.setCenterX(event.getX());
             circlePainting.setCenterY(event.getY());
             inicioXArc = event.getX();
+            
+            circlePainting.setOnContextMenuRequested(e -> {
+                ContextMenu menuContext = new ContextMenu();
+                MenuItem borrarItem = new MenuItem("eliminar");
+                menuContext.getItems().add(borrarItem);
+                borrarItem.setOnAction(ev -> {
+                    zoomGroup.getChildren().remove((Node)e.getSource());
+                    ev.consume();
+                });
+                MenuItem editarItem = new MenuItem("editar");
+                menuContext.getItems().add(editarItem);
+                editarItem.setOnAction(ev -> {
+                    try {
+                        FXMLLoader loaderCirculo = new FXMLLoader(getClass().getResource("/Vistas/Circulo.fxml"));
+                        Parent root = loaderCirculo.load();
+                        CirculoController controlador = loaderCirculo.getController();
+
+                        Scene scene = new Scene(root);
+                        Stage stage = new Stage();
+                        stage.setTitle("Opciones Circulo");
+                        stage.initModality(Modality.APPLICATION_MODAL);
+                        stage.setScene(scene);
+                        stage.showAndWait();
+
+                        colorCirculo = controlador.getColor();
+                    } catch (IOException ex) {
+                        Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    Circle circuloNuevo = (Circle) e.getSource();
+                    circuloNuevo.setStroke(colorCirculo);
+                });
+                 menuContext.show(zoom_slider.getScene().getWindow(), e.getSceneX(), e.getSceneY());
+                e.consume();
+            });
+            
         }
         
         if (intAyuda == 4){
@@ -230,53 +306,56 @@ public class PruebaProblemasMapaController implements Initializable {
             texto.setLayoutX(event.getX());
             texto.setLayoutY(event.getY());
             texto.requestFocus();
+            
             texto.setOnAction(e -> {
                 Text textoT= new Text(texto.getText());
                 textoT.setX(texto.getLayoutX());
                 textoT.setY(texto.getLayoutY());
-                textoT.setStyle("-fx-font-family: Gafata; -fx-font-size: 40;");
+                textoT.prefHeight(grosorTexto);
+                textoT.setFont(Font.font(grosorTexto));
+                //textoT.setFont(Font.font("Gafata",FontWeight.BOLD,grosorTexto));
+                textoT.setFill( colorTexto) ;
                 zoomGroup.getChildren().add(textoT);
                 zoomGroup.getChildren().remove(texto);
                 e.consume();
+                textoT.setOnContextMenuRequested(r -> {
+                ContextMenu menuContext = new ContextMenu();
+                MenuItem borrarItem = new MenuItem("eliminar");
+                menuContext.getItems().add(borrarItem);
+                borrarItem.setOnAction(ev -> {
+                    zoomGroup.getChildren().remove((Node)r.getSource());
+                    ev.consume();
+                });
+                MenuItem editarItem = new MenuItem("editar");
+                menuContext.getItems().add(editarItem);
+                editarItem.setOnAction(ev -> {
+                    try {
+                        FXMLLoader loaderTexto = new FXMLLoader(getClass().getResource("/Vistas/Texto.fxml"));
+                        Parent root = loaderTexto.load();
+                        TextoController controlador = loaderTexto.getController();
+
+                        Scene scene = new Scene(root);
+                        Stage stage = new Stage();
+                        stage.setTitle("Opciones Texto");
+                        stage.initModality(Modality.APPLICATION_MODAL);
+                        stage.setScene(scene);
+                        stage.showAndWait();
+
+                        colorTexto = controlador.getColor();
+                    } catch (IOException ex) {
+                        Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    Text textoNuevo = (Text) r.getSource();
+                    textoNuevo.setFill(colorTexto);
+                });
+                 menuContext.show(zoom_slider.getScene().getWindow(), r.getSceneX(), r.getSceneY());
+                r.consume();
             });
+            });
+            
+            
         }
-        
-        linePainting.setOnContextMenuRequested(e -> {
-            ContextMenu menuContext = new ContextMenu();
-            MenuItem borrarItem = new MenuItem("eliminar");
-            menuContext.getItems().add(borrarItem);
-            borrarItem.setOnAction(ev -> {
-                zoomGroup.getChildren().remove((Node)e.getSource());
-                ev.consume();
-            });
-            MenuItem borrarTodo = new MenuItem("Borrar Todo");
-            menuContext.getItems().add(borrarTodo);
-            borrarTodo.setOnAction(ev -> {
-                zoomGroup.getChildren().remove(1,zoomGroup.getChildren().size());
-                ev.consume();
-            });
-            menuContext.show(linePainting, e.getSceneX(), e.getSceneY());
-            e.consume();
-        });
-        
-        circlePainting.setOnContextMenuRequested(e -> {
-            ContextMenu menuContext = new ContextMenu();
-            MenuItem borrarItem = new MenuItem("eliminar");
-            menuContext.getItems().add(borrarItem);
-            borrarItem.setOnAction(ev -> {
-                zoomGroup.getChildren().remove((Node)e.getSource());
-                ev.consume();
-            });
-            MenuItem borrarTodo = new MenuItem("Borrar Todo");
-            menuContext.getItems().add(borrarTodo);
-            borrarTodo.setOnAction(ev -> {
-                zoomGroup.getChildren().remove(1,zoomGroup.getChildren().size());
-                ev.consume();
-            });
-            menuContext.show(circlePainting, e.getSceneX(), e.getSceneY());
-            e.consume();
-        });
-        
+       
         
      }
      
@@ -323,45 +402,76 @@ public class PruebaProblemasMapaController implements Initializable {
     }
 
     @FXML
-    private void Condicion2(ActionEvent event) {
+    private void Condicion2(ActionEvent event) throws IOException {
         intAyuda = 2;
-        try {
-            Stage actualStage = new Stage();
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/Linea.fxml"));
-            Parent root = loader.load();
+            FXMLLoader loaderLinea = new FXMLLoader(getClass().getResource("/Vistas/Linea.fxml"));
+            Parent root = loaderLinea.load();
+            LineaController controlador = loaderLinea.getController();
+
 
             Scene scene = new Scene(root);
-            actualStage.setTitle("Propiedades de la Linea");
-            actualStage.setScene(scene);
-            actualStage.setResizable(false);
-            actualStage.initModality(Modality.APPLICATION_MODAL);
+            Stage stage = new Stage();
+            stage.setTitle("Opciones Linea");
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(scene);
+            stage.showAndWait();
+            
+            colorLinea = controlador.getColor();
+            grosorLinea = controlador.getTamaño();
 
-            //EditProfileController ctr = loader.getController();
-            //ctr.initStage(actualStage);
-            actualStage.show();
-            
-            
-            
-            
-        } catch (IOException ex) {
-            Logger.getLogger(PruebaProblemasMapaController.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     @FXML
-    private void Condicion3(ActionEvent event) {
+    private void Condicion3(ActionEvent event) throws IOException {
         intAyuda = 3;
+        FXMLLoader loaderCirculo = new FXMLLoader(getClass().getResource("/Vistas/Circulo.fxml"));
+            Parent root2 = loaderCirculo.load();
+            CirculoController controlador2 = loaderCirculo.getController();
+
+
+            Scene scene2 = new Scene(root2);
+            Stage stage2 = new Stage();
+            stage2.setTitle("Opciones Circulo");
+            stage2.initModality(Modality.APPLICATION_MODAL);
+            stage2.setScene(scene2);
+            stage2.showAndWait();
+            
+            colorCirculo = controlador2.getColor();
+            grosorCirculo = controlador2.getTamaño();
     }
 
     @FXML
-    private void Condicion4(ActionEvent event) {
+    private void Condicion4(ActionEvent event) throws IOException {
         intAyuda = 4;
+        FXMLLoader loaderTexto = new FXMLLoader(getClass().getResource("/Vistas/Texto.fxml"));
+            Parent root3 = loaderTexto.load();
+            TextoController controlador3 = loaderTexto.getController();
+
+
+            Scene scene2 = new Scene(root3);
+            Stage stage2 = new Stage();
+            stage2.setTitle("Opciones Texto");
+            stage2.initModality(Modality.APPLICATION_MODAL);
+            stage2.setScene(scene2);
+            stage2.showAndWait();
+            
+            colorTexto = controlador3.getColor();
+            grosorTexto = controlador3.getTamaño();
+            
     }
 
     @FXML
     private void Borrar(ActionEvent event) {
-        
+        linePainting.setOnContextMenuRequested(e -> {
+                ContextMenu menuContext = new ContextMenu();
+                MenuItem borrarItem = new MenuItem("eliminar");
+                menuContext.getItems().add(borrarItem);
+                borrarItem.setOnAction(ev -> {
+                    zoomGroup.getChildren().remove((Node)e.getSource());
+                    ev.consume();
+                });
+        });
     }
 
     @FXML
@@ -373,4 +483,5 @@ public class PruebaProblemasMapaController implements Initializable {
     public void initStage(Stage stage) {
         primaryStage = stage;
     }
+    
 }

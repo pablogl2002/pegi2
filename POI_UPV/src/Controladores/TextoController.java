@@ -4,7 +4,6 @@
  */
 package Controladores;
 
-import Controladores.PruebaProblemasMapaController;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -14,7 +13,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Slider;
 import javafx.scene.paint.Color;
-//import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 
 /**
@@ -22,53 +20,44 @@ import javafx.stage.Stage;
  *
  * @author Sergio Pardo
  */
-public class LineaController extends PruebaProblemasMapaController  implements Initializable {
+public class TextoController extends PruebaProblemasMapaController implements Initializable {
 
     @FXML
-    private Slider sliderGrosorLinea;
+    private ColorPicker selectorColorTexto;
     @FXML
-    private Button aceptarLinea;
+    private Slider sliderGrosorTexto;
     @FXML
-    private ColorPicker selectorColorLinea;
-    private Color color;
-    private int tamañoRalla;
+    private Button aceptarTexto;
+    private Color colorTexto;
+    private int grosorTexto;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        sliderGrosorLinea.setMin(1.0);
-        sliderGrosorLinea.setMax(10);
-        sliderGrosorLinea.setValue(1.0);
-        
+        sliderGrosorTexto.setMin(20.0);
+        sliderGrosorTexto.setMax(100.0);
+        sliderGrosorTexto.setValue(10.0);
         
         // TODO
     }    
 
     @FXML
-  
-  
-    
-    
-    private void AceptarLinea(ActionEvent event) {
+    private void AceptarTexto(ActionEvent event) {
         intAyuda = 2;
-        color = selectorColorLinea.getValue();
-        tamañoRalla = (int) sliderGrosorLinea.getValue();
-        Stage ventana = (Stage) aceptarLinea.getScene().getWindow();
+        colorTexto = (Color) selectorColorTexto.getValue();
+        grosorTexto = (int) sliderGrosorTexto.getValue();
+        Stage ventana = (Stage) aceptarTexto.getScene().getWindow();
         ventana.close();
-        
-        
-        
     }
+    
     public Color getColor() {
-        return color;
+        return colorTexto;
        
     }
     public int getTamaño() {
-        return tamañoRalla;
+        return grosorTexto;
        
     }
-    
 }
-

@@ -4,7 +4,6 @@
  */
 package Controladores;
 
-import Controladores.PruebaProblemasMapaController;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -14,61 +13,55 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Slider;
 import javafx.scene.paint.Color;
-//import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
+
 
 /**
  * FXML Controller class
  *
  * @author Sergio Pardo
  */
-public class LineaController extends PruebaProblemasMapaController  implements Initializable {
+public class CirculoController extends PruebaProblemasMapaController  implements Initializable {
 
     @FXML
-    private Slider sliderGrosorLinea;
+    private Slider SliderCirculoGrosor;
+    private int grosorCirculos;
+    private Color colorCirculos;
     @FXML
-    private Button aceptarLinea;
+    private ColorPicker selectorColorCirculo;
     @FXML
-    private ColorPicker selectorColorLinea;
-    private Color color;
-    private int tamañoRalla;
+    private Button aceptarCirculo;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        sliderGrosorLinea.setMin(1.0);
-        sliderGrosorLinea.setMax(10);
-        sliderGrosorLinea.setValue(1.0);
-        
-        
         // TODO
+        SliderCirculoGrosor.setMin(1.0);
+        SliderCirculoGrosor.setMax(10);
+        SliderCirculoGrosor.setValue(1.0);
+        
     }    
 
+    
     @FXML
-  
-  
-    
-    
-    private void AceptarLinea(ActionEvent event) {
+    private void AceptarCirculo(ActionEvent event) {
         intAyuda = 2;
-        color = selectorColorLinea.getValue();
-        tamañoRalla = (int) sliderGrosorLinea.getValue();
-        Stage ventana = (Stage) aceptarLinea.getScene().getWindow();
+        colorCirculos = (Color) selectorColorCirculo.getValue();
+        grosorCirculos = (int) SliderCirculoGrosor.getValue();
+        Stage ventana = (Stage) aceptarCirculo.getScene().getWindow();
         ventana.close();
-        
-        
-        
     }
     public Color getColor() {
-        return color;
+        return colorCirculos;
        
     }
     public int getTamaño() {
-        return tamañoRalla;
+        
+        return grosorCirculos;
        
     }
-    
-}
+    }
 
+    

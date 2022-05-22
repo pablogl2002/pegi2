@@ -134,7 +134,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button mnemonicParsing="false" text="Button" />
+                  <Button mnemonicParsing="false" onAction="#Borrar" text="Button" />
                </children>
             </VBox>
             <ScrollPane fx:id="map_scrollpane" hbarPolicy="ALWAYS" onMouseMoved="#muestraPosicion" pannable="true" prefHeight="398.0" prefWidth="317.0" vbarPolicy="ALWAYS">
