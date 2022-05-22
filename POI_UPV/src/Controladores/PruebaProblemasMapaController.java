@@ -247,14 +247,22 @@ public class PruebaProblemasMapaController implements Initializable {
     
     @FXML
     private void prevQuestion(ActionEvent event) {
-        if (tipo >= 0) tipo--;
+        if (tipo >= 0){
+            tipo--;
+            nextQ_button.setDisable(false);
+        }
+        if (tipo == 0) prevQ_button.setDisable(true);
         else if (randomIndex > 0) randomIndex--;
         initProblemas();
     }
     
     @FXML
     private void nextQuestion(ActionEvent event) {
-        if (tipo >= 0) tipo++;
+        if (tipo >= 0) {
+            tipo++;
+            prevQ_button.setDisable(false);
+        }
+        if(tipo >= 17) {nextQ_button.setDisable(true);}
         else if (randomIndex < 18) randomIndex++;
         initProblemas();
     }
