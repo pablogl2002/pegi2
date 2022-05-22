@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Controladores;
 
 import DBAccess.NavegacionDAOException;
@@ -11,6 +6,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,7 +26,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
-import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Menu;
@@ -41,11 +36,8 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.text.*;
@@ -85,14 +77,6 @@ public class PruebaProblemasMapaController implements Initializable {
     private MenuItem pin_info;
     @FXML
     private Label posicion;
-    private Line linePainting;
-    private double baseX;
-    private double baseY;
-    private double inicioYTrans;
-    private double inicioXTrans;
-    private int intAyuda;
-    private double inicioXArc;
-    private Stage primaryStage;
     private int tipo;
     private User usuario;
     private Navegacion datos;
@@ -299,7 +283,7 @@ public class PruebaProblemasMapaController implements Initializable {
         contentGroup.getChildren().add(zoomGroup);
         zoomGroup.getChildren().add(map_scrollpane.getContent());
         map_scrollpane.setContent(contentGroup);
-        map_scrollpane.setPannable(false);     
+           
         map_scrollpane.setPannable(false);
     }
 
@@ -324,10 +308,7 @@ public class PruebaProblemasMapaController implements Initializable {
     
     @FXML
      private void RatonPulsado(MouseEvent event) {
-      
-        if (event.isSecondaryButtonDown()){intAyuda = 935;}//Estoy hay que cambiarlo porque al usar el click derecho se quita la funcion de dibujar y demás
-        
-      
+
         if (event.isSecondaryButtonDown()){
             intAyuda = 24;
             
@@ -335,8 +316,8 @@ public class PruebaProblemasMapaController implements Initializable {
         
         if (intAyuda == 2) {
             linePainting = new Line(event.getX(), event.getY(), event.getX(), event.getY());
-            zoomGroup.getChildren().add(linePainting);
-        }
+        
+
             //colorLinea = BLACK;
             
             linePainting.setStroke(colorLinea);
@@ -413,8 +394,8 @@ public class PruebaProblemasMapaController implements Initializable {
         
         if (intAyuda == 3) {
             circlePainting = new Circle(1);
-            circlePainting.setStroke(Color.RED);
-            circlePainting.setFill(null);
+            
+
             circlePainting.setStroke(colorCirculo);
             circlePainting.setStrokeWidth(grosorCirculo);
             circlePainting.setFill(null);
@@ -515,46 +496,7 @@ public class PruebaProblemasMapaController implements Initializable {
             
             
         }
-        
-        linePainting.setOnContextMenuRequested(e -> {
-            ContextMenu menuContext = new ContextMenu();
-            MenuItem borrarItem = new MenuItem("eliminar");
-            menuContext.getItems().add(borrarItem);
-            borrarItem.setOnAction(ev -> {
-                zoomGroup.getChildren().remove((Node)e.getSource());
-                ev.consume();
-            });
-            MenuItem borrarTodo = new MenuItem("Borrar Todo");
-            menuContext.getItems().add(borrarTodo);
-            borrarTodo.setOnAction(ev -> {
-                zoomGroup.getChildren().remove(1,zoomGroup.getChildren().size());
-                ev.consume();
-            });
-            menuContext.show(linePainting, e.getSceneX(), e.getSceneY());
-            e.consume();
-        });
-        
-        circlePainting.setOnContextMenuRequested(e -> {
-            ContextMenu menuContext = new ContextMenu();
-            MenuItem borrarItem = new MenuItem("eliminar");
-            menuContext.getItems().add(borrarItem);
-            borrarItem.setOnAction(ev -> {
-                zoomGroup.getChildren().remove((Node)e.getSource());
-                ev.consume();
-            });
-            MenuItem borrarTodo = new MenuItem("Borrar Todo");
-            menuContext.getItems().add(borrarTodo);
-            borrarTodo.setOnAction(ev -> {
-                zoomGroup.getChildren().remove(1,zoomGroup.getChildren().size());
-                ev.consume();
-            });
-            menuContext.show(circlePainting, e.getSceneX(), e.getSceneY());
-            e.consume();
-        });
-        
-        
-       
-        
+
      }
      
     @FXML
@@ -660,9 +602,7 @@ public class PruebaProblemasMapaController implements Initializable {
     }
 
     @FXML
-    private void Borrar(ActionEvent event) {
-        
-    private void Borrar(ActionEvent event) {      
+    private void borrar(ActionEvent event) {      
         zoomGroup.getChildren().remove(1,zoomGroup.getChildren().size()); 
     }
 
@@ -712,15 +652,4 @@ public class PruebaProblemasMapaController implements Initializable {
             Logger.getLogger(ProblemsController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-    @FXML
-    private void moverFondo(ActionEvent event) {
-        map_scrollpane.setPannable(true);
-        intAyuda = 115;
-    }
-
-    public void initStage(Stage stage) {
-        primaryStage = stage;
-    }
-    
 }
