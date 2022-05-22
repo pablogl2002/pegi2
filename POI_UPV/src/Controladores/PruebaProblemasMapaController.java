@@ -6,7 +6,10 @@
 package Controladores;
 
 import DBAccess.NavegacionDAOException;
+import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -15,11 +18,16 @@ import java.util.logging.Logger;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
@@ -39,8 +47,10 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import model.Answer;
 import model.Navegacion;
 import model.Problem;
 import model.User;
@@ -113,7 +123,8 @@ public class PruebaProblemasMapaController implements Initializable {
     private Button verificar_button;
     @FXML
     private Button nextQ_button;
-    private int numProb;
+    private List<Integer> arAux;
+    private int randomIndex = 0;
     
     @FXML
     void zoomIn(ActionEvent event) {
@@ -177,7 +188,82 @@ public class PruebaProblemasMapaController implements Initializable {
         map_listview.getItems().add(hm.get("2F"));
         map_listview.getItems().add(hm.get("Agora"));
     }
-
+    
+    public void initStage(Stage stage, User user, int type) {
+        try {
+            primaryStage = stage;
+            usuario = user;
+            id_avatar.setImage(usuario.getAvatar());
+            id_menuPerfil.setText(usuario.getNickName());
+            
+            System.out.println(type);
+            tipo = type; //tipo = -1 -> problemas aleatorios  tipo = num -> problemas ordenados (numero del problema - 1)
+            datos = Navegacion.getSingletonNavegacion();
+            problemas = datos.getProblems();
+            
+            initProblemas();
+        } catch (NavegacionDAOException ex) {
+            Logger.getLogger(PruebaProblemasMapaController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void initProblemas() { 
+            if (tipo >= 0) {
+                questionText.setText(problemas.get(tipo).getText());
+                question_label.setText("Problema " + (tipo + 1));
+                initRespuestas(tipo);
+            } else {
+                arAux = new ArrayList<Integer>();
+                crearProblemasRandom();
+                Collections.shuffle(arAux);
+                questionText.setText(problemas.get(arAux.get(randomIndex)).getText());
+                question_label.setText("Problema Aleatorio " + (randomIndex + 1) + " (" +(arAux.get(randomIndex)) + ")");
+                initRespuestas(arAux.get(randomIndex));
+                System.out.println(arAux.get(randomIndex));
+            }            
+    }
+    
+    private void initRespuestas(int index) {
+        List<Answer> respuestas = problemas.get(index).getAnswers();
+        ObservableList<Answer> res = FXCollections.observableArrayList();
+        Answer respuesta = respuestas.get((int) Math.random() * respuestas.size());
+        while(res.size() != 4) {
+            if (!res.contains(res)) { res.add(respuesta); }
+            respuesta = res.get((int) (Math.random() * res.size()));
+        }
+        
+        answer1.setText(res.get(0).getText());
+        answer2.setText(res.get(1).getText());
+        answer3.setText(res.get(2).getText());
+        answer4.setText(res.get(3).getText());
+    }
+    
+    private void crearProblemasRandom() {
+        for (int i = 0; i < arAux.size(); i++) {
+            arAux.add(i);
+        }
+    }
+    
+    @FXML
+    private void prevQuestion(ActionEvent event) {
+        if (tipo >= 0) tipo--;
+        else if (randomIndex > 0) randomIndex--;
+        initProblemas();
+    }
+    
+    @FXML
+    private void nextQuestion(ActionEvent event) {
+        if (tipo >= 0) tipo++;
+        else if (randomIndex < 18) randomIndex++;
+        initProblemas();
+    }
+    
+    @FXML
+    private void verifyQuestion(ActionEvent event) {
+        
+    }
+    
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         initData();
@@ -196,26 +282,7 @@ public class PruebaProblemasMapaController implements Initializable {
         contentGroup.getChildren().add(zoomGroup);
         zoomGroup.getChildren().add(map_scrollpane.getContent());
         map_scrollpane.setContent(contentGroup);
-        map_scrollpane.setPannable(false);
-        
-        
-        //=========================================================================
-        // inicialización problemas
-        try {
-            datos = Navegacion.getSingletonNavegacion();
-            problemas = datos.getProblems();
-            if (tipo >= 0) {
-                questionText.setText(problemas.get(tipo).getText());
-                question_label.setText("Problema " + (tipo + 1));
-            } else {
-                
-            }
-            
-        } catch (NavegacionDAOException ex) {
-            Logger.getLogger(PruebaProblemasMapaController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        
+        map_scrollpane.setPannable(false);     
     }
 
     @FXML
@@ -393,25 +460,44 @@ public class PruebaProblemasMapaController implements Initializable {
         intAyuda = 115;
     }
 
-    public void initStage(Stage stage, User user, int type) {
-        primaryStage = stage;
-        usuario = user;
-        //id_avatar.setImage(usuario.getAvatar());
-        //id_menuPerfil.setText(usuario.getNickName());
-        tipo = type; //tipo = -1 -> problemas aleatorios  tipo = num -> problemas ordenados (numero del problema - 1)
-    }
-    
-    public void initStage(Stage stage, User user, Problem problema) {
-        primaryStage = stage;
-        usuario = user;
-        tipo = problemas.indexOf(problema);
-    }
-
     @FXML
     private void editProfile(ActionEvent event) {
+        try {
+            Stage actualStage = new Stage();
+            
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/EditProfile.fxml"));
+            Parent root = loader.load();
+            
+            Scene scene = new Scene(root);
+            actualStage.setTitle("Editar Perfil");
+            actualStage.setScene(scene);
+            actualStage.setResizable(false);
+            actualStage.initModality(Modality.APPLICATION_MODAL);
+            
+            actualStage.show();
+            
+        } catch (IOException ex) {
+            Logger.getLogger(ChooseProblemTypeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML
     private void logOut(ActionEvent event) {
+        LogInSignUpController.setUser(null);
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/ChooseProblemType.fxml"));
+            Parent root = loader.load();
+            
+            Scene scene = new Scene(root);
+            primaryStage.setTitle("Problemas");
+            primaryStage.setScene(scene);
+            primaryStage.setResizable(false);
+            
+            ChooseProblemTypeController ctr = loader.getController();
+            ctr.initStage(primaryStage, usuario);
+            primaryStage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(ProblemsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

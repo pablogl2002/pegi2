@@ -98,7 +98,7 @@ public class ChooseProblemTypeController implements Initializable {
             Logger.getLogger(ProblemsController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+/*
     @FXML
     private void pressSalir(ActionEvent event) {
         try {
@@ -118,7 +118,7 @@ public class ChooseProblemTypeController implements Initializable {
             Logger.getLogger(ChooseProblemTypeController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+*/    
     @FXML
     private void pressAceptar(ActionEvent event) {
         try {
@@ -145,7 +145,7 @@ public class ChooseProblemTypeController implements Initializable {
                 primaryStage.setResizable(true);
 
                 PruebaProblemasMapaController rPro = loader.getController();
-                rPro.initStage(primaryStage, usuario, 1);
+                rPro.initStage(primaryStage, usuario, -1);
             }
             primaryStage.show();
         } catch (IOException ex) {
