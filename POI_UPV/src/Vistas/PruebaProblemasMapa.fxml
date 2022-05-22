@@ -26,7 +26,7 @@
 
 <VBox prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.PruebaProblemasMapaController">
    <children>
-      <HBox alignment="CENTER_RIGHT" fillHeight="false" spacing="5.0" VBox.vgrow="NEVER">
+      <HBox alignment="CENTER_RIGHT" fillHeight="false" focusTraversable="true" spacing="5.0" VBox.vgrow="NEVER">
          <children>
             <MenuBar>
               <menus>
@@ -257,7 +257,7 @@
             </HBox>
          </items>
       </SplitPane>
-      <HBox alignment="CENTER_RIGHT">
+      <HBox alignment="CENTER_RIGHT" focusTraversable="true">
          <children>
             <Label text="Zoom">
                <HBox.margin>

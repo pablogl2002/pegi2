@@ -9,29 +9,29 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="280.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.LineaController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="280.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.CirculoController">
    <children>
-      <ColorPicker fx:id="selectorColorLinea" layoutX="72.0" layoutY="61.0">
+      <ColorPicker fx:id="selectorColorCirculo" layoutX="72.0" layoutY="61.0">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
       </ColorPicker>
-      <Slider fx:id="sliderGrosorLinea" layoutX="72.0" layoutY="108.0" prefHeight="14.0" prefWidth="138.0" />
+      <Slider fx:id="SliderCirculoGrosor" layoutX="72.0" layoutY="108.0" prefHeight="14.0" prefWidth="138.0" />
       <Text layoutX="14.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Grosor:">
          <font>
             <Font size="14.0" />
          </font>
       </Text>
-      <HBox id="opcionesLinea" alignment="CENTER" focusTraversable="true" prefHeight="40.0" prefWidth="280.0" style="-fx-background-color: blue;">
+      <HBox id="opcionesLinea" alignment="CENTER" prefHeight="40.0" prefWidth="280.0" style="-fx-background-color: blue;">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Características de la línea" textAlignment="CENTER">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Características del círculo" textAlignment="CENTER">
                <font>
                   <Font size="18.0" />
                </font>
             </Text>
          </children>
       </HBox>
-      <Button fx:id="aceptarLinea" layoutX="115.0" layoutY="144.0" mnemonicParsing="false" onAction="#AceptarLinea" text="Aceptar" />
+      <Button fx:id="aceptarCirculo" layoutX="115.0" layoutY="144.0" mnemonicParsing="false" onAction="#AceptarCirculo" text="Aceptar" />
       <Text layoutX="14.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Color:">
          <font>
             <Font size="14.0" />
