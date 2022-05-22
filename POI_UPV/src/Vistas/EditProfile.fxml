@@ -87,7 +87,7 @@
                                                       <Insets bottom="5.0" />
                                                    </HBox.margin>
                                                 </Label>
-                                                <Label fx:id="label_wUserSign11" text="x" textFill="#ca0505" visible="false">
+                                                <Label fx:id="label_wOldMail" text="x" textFill="#ca0505" visible="false">
                                                    <HBox.margin>
                                                       <Insets left="10.0" />
                                                    </HBox.margin>
@@ -112,7 +112,7 @@
                                                       <Insets bottom="5.0" />
                                                    </HBox.margin>
                                                 </Label>
-                                                <Label fx:id="label_wUserSign1" text="x" textFill="#ca0505" visible="false">
+                                                <Label fx:id="label_wNewMail" text="x" textFill="#ca0505" visible="false">
                                                    <HBox.margin>
                                                       <Insets left="10.0" />
                                                    </HBox.margin>
@@ -150,7 +150,7 @@
                                                                   <Insets bottom="5.0" />
                                                                </HBox.margin>
                                                             </Label>
-                                                            <Label fx:id="label_wPassSign1" text="x" textFill="#ca0505" visible="false">
+                                                            <Label fx:id="label_wOldPass" text="x" textFill="#ca0505" visible="false">
                                                                <HBox.margin>
                                                                   <Insets left="10.0" />
                                                                </HBox.margin>
@@ -176,7 +176,7 @@
                                                                   <Insets bottom="5.0" />
                                                                </HBox.margin>
                                                             </Label>
-                                                            <Label fx:id="label_wPassSign11" text="x" textFill="#ca0505" visible="false">
+                                                            <Label fx:id="label_wNewPass" text="x" textFill="#ca0505" visible="false">
                                                                <HBox.margin>
                                                                   <Insets left="10.0" />
                                                                </HBox.margin>
@@ -202,7 +202,7 @@
                                                                   <Insets bottom="5.0" />
                                                                </HBox.margin>
                                                             </Label>
-                                                            <Label fx:id="label_wRePassSign1" text="x" textFill="#ca0505" visible="false">
+                                                            <Label fx:id="label_wReNewPass" text="x" textFill="#ca0505" visible="false">
                                                                <HBox.margin>
                                                                   <Insets left="10.0" />
                                                                </HBox.margin>
@@ -243,7 +243,7 @@
                                                       <Insets bottom="5.0" />
                                                    </HBox.margin>
                                                 </Label>
-                                                <Label fx:id="label_wBirthday" text="x" textFill="#ca0505" visible="false">
+                                                <Label fx:id="label_wOldBirthday" text="x" textFill="#ca0505" visible="false">
                                                    <HBox.margin>
                                                       <Insets left="10.0" />
                                                    </HBox.margin>
@@ -262,7 +262,7 @@
                                                       <Insets bottom="5.0" />
                                                    </HBox.margin>
                                                 </Label>
-                                                <Label fx:id="label_wBirthday1" text="x" textFill="#ca0505" visible="false">
+                                                <Label fx:id="label_wNewBirthday" text="x" textFill="#ca0505" visible="false">
                                                    <HBox.margin>
                                                       <Insets left="10.0" />
                                                    </HBox.margin>

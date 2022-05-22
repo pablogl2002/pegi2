@@ -6,6 +6,10 @@ package Controladores;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,11 +19,17 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Menu;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.InputMethodEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.Session;
 import model.User;
 
 /**
@@ -37,22 +47,28 @@ public class EstadisticasController implements Initializable {
     @FXML
     private ImageView id_avatar;
     @FXML
-    private TableColumn<?, ?> userColumn;
+    private TableColumn<Session, String> dateColumn;
     @FXML
-    private TableColumn<?, ?> mailColumn;
+    private TableColumn<Session, Integer> correctColumn;
     @FXML
-    private TableColumn<?, ?> ratioColumn;
+    private TableColumn<Session, Integer> failsColumn;
+    private static Session aux;
     @FXML
-    private TableColumn<?, ?> dateColumn;
-
+    private static TableView<Session> tabla;
+    private List<Session> list;
+    @FXML
+    private DatePicker datePicker;
+    @FXML
+    private Button salirButton;
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-
+    }
+    
     @FXML
     private void editProfile(ActionEvent event) {
         try {
@@ -92,6 +108,7 @@ public class EstadisticasController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(ProblemsController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }
     
     public void initStage(Stage stage, User user) {
@@ -99,6 +116,35 @@ public class EstadisticasController implements Initializable {
         usuario = user;
         id_avatar.setImage(usuario.getAvatar());
         id_menuPerfil.setText(usuario.getNickName());
+        
+        list = usuario.getSessions();
+        dateColumn.setCellValueFactory(new PropertyValueFactory<Session, String>("timeStamp"));
+        correctColumn.setCellValueFactory(new PropertyValueFactory<Session, Integer>("hits"));
+        failsColumn.setCellValueFactory(new PropertyValueFactory<Session, Integer>("faults"));
+
+        for(int i=0;i<list.size();i++) {
+            Session sesion = list.get(i);
+            tabla.getItems().add(sesion);
+        }
+        
+    }
+
+    @FXML
+    private void filtrar(InputMethodEvent event) {
+        LocalTime h = LocalTime.now();
+        LocalDateTime t = LocalDateTime.of(datePicker.getValue(), h);
+        for (int i = 0; i < list.size(); i++) {
+            
+            if (list.get(i).getTimeStamp().isBefore(t)) {
+                Session sesion = list.get(i);
+                tabla.getItems().add(sesion); 
+            }
+        }
+    }
+
+    @FXML
+    private void salir(ActionEvent event) {
+        salirButton.getScene().getWindow().hide();
     }
     
 }

@@ -164,4 +164,24 @@ public class ChooseProblemTypeController implements Initializable {
         infoArea.setText("Realizar problemas de forma aleatoria.");
         auxNum = 1;
     }
+
+    @FXML
+    private void verEvolucion(ActionEvent event) {
+        try {
+            Stage actualStage = new Stage();
+            
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/Estadisticas.fxml"));
+            Parent root = loader.load();
+            
+            Scene scene = new Scene(root);
+            actualStage.setTitle("Evolución de " + usuario.getNickName());
+            actualStage.setScene(scene);
+            actualStage.setResizable(false);
+            actualStage.initModality(Modality.APPLICATION_MODAL);
+            
+            actualStage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(ChooseProblemTypeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

@@ -86,7 +86,6 @@ public class LogInSignUpController implements Initializable {
     @FXML
     private ImageView id_avatarEdit;
     
-    
     public void initStage(Stage stage) {
          primaryStage = stage;
     }

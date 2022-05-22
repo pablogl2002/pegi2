@@ -23,6 +23,7 @@
                   <Menu id="perfil_menu" fx:id="id_menuPerfil" mnemonicParsing="false" text="Mi Perfil">
                     <items>
                       <MenuItem mnemonicParsing="false" onAction="#editProfile" text="Editar Perfil" />
+                        <MenuItem mnemonicParsing="false" onAction="#verEvolucion" text="Ver Evolución" />
                         <MenuItem mnemonicParsing="false" onAction="#logOut" text="Cerrar Sesión" />
                     </items>
                      <graphic>

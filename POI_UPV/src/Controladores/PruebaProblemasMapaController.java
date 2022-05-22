@@ -3,6 +3,9 @@ package Controladores;
 import DBAccess.NavegacionDAOException;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -49,6 +52,7 @@ import model.Navegacion;
 import model.Problem;
 import model.User;
 import javafx.scene.paint.Color;
+import model.Session;
 
 
 /**
@@ -124,8 +128,14 @@ public class PruebaProblemasMapaController implements Initializable {
     private Button verificar_button;
     @FXML
     private Button nextQ_button;
-    private List<Integer> arAux;
-    private int randomIndex = 0;
+    private int randomIndex;
+    private Session sesion;
+    private int hints = 0;
+    private int fails = 0;
+    private LocalDateTime time;
+    private Problem p;
+    @FXML
+    private Label respondidaLabel;
     
     @FXML
     void zoomIn(ActionEvent event) {
@@ -214,60 +224,112 @@ public class PruebaProblemasMapaController implements Initializable {
                 question_label.setText("Problema " + (tipo + 1));
                 initRespuestas(tipo);
             } else {
-                arAux = new ArrayList<Integer>();
-                crearProblemasRandom();
-                Collections.shuffle(arAux);
-                questionText.setText(problemas.get(arAux.get(randomIndex)).getText());
-                question_label.setText("Problema Aleatorio " + (randomIndex + 1) + " (" +(arAux.get(randomIndex)) + ")");
-                initRespuestas(arAux.get(randomIndex));
-                System.out.println(arAux.get(randomIndex));
+                int index = (int) (Math.random() * (problemas.size() - 0));
+                p = problemas.get(index);
+                
+                questionText.setText(p.getText());
+                question_label.setText("Problema Aleatorio " + (randomIndex + 1) + " (" + index + ")");
+                initRespuestas(index);
+                 
             }            
     }
     
     private void initRespuestas(int index) {
         List<Answer> respuestas = problemas.get(index).getAnswers();
-        ObservableList<Answer> res = FXCollections.observableArrayList();
-        Answer respuesta = respuestas.get((int) Math.random() * respuestas.size());
-        while(res.size() != 4) {
-            if (!res.contains(res)) { res.add(respuesta); }
-            respuesta = res.get((int) (Math.random() * res.size()));
+        
+        /*
+        ObservableList<Integer> res = FXCollections.observableArrayList();
+        int num = (int) Math.random() * respuestas.size();
+        Integer respuesta = num;
+        
+        while(!(res.size() == 4)) {
+            if (!res.contains(respuesta)) { res.add(respuesta); }
+            respuesta = (int) (Math.random() * res.size());
         }
         
+        answer1.setText(respuestas.get(res.get(0)).getText());
+        answer2.setText(respuestas.get(res.get(1)).getText());
+        answer3.setText(respuestas.get(res.get(2)).getText());
+        answer4.setText(respuestas.get(res.get(3)).getText());
+        */
+        /*
         answer1.setText(res.get(0).getText());
         answer2.setText(res.get(1).getText());
         answer3.setText(res.get(2).getText());
         answer4.setText(res.get(3).getText());
+        */
+        
+        answer1.setText(respuestas.get(0).getText());
+        answer2.setText(respuestas.get(1).getText());
+        answer3.setText(respuestas.get(2).getText());
+        answer4.setText(respuestas.get(3).getText());
     }
-    
-    private void crearProblemasRandom() {
-        for (int i = 0; i < arAux.size(); i++) {
-            arAux.add(i);
-        }
-    }
-    
+        
     @FXML
     private void prevQuestion(ActionEvent event) {
-        if (tipo >= 0) tipo--;
-        else if (randomIndex > 0) randomIndex--;
+        respondidaLabel.setVisible(false);
+        if (tipo > 0) {
+            tipo--;
+        } if (tipo == 0) { 
+            prevQ_button.setDisable(false); 
+        } else { 
+            prevQ_button.setDisable(false); 
+        }
         initProblemas();
     }
     
     @FXML
     private void nextQuestion(ActionEvent event) {
+        respondidaLabel.setVisible(false);
         if (tipo >= 0) tipo++;
-        else if (randomIndex < 18) randomIndex++;
+        else if (randomIndex < 18) { 
+            randomIndex++; 
+        } else nextQ_button.setDisable(false);
         initProblemas();
     }
     
     @FXML
-    private void verifyQuestion(ActionEvent event) {
-        
+    private void borrarSeleccion(MouseEvent event) {
+        answer.selectToggle(null);
     }
     
+    //responder en realidad
+    @FXML
+    private void verifyQuestion(ActionEvent event) {
+        respondidaLabel.setVisible(true);
+        if (tipo >= 0) {
+            if (answer1.isSelected() && problemas.get(tipo).getAnswers().get(0).getValidity()) {
+                hints++;
+            } else { fails++; }
+            if (answer2.isSelected() && problemas.get(tipo).getAnswers().get(1).getValidity()) {
+                hints++;
+            } else { fails++; }
+            if (answer3.isSelected() && problemas.get(tipo).getAnswers().get(2).getValidity()) {
+                hints++;
+            } else { fails++; }
+            if (answer4.isSelected() && problemas.get(tipo).getAnswers().get(3).getValidity()) {
+                hints++;
+            } else { fails++; }
+        } else {
+            if (answer1.isSelected() && p.getAnswers().get(0).getValidity()) {
+                hints++;
+            } else { fails++; }
+            if (answer2.isSelected() && p.getAnswers().get(1).getValidity()) {
+                hints++;
+            } else { fails++; }
+            if (answer3.isSelected() && p.getAnswers().get(2).getValidity()) {
+                hints++;
+            } else { fails++; }
+            if (answer4.isSelected() && p.getAnswers().get(3).getValidity()) {
+                hints++;
+            } else { fails++; }
+        }
+    }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         initData();
+        
         //==========================================================
         // inicializamos el slider y enlazamos con el zoom
         zoom_slider.setMin(0.5);
@@ -282,11 +344,21 @@ public class PruebaProblemasMapaController implements Initializable {
         zoomGroup = new Group();
         contentGroup.getChildren().add(zoomGroup);
         zoomGroup.getChildren().add(map_scrollpane.getContent());
-        map_scrollpane.setContent(contentGroup);
-           
+        map_scrollpane.setContent(contentGroup);      
         map_scrollpane.setPannable(false);
+        
     }
 
+    private void guardarSesion() {
+        try {
+            sesion = new Session(time, hints, fails);
+            time = LocalDateTime.of(LocalDate.now(), LocalTime.now());
+            usuario.addSession(sesion);
+        } catch (NavegacionDAOException ex) {
+            Logger.getLogger(PruebaProblemasMapaController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     @FXML
     private void muestraPosicion(MouseEvent event) {
         posicion.setText("sceneX: " + (int) event.getSceneX() + ", sceneY: " + (int) event.getSceneY() + "\n"
@@ -295,6 +367,7 @@ public class PruebaProblemasMapaController implements Initializable {
 
     @FXML
     private void cerrarAplicacion(ActionEvent event) {
+        guardarSesion();
         ((Stage)zoom_slider.getScene().getWindow()).close();
     }
 
@@ -635,9 +708,10 @@ public class PruebaProblemasMapaController implements Initializable {
 
     @FXML
     private void logOut(ActionEvent event) {
+        guardarSesion();
         LogInSignUpController.setUser(null);
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/ChooseProblemType.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/LogInSignUp.fxml"));
             Parent root = loader.load();
             
             Scene scene = new Scene(root);
@@ -645,11 +719,13 @@ public class PruebaProblemasMapaController implements Initializable {
             primaryStage.setScene(scene);
             primaryStage.setResizable(false);
             
-            ChooseProblemTypeController ctr = loader.getController();
-            ctr.initStage(primaryStage, usuario);
+            LogInSignUpController ctr = loader.getController();
+            ctr.initStage(primaryStage);
             primaryStage.show();
         } catch (IOException ex) {
             Logger.getLogger(ProblemsController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    
 }
