@@ -9,6 +9,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,9 +23,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.User;
+import static model.User.checkPassword;
 
 /**
  * FXML Controller class
@@ -71,6 +75,14 @@ public class EditProfileController implements Initializable {
     private Label label_wBirthday1;
     @FXML
     private DatePicker newBirth_picker;
+    @FXML
+    private Button aapplyButton;
+    private CharSequence charSequence1 = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ";
+    private CharSequence charSequence2 = "abcdefghijklmnñopqrstuvwxyz";        
+    private CharSequence charSequence3 = "0123456789"; 
+    private CharSequence charSequence4 = "!@#$%&*()-+=ç";
+    @FXML
+    private Text DatosUsuario;
     
     
     /**
@@ -82,7 +94,7 @@ public class EditProfileController implements Initializable {
         avatar = usuario.getAvatar();
         id_avatar.setImage(avatar);
         oldMailField.setText(usuario.getEmail());
-        
+        DatosUsuario.setText("Email:\n" + usuario.getEmail() + "\nContraseña: " + usuario.getPassword() + "\nCumpleaños: " + usuario.getBirthdate());
         
         
         oldPassField.textProperty().addListener((ob, oldV, newV) -> {
@@ -92,22 +104,39 @@ public class EditProfileController implements Initializable {
         
     }    
 
+    private boolean comprobarCumpleaños (){
+        LocalDate hoy = LocalDate.now();
+        LocalDate nacimiento = newBirth_picker.getValue();
+        long edad = ChronoUnit.YEARS.between(nacimiento, hoy);
+        return (edad >= 12);
+    }
+    
+    
     @FXML
     private void applyButton(ActionEvent event) throws NavegacionDAOException {
-        if (!newMailField.getText().equals(usuario.getEmail()) && oldMailField.getText().equals(usuario.getEmail()) && newMailField.getText() != null) {
-            usuario.setEmail(newMailField.getText());      
-            System.out.println("Cambiado mail");
+        if (newMailField.getText() != null && checkPassword(newMailField.getText())) {
+            usuario.setEmail(newMailField.getText());
+            System.out.println("Cambiado correo");
         }
         
-        if (oldPassField.getText().equals(usuario.getPassword()) && !newPassField.getText().equals(usuario.getPassword()) && newPassField.getText().equals(reNewPassField)) {
+        if (newPassField.getText().equals(reNewPassField.getText()) && checkPassword(newPassField.getText())) {
             usuario.setPassword(newPassField.getText());
-            System.out.println("Cambiada contraseña");
+            System.out.println("Cambiado contraseña");
         }
         
         if (!avatar.equals(usuario.getAvatar())) {
             usuario.setAvatar(avatar);
             System.out.println("Cambiado avatar");
         }
+        
+        if (!oldBirth_picker.valueProperty().getValue().equals(newBirth_picker.valueProperty().getValue()) && comprobarCumpleaños()
+                && oldBirth_picker.valueProperty().getValue().equals(usuario.getBirthdate())) {
+            usuario.setBirthdate(newBirth_picker.valueProperty().getValue());
+            System.out.println("Cambiado cumpleaños");
+        }
+        
+        Stage ventana = (Stage) aapplyButton.getScene().getWindow();
+        ventana.close();
     }
 
     @FXML

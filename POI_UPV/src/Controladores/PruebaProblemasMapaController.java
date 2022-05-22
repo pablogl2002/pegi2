@@ -339,26 +339,59 @@ public class PruebaProblemasMapaController implements Initializable {
                     zoomGroup.getChildren().remove((Node)e.getSource());
                     ev.consume();
                 });    
-                MenuItem marcarPosicion = new MenuItem("marcarPosición");
+                MenuItem marcarPosicion = new MenuItem("marcar Posición");
                 menuContext.getItems().add(marcarPosicion);
                 marcarPosicion.setOnAction(ev -> {
+                    Line linePaintingY = new Line(event.getX(), event.getY(), event.getX(), event.getY());
                     Line linePaintingX = new Line(event.getX(), event.getY(), event.getX(), event.getY());
                     linePaintingX.setStroke(colorLinea);
-                    linePaintingX.setStrokeWidth(grosorLinea);
-                    Line linePaintingY = new Line(event.getX(), event.getY(), event.getX(), event.getY());
+                    linePaintingX.setStrokeWidth(1);
+                    linePaintingX.setOnContextMenuRequested(e2 -> {
+
+                        ContextMenu menuContext2 = new ContextMenu();
+
+                        MenuItem borrarItem2 = new MenuItem("eliminar");
+                        menuContext2.getItems().add(borrarItem2);
+                        borrarItem2.setOnAction(ev2 -> {
+                            zoomGroup.getChildren().remove(((Node) e2.getSource()));
+                            zoomGroup.getChildren().remove(linePaintingY);
+
+                            ev2.consume();
+                        });
+                    menuContext2.show(zoom_slider.getScene().getWindow(), e2.getSceneX(), e2.getSceneY());
+                    e2.consume();
+                    });
+                    
                     linePaintingY.setStroke(colorLinea);
-                    linePaintingY.setStrokeWidth(grosorLinea);
+                    linePaintingY.setStrokeWidth(1);
+                    linePaintingY.setOnContextMenuRequested(e3 -> {
+
+                        ContextMenu menuContext3 = new ContextMenu();
+
+                        MenuItem borrarItem3 = new MenuItem("eliminar");
+                        menuContext3.getItems().add(borrarItem3);
+                        borrarItem3.setOnAction(ev3 -> {
+                            zoomGroup.getChildren().remove(((Node) e3.getSource()));
+                            zoomGroup.getChildren().remove(linePaintingX);
+
+                            ev3.consume();
+                        });
+                    menuContext3.show(zoom_slider.getScene().getWindow(), e3.getSceneX(), e3.getSceneY());
+                    e3.consume();
+                    });
+
                     zoomGroup.getChildren().add(linePaintingX);
                     zoomGroup.getChildren().add(linePaintingY);
-                    double anchoMinimo = event.getX();
-                    double largoMinimo = event.getY();
+                    //double anchoMinimo = event.getX();
+                    //double largoMinimo = event.getY();
                     linePaintingX.setStartX(0);
                     linePaintingX.setStartY(event.getY());
                     linePaintingX.setEndX(8974);
-                    linePaintingX.setEndY(largoMinimo);
+                    linePaintingX.setEndY(event.getY());
+                    
                     linePaintingY.setStartX(event.getX());
                     linePaintingY.setStartY(0);
-                    linePaintingY.setEndX(anchoMinimo);
+                    linePaintingY.setEndX(event.getX());
                     linePaintingY.setEndY(5746);
                     ev.consume();
                 });

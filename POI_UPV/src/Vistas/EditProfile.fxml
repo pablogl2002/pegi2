@@ -45,7 +45,7 @@
    <bottom>
       <HBox alignment="CENTER_RIGHT" prefHeight="60.0" prefWidth="200.0" spacing="25.0" BorderPane.alignment="CENTER_RIGHT">
          <children>
-            <Button id="accept_button" alignment="CENTER" minWidth="80.0" mnemonicParsing="false" onAction="#applyButton" prefWidth="100.0" text="Aplicar" textFill="WHITE">
+            <Button id="accept_button" fx:id="aapplyButton" alignment="CENTER" minWidth="80.0" mnemonicParsing="false" onAction="#applyButton" prefWidth="100.0" text="Aplicar" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -315,6 +315,15 @@
                   </ImageView>
                </children>
             </Pane>
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Text fx:id="DatosUsuario" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="JUSTIFY" wrappingWidth="119.73669052124023">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Text>
+               </children>
+            </VBox>
          </children>
          <BorderPane.margin>
             <Insets right="15.0" />
