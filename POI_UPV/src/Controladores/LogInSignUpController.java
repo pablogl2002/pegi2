@@ -20,6 +20,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -27,7 +29,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
@@ -74,21 +75,29 @@ public class LogInSignUpController implements Initializable {
     @FXML
     private Label label_wRePassSign;
     @FXML
-    private Label label_anotherError;
-    @FXML
     private ImageView id_avatar;
     
     // Variables del codigo
     private Stage primaryStage;
     private Navegacion baseDatos;
     private Image avatar;
+    private static User usuario;
+    
     @FXML
     private ImageView id_avatarEdit;
+    
     
     public void initStage(Stage stage) {
          primaryStage = stage;
     }
-     
+    
+    /**
+     *
+     * @return
+     */
+    public static User getUser() { return usuario; }
+    public static void setUser(User user) { usuario = user; }
+    
     /**
      * Initializes the controller class.
      */
@@ -123,10 +132,6 @@ public class LogInSignUpController implements Initializable {
         label_wBirthday.visibleProperty().set(false);
         label_wPassSign.visibleProperty().set(false);
         label_wRePassSign.visibleProperty().set(false);
-        label_anotherError.visibleProperty().set(false);
-        
-        
-        label_anotherError.setText("");
     }
 
     @FXML
@@ -134,6 +139,14 @@ public class LogInSignUpController implements Initializable {
         bCancel.getScene().getWindow().hide();
     }
 
+    private void mostrarAlerta(String campo, String error) {
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(campo);
+        alert.setContentText(error);
+        alert.showAndWait();
+    }
+    
     /* metodo que comprueba que los parametros de Inicio son correctos, en caso incorrecta muestra un label de error */
     @FXML
     private void handleLogInOnAction(ActionEvent event) {
@@ -143,10 +156,17 @@ public class LogInSignUpController implements Initializable {
         String pass = passFieldLog.textProperty().getValueSafe();
         if (!baseDatos.exitsNickName(nick)) {
             label_wUser.visibleProperty().set(true);
+            String campo = "Error al introducir el usuario";
+            String error = "No existe el usuario.";
+            mostrarAlerta(campo, error);
         } else {
-            User usuario = baseDatos.loginUser(nick, pass);
+            User user = baseDatos.loginUser(nick, pass);
+            setUser(user);
             if (usuario == null) {
                 label_wPass.visibleProperty().set(true);
+                String campo = "Error al introducir la contraseña";
+                String error = "Contraseña Incorrecta.";
+                mostrarAlerta(campo, error);
             } else { goToProblems(usuario); }
         }
     }
@@ -165,30 +185,35 @@ public class LogInSignUpController implements Initializable {
             
             if (!User.checkNickName(nickName)) {
                 label_wUserSign.visibleProperty().set(true);
-                label_anotherError.setText("Username must be between 6 and 15 characters with no spaces.");
-                label_anotherError.visibleProperty().set(true);
+                String campo = "Error al declarar el usuario";
+                String error = "El usuario debe tener entre 6 y 15 carateres sin espacios.";
+                mostrarAlerta(campo, error);
             } else {
                 if (baseDatos.exitsNickName(nickName)) {
                     label_wUserSign.visibleProperty().set(true);
-                    label_anotherError.setText("That username is already in use.");
-                    label_anotherError.visibleProperty().set(true);
+                    String campo = "Error al declarar el usuario";
+                    String error = "Ese usuario ya está en uso.";
+                    mostrarAlerta(campo, error);
                 }
             }
             if (!User.checkEmail(email)) {
                 label_wEmail.visibleProperty().set(true);
-                label_anotherError.setText("Please bring a correct email account.");
-                label_anotherError.visibleProperty().set(true);
+                String campo = "Error al declarar el correo";
+                String error = "Por favor introduzca un email correcto.";
+                mostrarAlerta(campo, error);
             }
             if (!User.checkPassword(password)) { 
                 label_wPassSign.visibleProperty().set(true);
-                label_anotherError.setText("The password must have between 8 and 20 characters, at least an uppercase letter, a lowercase letter, a digit and a special character without spaces");
-                label_anotherError.visibleProperty().set(true);
+                String campo = "Error al introducir la contraseña";
+                String error = "La contraseña debe tener entre 8 y 20 carateres sin espacios, al menos una mayúscula, una minúscula, un dígito y un caracter especial.";
+                mostrarAlerta(campo, error);
             }
             if (!password.equals(rePassword)) {
                 label_wRePassSign.visibleProperty().set(true);
                 label_wPassSign.visibleProperty().set(true);
-                label_anotherError.setText("Passwords don't match");
-                label_anotherError.visibleProperty().set(true);
+                String campo = "Error al introducir las contraseñas";
+                String error = "Las contraseñas no son iguales";
+                mostrarAlerta(campo, error);
             }
             
             if (avatar == null) {
@@ -196,7 +221,8 @@ public class LogInSignUpController implements Initializable {
             }
             
             if (User.checkNickName(nickName) && !baseDatos.exitsNickName(nickName) && User.checkEmail(email) && User.checkPassword(password) && password.equals(rePassword)) {
-                User usuario = baseDatos.registerUser(nickName, email, password, birthdate);               
+                User user = baseDatos.registerUser(nickName, email, password, birthdate);        
+                setUser(user);
                 goToProblems(usuario);
             }
 
@@ -213,7 +239,7 @@ public class LogInSignUpController implements Initializable {
             Scene scene = new Scene(root);
             primaryStage.setTitle("Problemas");
             primaryStage.setScene(scene);
-            primaryStage.setResizable(true);
+            primaryStage.setResizable(false);
 
             ChooseProblemTypeController ctr = loader.getController();
             ctr.initStage(primaryStage, usuario);        

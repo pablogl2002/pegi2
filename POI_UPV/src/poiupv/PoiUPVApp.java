@@ -24,17 +24,14 @@ public class PoiUPVApp extends Application {
     public void start(Stage stage) throws Exception {
         
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/LogInSignUp.fxml"));
-        //FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/PruebaProblemasMapa.fxml"));
         Parent root = loader.load();
         
         Scene scene = new Scene(root);
         stage.setTitle("Iniciar Sesión o Registrar Cuenta");
         stage.setScene(scene);
-        stage.setResizable(true);
+        stage.setResizable(false);
         
-        //ProblemsController ctr = loader.getController();
         LogInSignUpController ctr = loader.getController();
-        //PruebaProblemasMapaController ctr = loader.getController();
         ctr.initStage(stage);
         
         stage.show();

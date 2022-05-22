@@ -18,6 +18,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.User;
 
@@ -57,19 +58,67 @@ public class ChooseProblemTypeController implements Initializable {
     
     @FXML
     private void editProfile(ActionEvent event) {
-        
+        try {
+            Stage actualStage = new Stage();
+            
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/EditProfile.fxml"));
+            Parent root = loader.load();
+            
+            Scene scene = new Scene(root);
+            actualStage.setTitle("Editar Perfil");
+            actualStage.setScene(scene);
+            actualStage.setResizable(false);
+            actualStage.initModality(Modality.APPLICATION_MODAL);
+            
+            //EditProfileController ctr = loader.getController();
+            //ctr.initStage(actualStage);
+            actualStage.show();
+            
+        } catch (IOException ex) {
+            Logger.getLogger(ChooseProblemTypeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML
     private void logOut(ActionEvent event) {
-        
+        LogInSignUpController.setUser(null);
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/ChooseProblemType.fxml"));
+            Parent root = loader.load();
+            
+            Scene scene = new Scene(root);
+            primaryStage.setTitle("Problemas");
+            primaryStage.setScene(scene);
+            primaryStage.setResizable(false);
+            
+            ChooseProblemTypeController ctr = loader.getController();
+            ctr.initStage(primaryStage, usuario);
+            primaryStage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(ProblemsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-
+/*
     @FXML
     private void pressSalir(ActionEvent event) {
-        
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/LogInSignUp.fxml"));
+            Parent root = loader.load();
+
+            Scene scene = new Scene(root);
+            primaryStage.setTitle("Iniciar Sesión o Registrar Cuenta");
+            primaryStage.setScene(scene);
+            primaryStage.setResizable(false);
+            
+            LogInSignUpController ctr = loader.getController();
+            ctr.initStage(primaryStage);
+
+            primaryStage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(ChooseProblemTypeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-    
+*/    
     @FXML
     private void pressAceptar(ActionEvent event) {
         try {
@@ -96,7 +145,7 @@ public class ChooseProblemTypeController implements Initializable {
                 primaryStage.setResizable(true);
 
                 PruebaProblemasMapaController rPro = loader.getController();
-            rPro.initStage(primaryStage, usuario, 0);
+                rPro.initStage(primaryStage, usuario, -1);
             }
             primaryStage.show();
         } catch (IOException ex) {

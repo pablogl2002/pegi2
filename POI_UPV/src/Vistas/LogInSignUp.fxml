@@ -19,9 +19,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<HBox fillHeight="false" prefHeight="432.0" prefWidth="606.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.LogInSignUpController">
+<HBox fillHeight="false" prefWidth="607.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.LogInSignUpController">
    <children>
-      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="470.0" prefWidth="250.0" style="-fx-background-color: white;">
+      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="430.0" prefWidth="250.0" style="-fx-background-color: white;">
          <top>
             <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="300.0" BorderPane.alignment="CENTER_LEFT">
                <children>
@@ -116,8 +116,8 @@
             </HBox>
          </bottom>
       </BorderPane>
-      <Separator orientation="VERTICAL" prefHeight="200.0" />
-      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="470.0" prefWidth="350.0" style="-fx-background-color: white;">
+      <Separator orientation="VERTICAL" prefHeight="430.0" />
+      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="430.0" prefWidth="350.0" style="-fx-background-color: white;">
          <top>
             <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="300.0" BorderPane.alignment="CENTER_LEFT">
                <children>
@@ -305,11 +305,6 @@
                         </VBox>
                      </children>
                   </HBox>
-                  <Label fx:id="label_anotherError" prefHeight="35.0" prefWidth="320.0" textFill="#ca0505" visible="false" wrapText="true">
-                     <VBox.margin>
-                        <Insets left="20.0" right="20.0" />
-                     </VBox.margin>
-                  </Label>
                </children>
                <BorderPane.margin>
                   <Insets />
