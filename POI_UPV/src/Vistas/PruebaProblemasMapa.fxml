@@ -112,14 +112,20 @@
                               <RadioButton fx:id="answer2" mnemonicParsing="false" text="RadioButton" toggleGroup="$answer" />
                               <RadioButton fx:id="answer3" mnemonicParsing="false" text="RadioButton" toggleGroup="$answer" />
                               <RadioButton fx:id="answer4" mnemonicParsing="false" text="RadioButton" toggleGroup="$answer" />
+                              <Label onMouseClicked="#borrarSeleccion" text="Borrar Selección" textFill="#3568dd" underline="true" />
                            </children>
                            <VBox.margin>
                               <Insets bottom="30.0" left="50.0" right="30.0" top="30.0" />
                            </VBox.margin>
                         </VBox>
+                        <Label fx:id="respondidaLabel" text="Pregunta respondida" visible="false">
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </Label>
                         <HBox alignment="CENTER" spacing="70.0">
                            <children>
-                              <Button fx:id="verificar_button" mnemonicParsing="false" onAction="#verifyQuestion" text="Button" />
+                              <Button fx:id="verificar_button" mnemonicParsing="false" onAction="#verifyQuestion" text="Contestar" />
                            </children>
                            <VBox.margin>
                               <Insets bottom="20.0" />
