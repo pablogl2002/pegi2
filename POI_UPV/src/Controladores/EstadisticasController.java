@@ -24,9 +24,12 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Menu;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.InputMethodEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Session;
@@ -42,109 +45,70 @@ public class EstadisticasController implements Initializable {
     private Stage primaryStage;
     private User usuario;
     
-    @FXML
     private Menu id_menuPerfil;
     @FXML
     private ImageView id_avatar;
-    @FXML
     private TableColumn<Session, String> dateColumn;
-    @FXML
     private TableColumn<Session, Integer> correctColumn;
-    @FXML
     private TableColumn<Session, Integer> failsColumn;
     private static Session aux;
-    @FXML
     private static TableView<Session> tabla;
     private List<Session> list;
-    @FXML
     private DatePicker datePicker;
     @FXML
     private Button salirButton;
+    @FXML
+    private TextField correctField;
+    @FXML
+    private TextField faultField;
+    
+    private int hits = 0;
+    private int faults = 0;
+    
     
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        
+        
     }
     
-    @FXML
-    private void editProfile(ActionEvent event) {
-        try {
-            Stage actualStage = new Stage();
-            
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/EditProfile.fxml"));
-            Parent root = loader.load();
-            
-            Scene scene = new Scene(root);
-            actualStage.setTitle("Editar Perfil");
-            actualStage.setScene(scene);
-            actualStage.setResizable(false);
-            actualStage.initModality(Modality.APPLICATION_MODAL);
-            
-            actualStage.show();
-            
-        } catch (IOException ex) {
-            Logger.getLogger(ChooseProblemTypeController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
 
     @FXML
-    private void logOut(ActionEvent event) {
-        LogInSignUpController.setUser(null);
-        try {
+    private void salir(ActionEvent event) {
+       try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/ChooseProblemType.fxml"));
             Parent root = loader.load();
             
             Scene scene = new Scene(root);
-            primaryStage.setTitle("Problemas");
+            primaryStage.setTitle("Problemas Aleatorios");
             primaryStage.setScene(scene);
-            primaryStage.setResizable(false);
+            primaryStage.setResizable(true);
             
-            ChooseProblemTypeController ctr = loader.getController();
-            ctr.initStage(primaryStage, usuario);
-            primaryStage.show();
+            ChooseProblemTypeController rPro = loader.getController();
+            rPro.initStage(primaryStage, usuario);
         } catch (IOException ex) {
             Logger.getLogger(ProblemsController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
     }
-    
-    public void initStage(Stage stage, User user) {
+
+    void initStage(Stage stage, User user) {
         primaryStage = stage;
         usuario = user;
         id_avatar.setImage(usuario.getAvatar());
         id_menuPerfil.setText(usuario.getNickName());
         
-        list = usuario.getSessions();
-        dateColumn.setCellValueFactory(new PropertyValueFactory<Session, String>("timeStamp"));
-        correctColumn.setCellValueFactory(new PropertyValueFactory<Session, Integer>("hits"));
-        failsColumn.setCellValueFactory(new PropertyValueFactory<Session, Integer>("faults"));
-
-        for(int i=0;i<list.size();i++) {
-            Session sesion = list.get(i);
-            tabla.getItems().add(sesion);
+        List<Session> sesion = usuario.getSessions();
+        
+        for (int i = 0; i < sesion.size(); i++) {
+            hits += sesion.get(i).getHits();
+            faults += sesion.get(i).getFaults();
         }
         
+        correctField.setText(Integer.toString(hits));
+        faultField.setText(Integer.toString(faults));
     }
 
-    @FXML
-    private void filtrar(InputMethodEvent event) {
-        LocalTime h = LocalTime.now();
-        LocalDateTime t = LocalDateTime.of(datePicker.getValue(), h);
-        for (int i = 0; i < list.size(); i++) {
-            
-            if (list.get(i).getTimeStamp().isBefore(t)) {
-                Session sesion = list.get(i);
-                tabla.getItems().add(sesion); 
-            }
-        }
-    }
-
-    @FXML
-    private void salir(ActionEvent event) {
-        salirButton.getScene().getWindow().hide();
-    }
-    
 }

@@ -2,81 +2,66 @@
 
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.EstadisticasController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.EstadisticasController">
    <children>
-      <MenuBar nodeOrientation="RIGHT_TO_LEFT">
-         <menus>
-            <Menu id="perfil_menu" fx:id="id_menuPerfil" mnemonicParsing="false" text="Mi Perfil">
-               <items>
-                  <MenuItem mnemonicParsing="false" onAction="#editProfile" text="Editar Perfil" />
-                  <MenuItem mnemonicParsing="false" onAction="#logOut" text="Cerrar Sesión" />
-               </items>
-               <graphic>
-                  <ImageView id="small_avatar" fx:id="id_avatar" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../resources/avatars/avatar4.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Menu>
-         </menus>
-      </MenuBar>
-      <HBox alignment="CENTER_RIGHT">
+      <HBox>
          <children>
-            <Region HBox.hgrow="ALWAYS">
+            <VBox>
+               <children>
+                  <Pane>
+                     <children>
+                        <ImageView id="big_avatar" fx:id="id_avatar" cache="true" fitHeight="120.0" fitWidth="120.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/avatars/default2.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ImageView>
+                     </children>
+                     <VBox.margin>
+                        <Insets right="20.0" />
+                     </VBox.margin>
+                  </Pane>
+               </children>
+            </VBox>
+            <Region prefHeight="200.0" prefWidth="200.0" />
+            <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="175.0" spacing="5.0">
+               <children>
+                  <Label text="Aciertos" />
+                  <TextField fx:id="correctField" editable="false" />
+                  <Label text="Errores" />
+                  <TextField fx:id="faultField" editable="false" />
+               </children>
                <HBox.margin>
                   <Insets />
                </HBox.margin>
-            </Region>
-            <Label text="A partir de: ">
-               <HBox.margin>
-                  <Insets right="5.0" />
-               </HBox.margin>
-            </Label>
-            <DatePicker fx:id="datePicker" onInputMethodTextChanged="#filtrar" prefHeight="26.0" prefWidth="138.0" />
+            </VBox>
          </children>
-         <VBox.margin>
-            <Insets left="10.0" right="10.0" top="10.0" />
-         </VBox.margin>
       </HBox>
-      <TableView fx:id="tabla" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="400.0">
-        <columns>
-          <TableColumn fx:id="dateColumn" editable="false" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" resizable="false" sortable="false" text="Fecha" />
-          <TableColumn fx:id="correctColumn" editable="false" maxWidth="125.0" minWidth="125.0" prefWidth="125.0" resizable="false" sortable="false" text="Aciertos" />
-            <TableColumn fx:id="failsColumn" editable="false" maxWidth="100.0" minWidth="125.0" prefWidth="125.0" resizable="false" sortable="false" text="Fallos" />
-        </columns>
-         <VBox.margin>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </VBox.margin>
-         <columnResizePolicy>
-            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-         </columnResizePolicy>
-      </TableView>
-      <HBox alignment="CENTER_RIGHT">
+      <Region prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+      <HBox alignment="CENTER_RIGHT" spacing="15.0">
          <children>
             <Button id="accept_button" fx:id="salirButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#salir" prefHeight="30.0" prefWidth="100.0" text="Salir" />
          </children>
          <VBox.margin>
-            <Insets bottom="5.0" right="10.0" />
+            <Insets bottom="5.0" />
          </VBox.margin>
       </HBox>
    </children>
    <padding>
-      <Insets bottom="5.0" />
+      <Insets bottom="10.0" left="15.0" right="15.0" top="15.0" />
    </padding>
    <stylesheets>
       <URL value="@../Estilos/botones.css" />

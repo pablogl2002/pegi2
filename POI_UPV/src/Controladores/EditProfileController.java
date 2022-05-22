@@ -17,7 +17,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -27,6 +26,7 @@ import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.User;
+import static model.User.checkEmail;
 import static model.User.checkPassword;
 
 /**
@@ -52,7 +52,6 @@ public class EditProfileController implements Initializable {
     private User usuario;
     @FXML
     private PasswordField newPassField;
-    private Boolean passProp = false;
     @FXML
     private TextField oldMailField;
     @FXML
@@ -62,13 +61,7 @@ public class EditProfileController implements Initializable {
     @FXML
     private DatePicker newBirth_picker;
     @FXML
-    private DatePicker newBirth_picker;
-    @FXML
     private Button aapplyButton;
-    private CharSequence charSequence1 = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ";
-    private CharSequence charSequence2 = "abcdefghijklmnñopqrstuvwxyz";        
-    private CharSequence charSequence3 = "0123456789"; 
-    private CharSequence charSequence4 = "!@#$%&*()-+=ç";
     @FXML
     private Text DatosUsuario;
     
@@ -106,7 +99,7 @@ public class EditProfileController implements Initializable {
     
     @FXML
     private void applyButton(ActionEvent event) throws NavegacionDAOException {
-        if (newMailField.getText() != null && checkPassword(newMailField.getText())) {
+        if (newMailField.getText() != null && checkEmail(newMailField.getText())) {
             usuario.setEmail(newMailField.getText());
             System.out.println("Cambiado correo");
         }

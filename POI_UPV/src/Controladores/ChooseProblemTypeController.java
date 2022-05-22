@@ -39,7 +39,7 @@ public class ChooseProblemTypeController implements Initializable {
     private int auxNum = -1;
     @FXML
     private Menu id_menuPerfil;
-    private User usuario;
+    public User usuario;
 
     /**
      * Initializes the controller class.
@@ -83,7 +83,7 @@ public class ChooseProblemTypeController implements Initializable {
     private void logOut(ActionEvent event) {
         LogInSignUpController.setUser(null);
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/ChooseProblemType.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/LogInSignUp.fxml"));
             Parent root = loader.load();
             
             Scene scene = new Scene(root);
@@ -91,8 +91,8 @@ public class ChooseProblemTypeController implements Initializable {
             primaryStage.setScene(scene);
             primaryStage.setResizable(false);
             
-            ChooseProblemTypeController ctr = loader.getController();
-            ctr.initStage(primaryStage, usuario);
+            LogInSignUpController ctr = loader.getController();
+            ctr.initStage(primaryStage);
             primaryStage.show();
         } catch (IOException ex) {
             Logger.getLogger(ProblemsController.class.getName()).log(Level.SEVERE, null, ex);
@@ -168,18 +168,16 @@ public class ChooseProblemTypeController implements Initializable {
     @FXML
     private void verEvolucion(ActionEvent event) {
         try {
-            Stage actualStage = new Stage();
-            
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/Estadisticas.fxml"));
             Parent root = loader.load();
-            
+
             Scene scene = new Scene(root);
-            actualStage.setTitle("Evolución de " + usuario.getNickName());
-            actualStage.setScene(scene);
-            actualStage.setResizable(false);
-            actualStage.initModality(Modality.APPLICATION_MODAL);
-            
-            actualStage.show();
+            primaryStage.setTitle("Problemas Aleatorios");
+            primaryStage.setScene(scene);
+            primaryStage.setResizable(true);
+
+            EstadisticasController rPro = loader.getController();
+            rPro.initStage(primaryStage, usuario);
         } catch (IOException ex) {
             Logger.getLogger(ChooseProblemTypeController.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -130,7 +130,7 @@ public class ProblemsController implements Initializable {
     private void logOut(ActionEvent event) {
         LogInSignUpController.setUser(null);
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/ChooseProblemType.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/LogInSignUp.fxml"));
             Parent root = loader.load();
             
             Scene scene = new Scene(root);
@@ -138,8 +138,8 @@ public class ProblemsController implements Initializable {
             primaryStage.setScene(scene);
             primaryStage.setResizable(false);
             
-            ChooseProblemTypeController ctr = loader.getController();
-            ctr.initStage(primaryStage, usuario);
+            LogInSignUpController ctr = loader.getController();
+            ctr.initStage(primaryStage);
             primaryStage.show();
         } catch (IOException ex) {
             Logger.getLogger(ProblemsController.class.getName()).log(Level.SEVERE, null, ex);

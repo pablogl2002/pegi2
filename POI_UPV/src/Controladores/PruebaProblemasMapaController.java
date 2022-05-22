@@ -69,7 +69,6 @@ public class PruebaProblemasMapaController implements Initializable {
     // el escalado se realiza sobre este nodo, al escalar el Group no mueve sus nodos
     private Group zoomGroup;
 
-    @FXML
     private ListView<Poi> map_listview;
     @FXML
     private ScrollPane map_scrollpane;
@@ -130,8 +129,8 @@ public class PruebaProblemasMapaController implements Initializable {
     private Button nextQ_button;
     private int randomIndex;
     private Session sesion;
-    private int hints = 0;
-    private int fails = 0;
+    private static int hints = 0;
+    private static int fails = 0;
     private LocalDateTime time;
     private Problem p;
     @FXML
@@ -152,6 +151,9 @@ public class PruebaProblemasMapaController implements Initializable {
         zoom_slider.setValue(sliderVal + -0.1);
     }
     
+    public static String getHits() { return hints + ""; }
+    public static String getFaults() { return fails + ""; }
+    
     // esta funcion es invocada al cambiar el value del slider zoom_slider
     private void zoom(double scaleValue) {
         //===================================================
@@ -168,7 +170,6 @@ public class PruebaProblemasMapaController implements Initializable {
         map_scrollpane.setVvalue(scrollV);
     }
 
-    @FXML
     void listClicked(MouseEvent event) {
         Poi itemSelected = map_listview.getSelectionModel().getSelectedItem();
 
@@ -270,33 +271,27 @@ public class PruebaProblemasMapaController implements Initializable {
         respondidaLabel.setVisible(false);
         if (tipo > 0) {
             tipo--;
-        } if (tipo == 0) { 
-            prevQ_button.setDisable(false); 
-        } else { 
-            prevQ_button.setDisable(false); 
-        }
-        if (tipo >= 0){
-            tipo--;
             nextQ_button.setDisable(false);
+        } if (tipo == 0) { 
+            prevQ_button.setDisable(true); 
+        } else { 
+            prevQ_button.setDisable(true); 
         }
-        if (tipo == 0) prevQ_button.setDisable(true);
-        else if (randomIndex > 0) randomIndex--;
         initProblemas();
     }
     
     @FXML
     private void nextQuestion(ActionEvent event) {
         respondidaLabel.setVisible(false);
-        if (tipo >= 0) tipo++;
-        else if (randomIndex < 18) { 
-            randomIndex++; 
-        } else nextQ_button.setDisable(false);
         if (tipo >= 0) {
-            tipo++;
+            tipo++; 
             prevQ_button.setDisable(false);
         }
-        if(tipo >= 17) {nextQ_button.setDisable(true);}
-        else if (randomIndex < 18) randomIndex++;
+        else if (randomIndex < 18) { 
+            randomIndex++; 
+        }
+        if (tipo >= 17) nextQ_button.setDisable(true);
+
         initProblemas();
     }
     
@@ -363,8 +358,8 @@ public class PruebaProblemasMapaController implements Initializable {
 
     private void guardarSesion() {
         try {
-            sesion = new Session(time, hints, fails);
             time = LocalDateTime.of(LocalDate.now(), LocalTime.now());
+            sesion = new Session(time, hints, fails); 
             usuario.addSession(sesion);
         } catch (NavegacionDAOException ex) {
             Logger.getLogger(PruebaProblemasMapaController.class.getName()).log(Level.SEVERE, null, ex);
@@ -380,6 +375,14 @@ public class PruebaProblemasMapaController implements Initializable {
     @FXML
     private void cerrarAplicacion(ActionEvent event) {
         guardarSesion();
+        try {
+            sesion = new Session(time, hints, fails);
+            time = LocalDateTime.of(LocalDate.now(), LocalTime.now());
+            usuario.addSession(sesion);
+        } catch (NavegacionDAOException ex) {
+            Logger.getLogger(PruebaProblemasMapaController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         ((Stage)zoom_slider.getScene().getWindow()).close();
     }
 
@@ -387,7 +390,8 @@ public class PruebaProblemasMapaController implements Initializable {
     private void acercaDe(ActionEvent event) {
         Alert mensaje= new Alert(Alert.AlertType.INFORMATION);
         mensaje.setTitle("Acerca de");
-        mensaje.setHeaderText("IPC - 2022");
+        mensaje.setHeaderText("IPC - 2022 (Grupo 2C1)");
+        mensaje.setContentText("Pablo García López \nSergio Pardo Defez");
         mensaje.showAndWait();
     }
     
@@ -611,8 +615,6 @@ public class PruebaProblemasMapaController implements Initializable {
                 r.consume();
             });
             });
-            
-            
         }
 
      }
@@ -754,13 +756,14 @@ public class PruebaProblemasMapaController implements Initializable {
     @FXML
     private void logOut(ActionEvent event) {
         guardarSesion();
+       
         LogInSignUpController.setUser(null);
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/LogInSignUp.fxml"));
             Parent root = loader.load();
             
             Scene scene = new Scene(root);
-            primaryStage.setTitle("Problemas");
+            primaryStage.setTitle("Iniciar Sesion o Registrarse");
             primaryStage.setScene(scene);
             primaryStage.setResizable(false);
             

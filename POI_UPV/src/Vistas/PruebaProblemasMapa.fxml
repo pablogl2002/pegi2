@@ -6,7 +6,6 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuButton?>
@@ -28,7 +27,7 @@
    <children>
       <HBox alignment="CENTER_RIGHT" fillHeight="false" focusTraversable="true" spacing="5.0" VBox.vgrow="NEVER">
          <children>
-            <MenuBar>
+            <MenuBar prefHeight="35.0" prefWidth="123.0">
               <menus>
                 <Menu mnemonicParsing="false" text="Fichero">
                   <items>
@@ -62,7 +61,7 @@
             </MenuBar>
          </children>
          <VBox.margin>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            <Insets />
          </VBox.margin>
       </HBox>
       <SplitPane dividerPositions="0.4" VBox.vgrow="ALWAYS">
@@ -73,7 +72,7 @@
                      <children>
                         <HBox alignment="CENTER" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="330.0">
                            <children>
-                              <Button fx:id="prevQ_button" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#prevQuestion" prefHeight="30.0" prefWidth="30.0">
+                              <Button id="edit_button" fx:id="prevQ_button" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#prevQuestion" prefHeight="30.0" prefWidth="30.0">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -84,7 +83,7 @@
                               <Region HBox.hgrow="ALWAYS" />
                               <Label fx:id="question_label" text="Nº Problema" />
                               <Region HBox.hgrow="ALWAYS" />
-                              <Button fx:id="nextQ_button" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#nextQuestion" prefHeight="30.0" prefWidth="30.0">
+                              <Button id="edit_button" fx:id="nextQ_button" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#nextQuestion" prefHeight="30.0" prefWidth="30.0">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -125,7 +124,7 @@
                         </Label>
                         <HBox alignment="CENTER" spacing="70.0">
                            <children>
-                              <Button fx:id="verificar_button" mnemonicParsing="false" onAction="#verifyQuestion" text="Contestar" />
+                              <Button id="accept_button" fx:id="verificar_button" mnemonicParsing="false" onAction="#verifyQuestion" text="Contestar" />
                            </children>
                            <VBox.margin>
                               <Insets bottom="20.0" />
@@ -133,7 +132,7 @@
                         </HBox>
                      </children>
                   </VBox>
-                  <ListView fx:id="map_listview" onMouseClicked="#listClicked" prefHeight="399.0" prefWidth="87.0" />
+                  <Region VBox.vgrow="ALWAYS" />
                </children>
             </VBox>
             <HBox>
@@ -267,12 +266,12 @@
                <HBox.margin>
                   <Insets right="3.0" />
                </HBox.margin></Label>
-            <Button mnemonicParsing="false" onAction="#zoomOut" text="-">
+            <Button id="edit_button" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#zoomOut" prefHeight="25.0" prefWidth="25.0" text="-">
                <HBox.margin>
                   <Insets right="3.0" />
                </HBox.margin></Button>
             <Slider fx:id="zoom_slider" />
-            <Button mnemonicParsing="false" onAction="#zoomIn" text="+">
+            <Button id="edit_button" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" mnemonicParsing="false" onAction="#zoomIn" prefHeight="25.0" prefWidth="25.0" text="+">
                <HBox.margin>
                   <Insets right="20.0" />
                </HBox.margin>
