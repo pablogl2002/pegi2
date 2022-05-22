@@ -214,6 +214,29 @@ public class PruebaProblemasMapaController implements Initializable {
                 borrarItem.setOnAction(ev -> {
                     zoomGroup.getChildren().remove((Node)e.getSource());
                     ev.consume();
+                });    
+                MenuItem marcarPosicion = new MenuItem("marcarPosición");
+                menuContext.getItems().add(marcarPosicion);
+                marcarPosicion.setOnAction(ev -> {
+                    Line linePaintingX = new Line(event.getX(), event.getY(), event.getX(), event.getY());
+                    linePaintingX.setStroke(colorLinea);
+                    linePaintingX.setStrokeWidth(grosorLinea);
+                    Line linePaintingY = new Line(event.getX(), event.getY(), event.getX(), event.getY());
+                    linePaintingY.setStroke(colorLinea);
+                    linePaintingY.setStrokeWidth(grosorLinea);
+                    zoomGroup.getChildren().add(linePaintingX);
+                    zoomGroup.getChildren().add(linePaintingY);
+                    double anchoMinimo = event.getX();
+                    double largoMinimo = event.getY();
+                    linePaintingX.setStartX(0);
+                    linePaintingX.setStartY(event.getY());
+                    linePaintingX.setEndX(8974);
+                    linePaintingX.setEndY(largoMinimo);
+                    linePaintingY.setStartX(event.getX());
+                    linePaintingY.setStartY(0);
+                    linePaintingY.setEndX(anchoMinimo);
+                    linePaintingY.setEndY(5746);
+                    ev.consume();
                 });
                 MenuItem editarItem = new MenuItem("editar");
                 menuContext.getItems().add(editarItem);
@@ -462,16 +485,8 @@ public class PruebaProblemasMapaController implements Initializable {
     }
 
     @FXML
-    private void Borrar(ActionEvent event) {
-        linePainting.setOnContextMenuRequested(e -> {
-                ContextMenu menuContext = new ContextMenu();
-                MenuItem borrarItem = new MenuItem("eliminar");
-                menuContext.getItems().add(borrarItem);
-                borrarItem.setOnAction(ev -> {
-                    zoomGroup.getChildren().remove((Node)e.getSource());
-                    ev.consume();
-                });
-        });
+    private void Borrar(ActionEvent event) {      
+        zoomGroup.getChildren().remove(1,zoomGroup.getChildren().size()); 
     }
 
     @FXML
